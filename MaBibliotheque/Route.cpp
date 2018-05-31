@@ -26,9 +26,42 @@ Vehicules* Route::get_vehicule(std::vector<std::unique_ptr<Vehicules>>& voie, in
 
 // fonction qui va générer les différents véhicules sur les différentes voies de la route
 void Route::generation_vehicules(std::vector<std::unique_ptr<Vehicules>>& voie) {
+	std::random_device rd;
+	static std::default_random_engine engine(rd());
+	static std::uniform_int_distribution<> pourcentage(0, 100);
+	const int choix_voiture_camion = pourcentage(engine);
+
+	if (niveau_route == un ) {
+		if (choix_voiture_camion < 80) {
+			auto vehicule = std::make_unique<Voitures>(500, 70, this->get_niveau());
+			voie.push_back(std::move(vehicule));
+		}
+		else {
+			auto vehicule = std::make_unique<Camions>(500, 70, this->get_niveau());
+			voie.push_back(std::move(vehicule));
+		}
+	}
+	else if (niveau_route == deux) {
+		if (choix_voiture_camion < 70) {
+			auto vehicule = std::make_unique<Voitures>(500, 70, this->get_niveau());
+			voie.push_back(std::move(vehicule));
+		}
+		else {
+			auto vehicule = std::make_unique<Camions>(500, 70, this->get_niveau());
+			voie.push_back(std::move(vehicule));
+		}
+	}
+	else {
+		if (choix_voiture_camion < 60) {
+			auto vehicule = std::make_unique<Voitures>(500, 70, this->get_niveau());
+			voie.push_back(std::move(vehicule));
+		}
+		else {
+			auto vehicule = std::make_unique<Camions>(500, 70, this->get_niveau());
+			voie.push_back(std::move(vehicule));
+		}
+	}
 	
-	auto vehicule = std::make_unique<Voitures>(500, 70, this->get_niveau());
-	voie.push_back(std::move(vehicule));
 	
 }
 

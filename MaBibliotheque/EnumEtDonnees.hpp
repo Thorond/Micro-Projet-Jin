@@ -22,3 +22,6 @@ enum niveau {
 	deux,
 	trois
 };
+
+static int vitesse_de_base = 80; // le joueur aura une vitesse ~130, le camion 60, puis +10% et +20%
+								// en proportion 0.75 0.20 0.05 (f(des niveaux))
