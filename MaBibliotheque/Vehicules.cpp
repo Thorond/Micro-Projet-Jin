@@ -3,13 +3,15 @@
 #include "Vehicules.hpp"
 
 
-Vehicules::Vehicules(double x, double vitesse/*, position_route position*/)
+Vehicules::Vehicules(double x, double vitesse/*, position_route position*/, b2World* world)
 	: x(x)
 	, vitesse_x(vitesse)
 	/*, position_y(position)*/
 	, etat_pc_avant(indefini)
 	, etat_pc_arriere(indefini)
+	, corps(*world)
 {
+	corps.charger(this->x, 0);
 }
 
 //Vehicules::~Vehicules() {
@@ -42,3 +44,10 @@ void Vehicules::set_etat_pc_arriere(etat_pare_choc etat) {
 	this->etat_pc_arriere = etat;
 }
 
+
+bool Vehicules::Update(/*sf::RenderWindow* window*/) {
+	b2Vec2 pos = this->corps.body->GetPosition();
+	//float32 rot = this->body->GetAngle();
+	this->set_x(pos.x);
+	return true;
+}

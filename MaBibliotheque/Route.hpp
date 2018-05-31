@@ -4,6 +4,7 @@
 #include <vector>
 #include <memory>
 #include <random>
+#include <SFML/Graphics.hpp>
 
 
 
@@ -29,4 +30,6 @@ private :
 	std::vector<std::unique_ptr<Vehicules>> voie_haute;
 	std::vector<std::unique_ptr<Vehicules>> voie_milieu;
 	std::vector<std::unique_ptr<Vehicules>> voie_basse;
+
+	b2World * world;
 };

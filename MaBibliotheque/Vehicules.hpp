@@ -1,10 +1,11 @@
 #pragma once
 #include "EnumEtDonnees.hpp"
+#include "Entitee.hpp"
 
 class Vehicules
 {
 public:
-	Vehicules(double x, double vitesse/*, position_route position*/);
+	Vehicules(double x, double vitesse/*, position_route position*/, b2World* world);
 	//~Vehicules();
 	double get_x();
 	void set_x( double x);
@@ -18,8 +19,13 @@ public:
 	void set_etat_pc_arriere(etat_pare_choc etat);
 
 	// formes (sfml)
+	// body (box2d)
 
 	virtual void construction_pare_choc(niveau niveau) = 0;
+	//void adpater_sa_vitesse(Vehicules& vehiDevant);
+
+	Entitee corps;
+	bool Update(/*sf::RenderWindow* window*/);
 
 private:
 	double x;
@@ -27,4 +33,5 @@ private:
 	//position_route position_y;
 	etat_pare_choc etat_pc_avant;
 	etat_pare_choc etat_pc_arriere;
+
 };

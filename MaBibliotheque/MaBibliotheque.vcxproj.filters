@@ -33,10 +33,19 @@
     <ClInclude Include="Route.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="ListageEnum.hpp">
+    <ClInclude Include="Camions.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Camions.hpp">
+    <ClInclude Include="EnumEtDonnees.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Policier.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Voleur.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Entitee.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
@@ -57,6 +66,15 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="Camions.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Policier.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Voleur.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Entitee.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

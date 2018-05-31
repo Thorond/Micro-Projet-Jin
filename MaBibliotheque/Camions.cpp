@@ -1,7 +1,7 @@
 #include "Camions.hpp"
 
-Camions::Camions(double x, double vitesse/*, position_route position*/, niveau niveau)
-	: Vehicules(x, vitesse/*, position*/)
+Camions::Camions(double x, double vitesse/*, position_route position*/, niveau niveau, b2World* world)
+	: Vehicules(x, vitesse/*, position*/, world)
 {
 	this->construction_pare_choc(niveau);
 }

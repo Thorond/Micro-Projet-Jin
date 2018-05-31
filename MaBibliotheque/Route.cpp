@@ -3,6 +3,7 @@
 Route::Route()
 	: niveau_route(un)
 {
+	this->world = new b2World(b2Vec2(0, 0));
 }
 
 niveau Route::get_niveau() { return this->niveau_route; }
@@ -33,31 +34,31 @@ void Route::generation_vehicules(std::vector<std::unique_ptr<Vehicules>>& voie) 
 
 	if (niveau_route == un ) {
 		if (choix_voiture_camion < 80) {
-			auto vehicule = std::make_unique<Voitures>(500, 70, this->get_niveau());
+			auto vehicule = std::make_unique<Voitures>(500, 70, this->get_niveau(),world);
 			voie.push_back(std::move(vehicule));
 		}
 		else {
-			auto vehicule = std::make_unique<Camions>(500, 70, this->get_niveau());
+			auto vehicule = std::make_unique<Camions>(500, 70, this->get_niveau(), world);
 			voie.push_back(std::move(vehicule));
 		}
 	}
 	else if (niveau_route == deux) {
 		if (choix_voiture_camion < 70) {
-			auto vehicule = std::make_unique<Voitures>(500, 70, this->get_niveau());
+			auto vehicule = std::make_unique<Voitures>(500, 70, this->get_niveau(), world);
 			voie.push_back(std::move(vehicule));
 		}
 		else {
-			auto vehicule = std::make_unique<Camions>(500, 70, this->get_niveau());
+			auto vehicule = std::make_unique<Camions>(500, 70, this->get_niveau(), world);
 			voie.push_back(std::move(vehicule));
 		}
 	}
 	else {
 		if (choix_voiture_camion < 60) {
-			auto vehicule = std::make_unique<Voitures>(500, 70, this->get_niveau());
+			auto vehicule = std::make_unique<Voitures>(500, 70, this->get_niveau(), world);
 			voie.push_back(std::move(vehicule));
 		}
 		else {
-			auto vehicule = std::make_unique<Camions>(500, 70, this->get_niveau());
+			auto vehicule = std::make_unique<Camions>(500, 70, this->get_niveau(), world);
 			voie.push_back(std::move(vehicule));
 		}
 	}
