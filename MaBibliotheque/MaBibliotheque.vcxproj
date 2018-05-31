@@ -147,6 +147,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="ListageEnum.hpp" />
     <ClInclude Include="monMain.h" />
     <ClInclude Include="Route.hpp" />
     <ClInclude Include="stdafx.h" />

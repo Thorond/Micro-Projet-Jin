@@ -1,7 +1,5 @@
 #pragma once
-enum position_route { haute, milieu, basse };
-enum etat_pare_choc { détruit, abime, bon , excellent, indestructible, indefini};
-enum niveau { un, deux, trois }; // à placer autre part
+#include "ListageEnum.hpp"
 
 class Vehicules
 {
@@ -19,10 +17,9 @@ public:
 	etat_pare_choc get_etat_pc_arriere();
 	void set_etat_pc_arriere(etat_pare_choc etat);
 
-
-
 	// formes (sfml)
 
+	virtual void construction_pare_choc(niveau niveau) = 0;
 
 private:
 	double x;

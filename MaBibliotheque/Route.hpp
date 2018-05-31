@@ -18,6 +18,7 @@ public :
 	Vehicules* get_vehicule(std::vector<std::unique_ptr<Vehicules>>& voie, int rang);
 
 	void generation_vehicules(std::vector<std::unique_ptr<Vehicules>>& voie);
+	void consequence_collision(Vehicules& v1, Vehicules& v2);
 
 private :
 	niveau niveau_route;

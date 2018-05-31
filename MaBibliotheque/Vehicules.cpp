@@ -1,4 +1,5 @@
 
+#include <iostream>
 #include "Vehicules.hpp"
 
 
@@ -8,7 +9,8 @@ Vehicules::Vehicules(double x, double vitesse/*, position_route position*/)
 	/*, position_y(position)*/
 	, etat_pc_avant(indefini)
 	, etat_pc_arriere(indefini)
-{}
+{
+}
 
 //Vehicules::~Vehicules() {
 
@@ -39,3 +41,4 @@ etat_pare_choc Vehicules::get_etat_pc_arriere() { return etat_pc_arriere; }
 void Vehicules::set_etat_pc_arriere(etat_pare_choc etat) {
 	this->etat_pc_arriere = etat;
 }
+

@@ -45,6 +45,9 @@
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\MaBibliotheque\MaBibliotheque.vcxproj">
+      <Project>{80a65e08-db0d-40bf-ac3e-c91b986dd658}</Project>
+    </ProjectReference>
     <ProjectReference Include="..\Micro-Projet-Jin\Micro-Projet-Jin.vcxproj">
       <Project>{ed1c4a1c-35ee-4ea1-bedb-55de62c9f991}</Project>
     </ProjectReference>

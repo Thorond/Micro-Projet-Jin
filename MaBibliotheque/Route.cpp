@@ -26,8 +26,32 @@ Vehicules* Route::get_vehicule(std::vector<std::unique_ptr<Vehicules>>& voie, in
 
 // fonction qui va générer les différents véhicules sur les différentes voies de la route
 void Route::generation_vehicules(std::vector<std::unique_ptr<Vehicules>>& voie) {
-	if (voie.size() == 0) {
-		auto vehicule = std::make_unique<Voitures>(500, 70, this->get_niveau());
-		voie.push_back(std::move(vehicule));
+	
+	auto vehicule = std::make_unique<Voitures>(500, 70, this->get_niveau());
+	voie.push_back(std::move(vehicule));
+	
+}
+
+
+void Route::consequence_collision(Vehicules& v1, Vehicules& v2) {
+	if (v1.get_x() > v2.get_x()) {
+		v1.set_etat_pc_arriere((etat_pare_choc)(v1.get_etat_pc_arriere() - 1));
+		v2.set_etat_pc_avant((etat_pare_choc)(v2.get_etat_pc_avant() - 1));
+		if (v1.get_etat_pc_arriere() == 0) {
+			// Immobilisé Vehicule (= accident)
+		}
+		if (v2.get_etat_pc_avant() == 0) {
+			// Immobilisé Vehicule (= accident)
+		}
+	}
+	else {
+		v2.set_etat_pc_arriere((etat_pare_choc)(v2.get_etat_pc_arriere() - 1));
+		v1.set_etat_pc_avant((etat_pare_choc)(v1.get_etat_pc_avant() - 1));
+		if (v2.get_etat_pc_arriere() == 0) {
+			// Immobilisé Vehicule (= accident)
+		}
+		if (v1.get_etat_pc_avant() == 0) {
+			// Immobilisé Vehicule (= accident)
+		}
 	}
 }
