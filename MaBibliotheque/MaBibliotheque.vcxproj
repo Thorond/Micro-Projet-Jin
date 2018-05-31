@@ -147,6 +147,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="Camions.hpp" />
     <ClInclude Include="ListageEnum.hpp" />
     <ClInclude Include="monMain.h" />
     <ClInclude Include="Route.hpp" />
@@ -156,6 +157,7 @@
     <ClInclude Include="Voitures.hpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="Camions.cpp" />
     <ClCompile Include="monMain.cpp" />
     <ClCompile Include="Route.cpp" />
     <ClCompile Include="stdafx.cpp">

@@ -34,24 +34,30 @@ void Route::generation_vehicules(std::vector<std::unique_ptr<Vehicules>>& voie) 
 
 
 void Route::consequence_collision(Vehicules& v1, Vehicules& v2) {
+	int pcv1;
+	int pcv2;
 	if (v1.get_x() > v2.get_x()) {
-		v1.set_etat_pc_arriere((etat_pare_choc)(v1.get_etat_pc_arriere() - 1));
-		v2.set_etat_pc_avant((etat_pare_choc)(v2.get_etat_pc_avant() - 1));
-		if (v1.get_etat_pc_arriere() == 0) {
-			// Immobilisé Vehicule (= accident)
+		pcv1 = v1.get_etat_pc_arriere();
+		pcv2 = v2.get_etat_pc_avant();
+		v1.set_etat_pc_arriere((etat_pare_choc)(pcv1 - pcv2));
+		v2.set_etat_pc_avant((etat_pare_choc)(pcv2 - pcv1));
+		if (v1.get_etat_pc_arriere() <= 0) {
+			// Faire disparaitre le vehicule
 		}
-		if (v2.get_etat_pc_avant() == 0) {
-			// Immobilisé Vehicule (= accident)
+		if (v2.get_etat_pc_avant() <= 0) {
+			// Faire disparaitre le vehicule
 		}
 	}
 	else {
-		v2.set_etat_pc_arriere((etat_pare_choc)(v2.get_etat_pc_arriere() - 1));
-		v1.set_etat_pc_avant((etat_pare_choc)(v1.get_etat_pc_avant() - 1));
-		if (v2.get_etat_pc_arriere() == 0) {
-			// Immobilisé Vehicule (= accident)
+		pcv1 = v1.get_etat_pc_avant();
+		pcv2 = v2.get_etat_pc_arriere();
+		v2.set_etat_pc_arriere((etat_pare_choc)(pcv2 - pcv1));
+		v1.set_etat_pc_avant((etat_pare_choc)(pcv1 - pcv2));
+		if (v2.get_etat_pc_arriere() <= 0) {
+			// Faire disparaitre le vehicule
 		}
-		if (v1.get_etat_pc_avant() == 0) {
-			// Immobilisé Vehicule (= accident)
+		if (v1.get_etat_pc_avant() <= 0) {
+			// Faire disparaitre le vehicule
 		}
 	}
 }
