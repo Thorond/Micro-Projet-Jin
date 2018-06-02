@@ -25,6 +25,12 @@ Vehicules* Route::get_vehicule(std::vector<std::unique_ptr<Vehicules>>& voie, in
 	return voie[rang].get();
 }
 
+void Route::generation_automatique() {
+	generation_vehicules(voie_haute);
+	generation_vehicules(voie_milieu);
+	generation_vehicules(voie_basse);
+}
+
 // fonction qui va générer les différents véhicules sur les différentes voies de la route
 void Route::generation_vehicules(std::vector<std::unique_ptr<Vehicules>>& voie) {
 	std::random_device rd;

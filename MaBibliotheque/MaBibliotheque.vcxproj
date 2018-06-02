@@ -148,6 +148,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClInclude Include="Camions.hpp" />
+    <ClInclude Include="Draw.hpp" />
     <ClInclude Include="Entitee.hpp" />
     <ClInclude Include="EnumEtDonnees.hpp" />
     <ClInclude Include="monMain.h" />
@@ -161,6 +162,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Camions.cpp" />
+    <ClCompile Include="Draw.cpp" />
     <ClCompile Include="Entitee.cpp" />
     <ClCompile Include="monMain.cpp" />
     <ClCompile Include="Policier.cpp" />
