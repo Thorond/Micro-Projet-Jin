@@ -23,5 +23,6 @@ enum niveau {
 	trois
 };
 
-static int vitesse_de_base = 80; // le joueur aura une vitesse ~130, le camion 60, puis +10% et +20%
+static const unsigned int VITESSE_DE_BASE(80); // le joueur aura une vitesse ~130, le camion 60, puis +10% et +20%
 								// en proportion 0.75 0.20 0.05 (f(des niveaux))
+static const unsigned int VITESSE_DEFILEMENT(130);

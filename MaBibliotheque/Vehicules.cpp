@@ -3,15 +3,15 @@
 #include "Vehicules.hpp"
 
 
-Vehicules::Vehicules(double x, double vitesse/*, position_route position*/, b2World* world)
+Vehicules::Vehicules(double x/*, position_route position*/, b2World* world)
 	: x(x)
-	, vitesse_x(vitesse)
+	, vitesse_x(0)
 	/*, position_y(position)*/
 	, etat_pc_avant(indefini)
 	, etat_pc_arriere(indefini)
 	, corps(*world)
 {
-	corps.charger(this->x, 0);
+	
 }
 
 //Vehicules::~Vehicules() {

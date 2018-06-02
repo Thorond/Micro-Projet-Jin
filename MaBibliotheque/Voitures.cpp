@@ -1,9 +1,11 @@
 #include "Voitures.hpp"
 
-Voitures::Voitures(double x, double vitesse/*, position_route position*/, niveau niveau, b2World* world)
-	: Vehicules(x, vitesse/*, position*/,world)
+Voitures::Voitures(double x/*, position_route position*/, niveau niveau, b2World* world)
+	: Vehicules(x/*, position*/,world)
 {
 	this->construction_pare_choc(niveau);
+	this->choix_vitesse(niveau);
+	corps.charger(x, 0, this->get_vitesse_x(), false);
 }
 
 void Voitures::construction_pare_choc(niveau niveau) {
@@ -19,4 +21,47 @@ void Voitures::construction_pare_choc(niveau niveau) {
 		this->set_etat_pc_avant(excellent);
 		this->set_etat_pc_arriere(excellent);
 	}
+}
+
+void Voitures::choix_vitesse(niveau niveau) {
+
+	std::random_device rd;
+	static std::default_random_engine engine(rd());
+	static std::uniform_int_distribution<> pourcentage(0, 100);
+	const int choix_vitesse = pourcentage(engine);
+
+	if (niveau == un) {
+		if (choix_vitesse < 75) {
+			this->set_vitesse_x(VITESSE_DE_BASE);
+		}
+		else if (choix_vitesse < 95) {
+			this->set_vitesse_x(1.25f * VITESSE_DE_BASE);
+		}
+		else {
+			this->set_vitesse_x(1.5f * VITESSE_DE_BASE);
+		}
+	}
+	else if (niveau == deux) {
+		if (choix_vitesse < 65) {
+			this->set_vitesse_x(VITESSE_DE_BASE);
+		}
+		else if (choix_vitesse < 90) {
+			this->set_vitesse_x(1.25f * VITESSE_DE_BASE);
+		}
+		else {
+			this->set_vitesse_x(1.5f * VITESSE_DE_BASE);
+		}
+	}
+	else {
+		if (choix_vitesse < 55) {
+			this->set_vitesse_x(VITESSE_DE_BASE);
+		}
+		else if (choix_vitesse < 80) {
+			this->set_vitesse_x(1.25f * VITESSE_DE_BASE);
+		}
+		else {
+			this->set_vitesse_x(1.5f * VITESSE_DE_BASE);
+		}
+	}
+	this->set_vitesse_x(this->get_vitesse_x() - VITESSE_DEFILEMENT); // adapter la vitesse des IA avec le joueur 
 }

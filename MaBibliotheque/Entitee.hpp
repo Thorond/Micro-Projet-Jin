@@ -5,7 +5,7 @@ class Entitee
 {
 public:
 	Entitee(b2World& world);
-	void charger(double x, double y);
+	void charger(double x, double y,double vitesse, bool isCamion);
 	~Entitee();
 	b2Body* body;
 

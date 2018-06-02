@@ -5,7 +5,8 @@ class Camions : public Vehicules
 {
 
 public:
-	Camions(double x, double vitesse/*, position_route position*/, niveau niveau, b2World* world);
+	Camions(double x/*, position_route position*/, niveau niveau, b2World* world);
 	void construction_pare_choc(niveau niveau) override;
+	void choix_vitesse(niveau niveau) override;
 
 }; 

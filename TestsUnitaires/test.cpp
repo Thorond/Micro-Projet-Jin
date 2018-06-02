@@ -39,13 +39,10 @@ TEST(TestMouvement, TestDynamique1) {
 	EXPECT_EQ(temp->get_x(), 500);
 	EXPECT_EQ(temp->corps.body->GetPosition().x, 500);
 	b2Vec2 vel = temp->corps.body->GetLinearVelocity();
-	//temp->corps.body->ApplyForceToCenter(b2Vec2(-1000, 0) true);
-	temp->corps.body->SetLinearVelocity(b2Vec2(-1000, 0));
-	//temp->corps.body->SetTransform(b2Vec2(-50, 0), 0);
 	for (int32 i = 0; i < 60; ++i)
 	{
 		route.Update();
 	}
-	EXPECT_NE(temp->corps.body->GetLinearVelocity().x, 0);
+	EXPECT_NE(vel.x, 0);
 	EXPECT_LE(temp->corps.body->GetPosition().x, 500);
 }

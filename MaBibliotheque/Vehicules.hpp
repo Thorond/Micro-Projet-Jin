@@ -1,11 +1,12 @@
 #pragma once
 #include "EnumEtDonnees.hpp"
 #include "Entitee.hpp"
+#include <random>
 
 class Vehicules
 {
 public:
-	Vehicules(double x, double vitesse/*, position_route position*/, b2World* world);
+	Vehicules(double x/*, position_route position*/, b2World* world);
 	//~Vehicules();
 	double get_x();
 	void set_x( double x);
@@ -22,6 +23,7 @@ public:
 	// body (box2d)
 
 	virtual void construction_pare_choc(niveau niveau) = 0;
+	virtual void choix_vitesse(niveau niveau) = 0;
 	//void adpater_sa_vitesse(Vehicules& vehiDevant);
 
 	Entitee corps;

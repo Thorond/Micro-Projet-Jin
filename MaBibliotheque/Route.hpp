@@ -25,6 +25,8 @@ public :
 	void generation_vehicules(std::vector<std::unique_ptr<Vehicules>>& voie);
 	void consequence_collision(Vehicules& v1, Vehicules& v2);
 
+	void Update(/*sf::RenderWindow* window */);
+
 private :
 	niveau niveau_route;
 	std::vector<std::unique_ptr<Vehicules>> voie_haute;
