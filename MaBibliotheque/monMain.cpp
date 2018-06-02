@@ -9,7 +9,7 @@ int monMain()
 	Route route = Route();
 
 	SFML_output out;
-	route.generation_vehicules(route.get_voie_basse());
+	route.generation_automatique();
 	route.draw(out.get_window());
 	out.display(route);
 	/*for (int32 i = 0; i < 10; ++i)

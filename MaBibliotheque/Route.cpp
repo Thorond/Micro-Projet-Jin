@@ -26,13 +26,13 @@ Vehicules* Route::get_vehicule(std::vector<std::unique_ptr<Vehicules>>& voie, in
 }
 
 void Route::generation_automatique() {
-	generation_vehicules(voie_haute);
-	generation_vehicules(voie_milieu);
-	generation_vehicules(voie_basse);
+	generation_vehicules(voie_haute, haute);
+	generation_vehicules(voie_milieu, milieu);
+	generation_vehicules(voie_basse, basse);
 }
 
 // fonction qui va générer les différents véhicules sur les différentes voies de la route
-void Route::generation_vehicules(std::vector<std::unique_ptr<Vehicules>>& voie) {
+void Route::generation_vehicules(std::vector<std::unique_ptr<Vehicules>>& voie, position_route posi) {
 	std::random_device rd;
 	static std::default_random_engine engine(rd());
 	static std::uniform_int_distribution<> pourcentage(0, 100);
@@ -40,31 +40,31 @@ void Route::generation_vehicules(std::vector<std::unique_ptr<Vehicules>>& voie) 
 
 	if (niveau_route == un ) {
 		if (choix_voiture_camion < 80) {
-			auto vehicule = std::make_unique<Voitures>(500, this->get_niveau(),world);
+			auto vehicule = std::make_unique<Voitures>(500, posi, this->get_niveau(),world );
 			voie.push_back(std::move(vehicule));
 		}
 		else {
-			auto vehicule = std::make_unique<Camions>(500, this->get_niveau(), world);
+			auto vehicule = std::make_unique<Camions>(500, posi , this->get_niveau(), world);
 			voie.push_back(std::move(vehicule));
 		}
 	}
 	else if (niveau_route == deux) {
 		if (choix_voiture_camion < 70) {
-			auto vehicule = std::make_unique<Voitures>(500, this->get_niveau(), world);
+			auto vehicule = std::make_unique<Voitures>(500, posi, this->get_niveau(), world);
 			voie.push_back(std::move(vehicule));
 		}
 		else {
-			auto vehicule = std::make_unique<Camions>(500, this->get_niveau(), world);
+			auto vehicule = std::make_unique<Camions>(500, posi, this->get_niveau(), world);
 			voie.push_back(std::move(vehicule));
 		}
 	}
 	else {
 		if (choix_voiture_camion < 60) {
-			auto vehicule = std::make_unique<Voitures>(500, this->get_niveau(), world);
+			auto vehicule = std::make_unique<Voitures>(500, posi, this->get_niveau(), world);
 			voie.push_back(std::move(vehicule));
 		}
 		else {
-			auto vehicule = std::make_unique<Camions>(500, this->get_niveau(), world);
+			auto vehicule = std::make_unique<Camions>(500, posi, this->get_niveau(), world);
 			voie.push_back(std::move(vehicule));
 		}
 	}
@@ -106,6 +106,12 @@ void Route::consequence_collision(Vehicules& v1, Vehicules& v2) {
 
 void Route::Update(sf::RenderWindow& window) {
 	this->world->Step(1.0f / 60.0f, 6, 2);
+	for (size_t i = 0; i < voie_haute.size(); i++) {
+		this->get_vehicule(voie_haute, i)->Update(window);
+	}
+	for (size_t i = 0; i < voie_milieu.size(); i++) {
+		this->get_vehicule(voie_milieu, i)->Update(window);
+	}
 	for (size_t k = 0; k < this->voie_basse.size(); k++) {
 		this->get_vehicule(voie_basse, k)->Update(window);
 	}

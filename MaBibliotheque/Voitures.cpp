@@ -1,7 +1,7 @@
 #include "Voitures.hpp"
 
-Voitures::Voitures(double x/*, position_route position*/, niveau niveau, b2World* world)
-	: Vehicules(x/*, position*/,world)
+Voitures::Voitures(double x, position_route position, niveau niveau, b2World* world)
+	: Vehicules(x, position,world)
 {
 	this->construction_pare_choc(niveau);
 	this->choix_vitesse(niveau);

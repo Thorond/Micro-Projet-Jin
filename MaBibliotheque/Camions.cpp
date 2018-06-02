@@ -1,7 +1,7 @@
 #include "Camions.hpp"
 
-Camions::Camions(double x/*, position_route position*/, niveau niveau, b2World* world)
-	: Vehicules(x/*, position*/, world)
+Camions::Camions(double x, position_route position, niveau niveau, b2World* world)
+	: Vehicules(x, position, world)
 {
 	this->construction_pare_choc(niveau);
 	this->choix_vitesse(niveau);
@@ -70,5 +70,7 @@ void Camions::choix_vitesse(niveau niveau) {
 void Camions::draw(sf::RenderWindow& window) {
 	this->draw_circle(this->get_x(), 4, window);
 	this->draw_circle(this->get_x() + 10, 4, window);
+	this->draw_circle(this->get_x() + 20, 4, window);
+	this->draw_circle(this->get_x() + 30, 4, window);
 	
 }
