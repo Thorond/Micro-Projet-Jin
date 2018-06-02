@@ -1,3 +1,2 @@
 ﻿  test.cpp
-MaBibliotheque.lib(Entitee.obj) : warning LNK4075: ignoring '/EDITANDCONTINUE' due to '/SAFESEH' specification
   TestsUnitaires.vcxproj -> D:\Visual Studio\Projets\Micro-Projet-Jin\Debug\TestsUnitaires.exe
