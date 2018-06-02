@@ -104,9 +104,21 @@ void Route::consequence_collision(Vehicules& v1, Vehicules& v2) {
 
 
 
-void Route::Update(/* sf::RenderWindow* window */) {
+void Route::Update(sf::RenderWindow& window) {
 	this->world->Step(1.0f / 60.0f, 6, 2);
 	for (size_t k = 0; k < this->voie_basse.size(); k++) {
-		this->get_vehicule(voie_basse, k)->Update(/* sf::RenderWindow* window */);
+		this->get_vehicule(voie_basse, k)->Update(window);
+	}
+}
+
+void Route::draw(sf::RenderWindow& window) {
+	for (size_t i = 0; i < voie_haute.size(); i++) {
+		this->get_vehicule(voie_haute, i)->draw(window);
+	}
+	for (size_t i = 0; i < voie_milieu.size(); i++) {
+		this->get_vehicule(voie_milieu, i)->draw(window);
+	}
+	for (size_t i = 0; i < voie_basse.size(); i++) {
+		this->get_vehicule(voie_basse, i)->draw(window);
 	}
 }

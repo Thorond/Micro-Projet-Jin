@@ -4,7 +4,6 @@
 #include <vector>
 #include <memory>
 #include <random>
-#include <SFML/Graphics.hpp>
 
 
 
@@ -25,7 +24,8 @@ public :
 	void generation_vehicules(std::vector<std::unique_ptr<Vehicules>>& voie);
 	void consequence_collision(Vehicules& v1, Vehicules& v2);
 
-	void Update(/*sf::RenderWindow* window */);
+	void Update(sf::RenderWindow& window);
+	void draw(sf::RenderWindow& window);
 
 private :
 	niveau niveau_route;

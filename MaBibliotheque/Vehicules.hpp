@@ -2,6 +2,7 @@
 #include "EnumEtDonnees.hpp"
 #include "Entitee.hpp"
 #include <random>
+#include <SFML\Graphics.hpp>
 
 class Vehicules
 {
@@ -19,15 +20,15 @@ public:
 	etat_pare_choc get_etat_pc_arriere();
 	void set_etat_pc_arriere(etat_pare_choc etat);
 
-	// formes (sfml)
-	// body (box2d)
 
 	virtual void construction_pare_choc(niveau niveau) = 0;
 	virtual void choix_vitesse(niveau niveau) = 0;
 	//void adpater_sa_vitesse(Vehicules& vehiDevant);
 
 	Entitee corps;
-	bool Update(/*sf::RenderWindow* window*/);
+	bool Update(sf::RenderWindow& window);
+	void draw_circle(double x, double r, sf::RenderWindow& window);
+	virtual void draw(sf::RenderWindow& window) = 0;
 
 private:
 	double x;

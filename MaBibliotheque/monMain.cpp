@@ -6,15 +6,18 @@
 
 int monMain()
 {
-	/*Voitures vehi = Voitures(500, 70,un);
-	std::cout << vehi.get_etat_pc_arriere() << std::endl;
-	vehi.set_etat_pc_arriere( (etat_pare_choc)(vehi.get_etat_pc_arriere()+1));
-	std::cout << vehi.get_etat_pc_arriere() << std::endl;*/
-
+	Route route = Route();
 
 	SFML_output out;
-	out.draw_circle(50, 50);
-	out.display();
+	route.generation_vehicules(route.get_voie_basse());
+	route.draw(out.get_window());
+	out.display(route);
+	/*for (int32 i = 0; i < 10; ++i)
+	{
+		route.Update(out);
+		route.draw(out);
+		out.display();
+	}*/
 
 	return 0;
 }

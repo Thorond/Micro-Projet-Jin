@@ -65,3 +65,10 @@ void Camions::choix_vitesse(niveau niveau) {
 	}
 	this->set_vitesse_x(this->get_vitesse_x() - VITESSE_DEFILEMENT); // adapter la vitesse des IA avec le joueur 
 }
+
+
+void Camions::draw(sf::RenderWindow& window) {
+	this->draw_circle(this->get_x(), 4, window);
+	this->draw_circle(this->get_x() + 10, 4, window);
+	
+}

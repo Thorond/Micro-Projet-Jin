@@ -3,8 +3,6 @@
 #include <vector>
 #include "Draw.hpp"
 
-static const unsigned int WINDOW_WIDTH(1000);
-static const unsigned int WINDOW_HEIGHT(700);
 
 
 SFML_output::SFML_output()
@@ -13,15 +11,7 @@ SFML_output::SFML_output()
 	clean();
 }
 
-void SFML_output::draw_circle(double absolute_x, double r)
-{
-	sf::CircleShape shape(static_cast<float>(r));
-	shape.setFillColor(sf::Color::White);
-	shape.setPosition(static_cast<float>(absolute_x + WINDOW_WIDTH / 2 - r), static_cast<float>(WINDOW_HEIGHT / 2 - (50 + r)));
-	window.draw(shape);
-}
-
-void SFML_output::display()
+void SFML_output::display(Route& route)
 {
 	window.display();
 	while (window.isOpen())
@@ -33,17 +23,20 @@ void SFML_output::display()
 			{
 				// fenetre fermee
 				case sf::Event::Closed:
-				window.close() ;
+					window.close() ;
 				break;
 
 				default:
 				break;
 			}
+			
 		}
-		//sf::sleep(sf::milliseconds(1000));
-		//window.close();
-	}
 
+		window.clear();
+		route.Update(window);
+		route.draw(window);
+		window.display();
+	}
 
 }
 
@@ -54,4 +47,9 @@ void SFML_output::clean()
 	shape.setPosition(sf::Vector2f(0, 0));
 	shape.setFillColor(sf::Color::Black);
 	window.draw(shape);
+}
+
+
+sf::RenderWindow& SFML_output::get_window() {
+	return window;
 }

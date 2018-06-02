@@ -45,9 +45,17 @@ void Vehicules::set_etat_pc_arriere(etat_pare_choc etat) {
 }
 
 
-bool Vehicules::Update(/*sf::RenderWindow* window*/) {
+bool Vehicules::Update(sf::RenderWindow& window) {
 	b2Vec2 pos = this->corps.body->GetPosition();
 	//float32 rot = this->body->GetAngle();
 	this->set_x(pos.x);
 	return true;
+}
+
+void Vehicules::draw_circle(double x, double r, sf::RenderWindow& window)
+{
+	sf::CircleShape shape(static_cast<float>(r));
+	shape.setFillColor(sf::Color::White);
+	shape.setPosition(static_cast<float>(x + WINDOW_WIDTH / 2 - r), static_cast<float>(WINDOW_HEIGHT / 2 - (50 + r)));
+	window.draw(shape);
 }
