@@ -22,6 +22,8 @@ public :
 	void generation_automatique(sf::Clock& clock , sf::Time& elapsed); // générer pour les trois voies une voiture ou un camion de
 								// façon assez régulière
 	void generation_vehicules(std::vector<std::unique_ptr<Vehicules>>& voie, position_route posi);
+
+	bool changer_de_voie(position_route choix, position_route posActuel, Vehicules& vehic);
 	void consequence_collision(Vehicules& v1, Vehicules& v2);
 
 	void Update(sf::RenderWindow& window);

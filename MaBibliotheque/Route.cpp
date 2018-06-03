@@ -33,7 +33,7 @@ void Route::generation_automatique(sf::Clock& clock, sf::Time& elapsed) {
 	const int nombre_voie = distri_generation(engine);
 	const int choix_voie = distri_generation(engine);
 
-	if (elapsed.asSeconds() > 3 ) { // en moyenne une fois toutes les 3 secondes 
+	if (elapsed.asSeconds() > 3 ) { // generation toutes les trois secondes
 		if (nombre_voie < FREQ / 2) {
 			if (choix_voie < FREQ / 3) {
 				generation_vehicules(voie_haute, haute);
@@ -104,6 +104,49 @@ void Route::generation_vehicules(std::vector<std::unique_ptr<Vehicules>>& voie, 
 	
 }
 
+bool Route::changer_de_voie(position_route choix, position_route posActuel, Vehicules& vehic ) {
+	assert((choix == haute && posActuel == milieu) || (choix == milieu && posActuel == basse)
+		|| (choix == milieu && posActuel == haute) || (choix == basse && posActuel == milieu));
+	auto vehi = std::make_unique<Voitures>(vehic.get_x(), vehic.get_position(), this->get_niveau(), world ); // que voitures
+	std::vector<std::unique_ptr<Vehicules>>* voie_de_changement;
+	std::vector<std::unique_ptr<Vehicules>>* voie_actuel;
+	if (choix == haute && posActuel == milieu) {
+		voie_de_changement = &get_voie_haute();
+		voie_actuel = &get_voie_milieu();
+	}
+	else if ((choix == milieu && posActuel == basse)) {
+		voie_de_changement = &get_voie_milieu();
+		voie_actuel = &get_voie_basse();
+	}
+	else if ((choix == milieu && posActuel == haute)) {
+		voie_de_changement = &get_voie_milieu();
+		voie_actuel = &get_voie_haute();
+	}
+	else {
+		voie_de_changement = &get_voie_basse();
+		voie_actuel = &get_voie_milieu();
+	}
+	int positionnement = 0;
+	for (size_t i = 0; i < voie_actuel->size(); i++) {
+		if (get_vehicule(*voie_actuel, i)->get_x() == vehi.get()->get_x()) {
+			voie_actuel->erase(voie_actuel->begin() + i);
+			break;
+		}
+	}
+	for (size_t i = 0; i < voie_de_changement->size(); i++) {
+		if (get_vehicule(*voie_de_changement, i)->get_x() < vehi.get()->get_x())
+			positionnement++;
+		else if (get_vehicule(*voie_de_changement, i)->get_x() > vehi.get()->get_x()) {
+			voie_de_changement->insert(voie_de_changement->begin() + i, std::move(vehi));
+			break;
+		}
+		else return false;
+	}
+	if (positionnement == voie_de_changement->size()) voie_de_changement->push_back(std::move(vehi));
+	
+	return true;
+}
+
 
 void Route::consequence_collision(Vehicules& v1, Vehicules& v2) {
 	int pcv1;
@@ -143,21 +186,21 @@ void Route::Update(sf::RenderWindow& window) {
 	}
 	for (size_t i = 0; i < voie_haute.size(); i++) {
 		this->get_vehicule(voie_haute, i)->Update(window);
-		if (i + 1 < voie_haute.size()) this->get_vehicule(voie_haute, i)->adpater_sa_vitesse(*(this->get_vehicule(voie_haute, i + 1)));
+		if (i + 1 < voie_haute.size()) this->get_vehicule(voie_haute, i)->adapter_sa_vitesse(*(this->get_vehicule(voie_haute, i + 1)));
 	}
 	for (size_t i = 0; i < voie_milieu.size(); i++) {
 		if (this->get_vehicule(voie_milieu, i)->get_x() < -100) voie_milieu.erase(voie_milieu.begin() + i);
 	}
 	for (size_t i = 0; i < voie_milieu.size(); i++) {
 		this->get_vehicule(voie_milieu, i)->Update(window);
-		if (i + 1 < voie_milieu.size()) this->get_vehicule(voie_milieu, i)->adpater_sa_vitesse(*(this->get_vehicule(voie_milieu, i + 1)));
+		if (i + 1 < voie_milieu.size()) this->get_vehicule(voie_milieu, i)->adapter_sa_vitesse(*(this->get_vehicule(voie_milieu, i + 1)));
 	}
 	for (size_t i = 0; i < voie_basse.size(); i++) {
 		if (this->get_vehicule(voie_basse, i)->get_x() < -100) voie_basse.erase(voie_basse.begin() + i);
 	}
 	for (size_t i = 0; i < this->voie_basse.size(); i++) {
 		this->get_vehicule(voie_basse, i)->Update(window);
-		if (i + 1 < voie_basse.size()) this->get_vehicule(voie_basse, i)->adpater_sa_vitesse(*(this->get_vehicule(voie_basse, i + 1)));
+		if (i + 1 < voie_basse.size()) this->get_vehicule(voie_basse, i)->adapter_sa_vitesse(*(this->get_vehicule(voie_basse, i + 1)));
 	}
 }
 

@@ -44,7 +44,7 @@ void Vehicules::set_etat_pc_arriere(etat_pare_choc etat) {
 	this->etat_pc_arriere = etat;
 }
 
-void Vehicules::adpater_sa_vitesse(Vehicules& vehiDevant) {
+void Vehicules::adapter_sa_vitesse(Vehicules& vehiDevant) {
 	if (vehiDevant.get_x() - this->get_x() < 1000 && vehiDevant.get_vitesse_x() < this->get_vitesse_x() ) {
 		this->set_vitesse_x(vehiDevant.get_vitesse_x() );
 		this->corps.body->SetLinearVelocity(b2Vec2(vehiDevant.get_vitesse_x(), 0));
