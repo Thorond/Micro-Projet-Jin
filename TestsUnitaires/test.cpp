@@ -36,8 +36,8 @@ TEST(TestCorp, TestStatique1) {
 	Route route = Route();
 	route.generation_vehicules(route.get_voie_basse(), basse);
 	Vehicules* temp = route.get_vehicule(route.get_voie_basse(), 0);
-	EXPECT_EQ(temp->get_x(), 500);
-	EXPECT_EQ(temp->corps.body->GetPosition().x, 500);
+	EXPECT_EQ(temp->get_x(), WINDOW_WIDTH + 100);
+	EXPECT_EQ(temp->corps.body->GetPosition().x, WINDOW_WIDTH + 100);
 }
 
 TEST(TestCorp, TestDynamique1) {
@@ -54,7 +54,6 @@ TEST(TestCorp, TestDynamique1) {
 	EXPECT_NE(vel.x, 0);
 	EXPECT_NE(temp->corps.body->GetPosition().x, 500);
 }
-
 
 TEST(TestAI, TestDynamique1) {
 	Route route = Route();
@@ -79,4 +78,21 @@ TEST(TestAI, TestDynamique1) {
 		route.Update(out.get_window());
 	}
 	EXPECT_EQ(vehi1->corps.body->GetLinearVelocity().x, vehi2->corps.body->GetLinearVelocity().x);
+}
+
+TEST(TestAI, TestDestruction1) {
+	Route route = Route();
+
+	SFML_output out;
+
+	sf::Clock clock;
+	sf::Time elapsed = clock.getElapsedTime();
+	route.generation_vehicules(route.get_voie_basse(), basse);
+	route.get_vehicule(route.get_voie_basse(), 0)->set_x(0);
+	EXPECT_EQ(route.get_voie_basse().size(), 1);
+	while (elapsed.asSeconds() < 1) {
+		route.Update(out.get_window());
+		elapsed = clock.getElapsedTime();
+	}
+	EXPECT_EQ(route.get_voie_basse().size() , 0);
 }
