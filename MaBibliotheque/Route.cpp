@@ -108,12 +108,15 @@ void Route::Update(sf::RenderWindow& window) {
 	this->world->Step(1.0f / 60.0f, 6, 2);
 	for (size_t i = 0; i < voie_haute.size(); i++) {
 		this->get_vehicule(voie_haute, i)->Update(window);
+		if (i + 1 < voie_haute.size()) this->get_vehicule(voie_haute, i)->adpater_sa_vitesse(*(this->get_vehicule(voie_haute, i + 1)));
 	}
 	for (size_t i = 0; i < voie_milieu.size(); i++) {
 		this->get_vehicule(voie_milieu, i)->Update(window);
+		if (i + 1 < voie_milieu.size()) this->get_vehicule(voie_milieu, i)->adpater_sa_vitesse(*(this->get_vehicule(voie_milieu, i + 1)));
 	}
-	for (size_t k = 0; k < this->voie_basse.size(); k++) {
-		this->get_vehicule(voie_basse, k)->Update(window);
+	for (size_t i = 0; i < this->voie_basse.size(); i++) {
+		this->get_vehicule(voie_basse, i)->Update(window);
+		if (i + 1 < voie_basse.size()) this->get_vehicule(voie_basse, i)->adpater_sa_vitesse(*(this->get_vehicule(voie_basse, i + 1)));
 	}
 }
 

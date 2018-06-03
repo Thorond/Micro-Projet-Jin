@@ -14,6 +14,7 @@ SFML_output::SFML_output()
 void SFML_output::display(Route& route)
 {
 	window.display();
+	//int attente = 0;
 	while (window.isOpen())
 	{
 		sf::Event event;
@@ -31,7 +32,8 @@ void SFML_output::display(Route& route)
 			}
 			
 		}
-
+		//attente++;
+		//if ( attente == 2400) route.generation_automatique();
 		window.clear();
 		route.Update(window);
 		route.draw(window);

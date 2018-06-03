@@ -52,5 +52,31 @@ TEST(TestCorp, TestDynamique1) {
 		route.Update(out.get_window());
 	}
 	EXPECT_NE(vel.x, 0);
-	EXPECT_LE(temp->corps.body->GetPosition().x, 500);
+	EXPECT_NE(temp->corps.body->GetPosition().x, 500);
+}
+
+
+TEST(TestAI, TestDynamique1) {
+	Route route = Route();
+
+	SFML_output out;
+
+	route.generation_vehicules(route.get_voie_basse(), basse);
+	Vehicules* vehi1 = route.get_vehicule(route.get_voie_basse(), 0);
+	vehi1->set_vitesse_x(10);
+	vehi1->corps.body->SetLinearVelocity(b2Vec2(vehi1->get_vitesse_x(), 0));
+	vehi1->set_x(400);
+
+	route.generation_vehicules(route.get_voie_basse(), basse);
+	Vehicules* vehi2 = route.get_vehicule(route.get_voie_basse(), 1);
+	vehi2->set_vitesse_x(-10);
+	vehi2->corps.body->SetLinearVelocity(b2Vec2(vehi2->get_vitesse_x(), 0));
+	vehi2->set_x(500);
+
+	EXPECT_NE(vehi1->corps.body->GetLinearVelocity().x, vehi2->corps.body->GetLinearVelocity().x);
+	for (int32 i = 0; i < 60; ++i)
+	{
+		route.Update(out.get_window());
+	}
+	EXPECT_EQ(vehi1->corps.body->GetLinearVelocity().x, vehi2->corps.body->GetLinearVelocity().x);
 }
