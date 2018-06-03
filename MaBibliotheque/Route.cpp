@@ -72,31 +72,31 @@ void Route::generation_vehicules(std::vector<std::unique_ptr<Vehicules>>& voie, 
 
 	if (niveau_route == un ) {
 		if (choix_voiture_camion < 80) {
-			auto vehicule = std::make_unique<Voitures>(500, posi, this->get_niveau(),world );
+			auto vehicule = std::make_unique<Voitures>(WINDOW_WIDTH + 100 , posi, this->get_niveau(),world );
 			voie.push_back(std::move(vehicule));
 		}
 		else {
-			auto vehicule = std::make_unique<Camions>(500, posi , this->get_niveau(), world);
+			auto vehicule = std::make_unique<Camions>(WINDOW_WIDTH + 100, posi , this->get_niveau(), world);
 			voie.push_back(std::move(vehicule));
 		}
 	}
 	else if (niveau_route == deux) {
 		if (choix_voiture_camion < 70) {
-			auto vehicule = std::make_unique<Voitures>(500, posi, this->get_niveau(), world);
+			auto vehicule = std::make_unique<Voitures>(WINDOW_WIDTH + 100, posi, this->get_niveau(), world);
 			voie.push_back(std::move(vehicule));
 		}
 		else {
-			auto vehicule = std::make_unique<Camions>(500, posi, this->get_niveau(), world);
+			auto vehicule = std::make_unique<Camions>(WINDOW_WIDTH + 100, posi, this->get_niveau(), world);
 			voie.push_back(std::move(vehicule));
 		}
 	}
 	else {
 		if (choix_voiture_camion < 60) {
-			auto vehicule = std::make_unique<Voitures>(500, posi, this->get_niveau(), world);
+			auto vehicule = std::make_unique<Voitures>(WINDOW_WIDTH + 100, posi, this->get_niveau(), world);
 			voie.push_back(std::move(vehicule));
 		}
 		else {
-			auto vehicule = std::make_unique<Camions>(500, posi, this->get_niveau(), world);
+			auto vehicule = std::make_unique<Camions>(WINDOW_WIDTH + 100, posi, this->get_niveau(), world);
 			voie.push_back(std::move(vehicule));
 		}
 	}
@@ -139,21 +139,21 @@ void Route::consequence_collision(Vehicules& v1, Vehicules& v2) {
 void Route::Update(sf::RenderWindow& window) {
 	this->world->Step(1.0f / 60.0f, 6, 2);
 	for (size_t i = 0; i < voie_haute.size(); i++) { // est ce que l'on supprime réelement l'objet?
-		if (this->get_vehicule(voie_haute, i)->get_x() < 250) voie_haute.erase(voie_haute.begin() + i);
+		if (this->get_vehicule(voie_haute, i)->get_x() < - 100) voie_haute.erase(voie_haute.begin() + i);
 	}
 	for (size_t i = 0; i < voie_haute.size(); i++) {
 		this->get_vehicule(voie_haute, i)->Update(window);
 		if (i + 1 < voie_haute.size()) this->get_vehicule(voie_haute, i)->adpater_sa_vitesse(*(this->get_vehicule(voie_haute, i + 1)));
 	}
 	for (size_t i = 0; i < voie_milieu.size(); i++) {
-		if (this->get_vehicule(voie_milieu, i)->get_x() < 250) voie_milieu.erase(voie_milieu.begin() + i);
+		if (this->get_vehicule(voie_milieu, i)->get_x() < -100) voie_milieu.erase(voie_milieu.begin() + i);
 	}
 	for (size_t i = 0; i < voie_milieu.size(); i++) {
 		this->get_vehicule(voie_milieu, i)->Update(window);
 		if (i + 1 < voie_milieu.size()) this->get_vehicule(voie_milieu, i)->adpater_sa_vitesse(*(this->get_vehicule(voie_milieu, i + 1)));
 	}
 	for (size_t i = 0; i < voie_basse.size(); i++) {
-		if (this->get_vehicule(voie_basse, i)->get_x() < 250) voie_basse.erase(voie_basse.begin() + i);
+		if (this->get_vehicule(voie_basse, i)->get_x() < -100) voie_basse.erase(voie_basse.begin() + i);
 	}
 	for (size_t i = 0; i < this->voie_basse.size(); i++) {
 		this->get_vehicule(voie_basse, i)->Update(window);

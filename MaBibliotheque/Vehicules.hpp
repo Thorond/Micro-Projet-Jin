@@ -8,7 +8,7 @@ class Vehicules
 {
 public:
 	Vehicules(double x, position_route position, b2World* world);
-	//~Vehicules();
+	~Vehicules();
 	double get_x();
 	void set_x( double x);
 	double get_vitesse_x();

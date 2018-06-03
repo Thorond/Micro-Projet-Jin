@@ -10,12 +10,6 @@ int monMain()
 
 	SFML_output out;
 	out.display(route);
-	/*for (int32 i = 0; i < 10; ++i)
-	{
-		route.Update(out);
-		route.draw(out);
-		out.display();
-	}*/
 
 	return 0;
 }

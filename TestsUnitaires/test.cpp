@@ -85,14 +85,13 @@ TEST(TestAI, TestDestruction1) {
 
 	SFML_output out;
 
-	sf::Clock clock;
-	sf::Time elapsed = clock.getElapsedTime();
 	route.generation_vehicules(route.get_voie_basse(), basse);
 	route.get_vehicule(route.get_voie_basse(), 0)->set_x(0);
 	EXPECT_EQ(route.get_voie_basse().size(), 1);
-	while (elapsed.asSeconds() < 1) {
+	double x = route.get_vehicule(route.get_voie_basse(), 0)->get_x();
+	while (x > - 100 ) {
+		x = route.get_vehicule(route.get_voie_basse(), 0)->get_x();
 		route.Update(out.get_window());
-		elapsed = clock.getElapsedTime();
 	}
 	EXPECT_EQ(route.get_voie_basse().size() , 0);
 }

@@ -14,9 +14,9 @@ Vehicules::Vehicules(double x, position_route position, b2World* world)
 	
 }
 
-//Vehicules::~Vehicules() {
+Vehicules::~Vehicules() {
 
-//}
+}
 
 
 double Vehicules::get_x() { return x; }
@@ -66,6 +66,6 @@ void Vehicules::draw_circle(double x, double r, sf::RenderWindow& window)
 	else y = 25;
 	sf::CircleShape shape(static_cast<float>(r));
 	shape.setFillColor(sf::Color::White);
-	shape.setPosition(static_cast<float>(x + WINDOW_WIDTH / 2 - r), static_cast<float>(WINDOW_HEIGHT / 2 - (y + r)));
+	shape.setPosition(static_cast<float>(x - r), static_cast<float>(WINDOW_HEIGHT / 2 - (y + r)));
 	window.draw(shape);
 }
