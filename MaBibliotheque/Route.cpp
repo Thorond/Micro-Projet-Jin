@@ -25,10 +25,42 @@ Vehicules* Route::get_vehicule(std::vector<std::unique_ptr<Vehicules>>& voie, in
 	return voie[rang].get();
 }
 
-void Route::generation_automatique() {
-	generation_vehicules(voie_haute, haute);
-	generation_vehicules(voie_milieu, milieu);
-	generation_vehicules(voie_basse, basse);
+void Route::generation_automatique(sf::Clock& clock, sf::Time& elapsed) {
+	const unsigned int FREQ(1800);
+	std::random_device rd;
+	static std::default_random_engine engine(rd());
+	static std::uniform_int_distribution<> distri_generation(0, FREQ);
+	const int nombre_voie = distri_generation(engine);
+	const int choix_voie = distri_generation(engine);
+
+	if (elapsed.asSeconds() > 3 ) { // en moyenne une fois toutes les 3 secondes 
+		if (nombre_voie < FREQ / 2) {
+			if (choix_voie < FREQ / 3) {
+				generation_vehicules(voie_haute, haute);
+			}
+			else if (choix_voie < FREQ * 2 / 3) {
+				generation_vehicules(voie_milieu, milieu);
+			}
+			else {
+				generation_vehicules(voie_basse, basse);
+			}
+		}
+		else {
+			if (choix_voie < FREQ / 3) {
+				generation_vehicules(voie_haute, haute);
+				generation_vehicules(voie_milieu, milieu);
+			}
+			else if (choix_voie < FREQ * 2 / 3) {
+				generation_vehicules(voie_milieu, milieu);
+				generation_vehicules(voie_basse, basse);
+			}
+			else {
+				generation_vehicules(voie_basse, basse);
+				generation_vehicules(voie_haute, haute);
+			}
+		}
+		elapsed = clock.restart();
+	}
 }
 
 // fonction qui va générer les différents véhicules sur les différentes voies de la route
@@ -106,13 +138,22 @@ void Route::consequence_collision(Vehicules& v1, Vehicules& v2) {
 
 void Route::Update(sf::RenderWindow& window) {
 	this->world->Step(1.0f / 60.0f, 6, 2);
+	for (size_t i = 0; i < voie_haute.size(); i++) { // est ce que l'on supprime réelement l'objet?
+		if (this->get_vehicule(voie_haute, i)->get_x() < 250) voie_haute.erase(voie_haute.begin() + i);
+	}
 	for (size_t i = 0; i < voie_haute.size(); i++) {
 		this->get_vehicule(voie_haute, i)->Update(window);
 		if (i + 1 < voie_haute.size()) this->get_vehicule(voie_haute, i)->adpater_sa_vitesse(*(this->get_vehicule(voie_haute, i + 1)));
 	}
 	for (size_t i = 0; i < voie_milieu.size(); i++) {
+		if (this->get_vehicule(voie_milieu, i)->get_x() < 250) voie_milieu.erase(voie_milieu.begin() + i);
+	}
+	for (size_t i = 0; i < voie_milieu.size(); i++) {
 		this->get_vehicule(voie_milieu, i)->Update(window);
 		if (i + 1 < voie_milieu.size()) this->get_vehicule(voie_milieu, i)->adpater_sa_vitesse(*(this->get_vehicule(voie_milieu, i + 1)));
+	}
+	for (size_t i = 0; i < voie_basse.size(); i++) {
+		if (this->get_vehicule(voie_basse, i)->get_x() < 250) voie_basse.erase(voie_basse.begin() + i);
 	}
 	for (size_t i = 0; i < this->voie_basse.size(); i++) {
 		this->get_vehicule(voie_basse, i)->Update(window);

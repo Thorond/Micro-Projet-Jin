@@ -32,35 +32,35 @@ void Camions::choix_vitesse(niveau niveau) {
 
 	if (niveau == un) {
 		if (choix_vitesse < 75) {
-			this->set_vitesse_x(0.75f * VITESSE_DE_BASE);
+			this->set_vitesse_x(VITESSE_DE_BASE -1);
 		}
 		else if (choix_vitesse < 95) {
-			this->set_vitesse_x(0.50f * VITESSE_DE_BASE);
+			this->set_vitesse_x(VITESSE_DE_BASE -3);
 		}
 		else {
-			this->set_vitesse_x(0.25f * VITESSE_DE_BASE);
+			this->set_vitesse_x(VITESSE_DE_BASE - 5);
 		}
 	}
 	else if (niveau == deux) {
 		if (choix_vitesse < 65) {
-			this->set_vitesse_x(0.75f * VITESSE_DE_BASE);
+			this->set_vitesse_x(VITESSE_DE_BASE - 1);
 		}
 		else if (choix_vitesse < 90) {
-			this->set_vitesse_x(0.50f * VITESSE_DE_BASE);
+			this->set_vitesse_x(VITESSE_DE_BASE - 3);
 		}
 		else {
-			this->set_vitesse_x(0.25f * VITESSE_DE_BASE);
+			this->set_vitesse_x(VITESSE_DE_BASE - 5);
 		}
 	}
 	else {
 		if (choix_vitesse < 55) {
-			this->set_vitesse_x(0.75f * VITESSE_DE_BASE);
+			this->set_vitesse_x(VITESSE_DE_BASE - 1);
 		}
 		else if (choix_vitesse < 80) {
-			this->set_vitesse_x(0.50f * VITESSE_DE_BASE);
+			this->set_vitesse_x(VITESSE_DE_BASE - 3);
 		}
 		else {
-			this->set_vitesse_x(0.25f * VITESSE_DE_BASE);
+			this->set_vitesse_x(VITESSE_DE_BASE - 5);
 		}
 	}
 	this->set_vitesse_x(this->get_vitesse_x() - VITESSE_DEFILEMENT); // adapter la vitesse des IA avec le joueur 

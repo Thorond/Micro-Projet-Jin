@@ -4,7 +4,7 @@
 #include <vector>
 #include <memory>
 #include <random>
-
+#include <iostream>
 
 
 class Route 
@@ -19,7 +19,7 @@ public :
 	
 	Vehicules* get_vehicule(std::vector<std::unique_ptr<Vehicules>>& voie, int rang);
 
-	void generation_automatique(); // générer pour les trois voies une voiture ou un camion de
+	void generation_automatique(sf::Clock& clock , sf::Time& elapsed); // générer pour les trois voies une voiture ou un camion de
 								// façon assez régulière
 	void generation_vehicules(std::vector<std::unique_ptr<Vehicules>>& voie, position_route posi);
 	void consequence_collision(Vehicules& v1, Vehicules& v2);

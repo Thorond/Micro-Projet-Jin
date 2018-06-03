@@ -35,10 +35,10 @@ void Voitures::choix_vitesse(niveau niveau) {
 			this->set_vitesse_x(VITESSE_DE_BASE);
 		}
 		else if (choix_vitesse < 95) {
-			this->set_vitesse_x(1.25f * VITESSE_DE_BASE);
+			this->set_vitesse_x(VITESSE_DE_BASE + 2);
 		}
 		else {
-			this->set_vitesse_x(1.5f * VITESSE_DE_BASE);
+			this->set_vitesse_x(VITESSE_DE_BASE +4);
 		}
 	}
 	else if (niveau == deux) {
@@ -46,10 +46,10 @@ void Voitures::choix_vitesse(niveau niveau) {
 			this->set_vitesse_x(VITESSE_DE_BASE);
 		}
 		else if (choix_vitesse < 90) {
-			this->set_vitesse_x(1.25f * VITESSE_DE_BASE);
+			this->set_vitesse_x(VITESSE_DE_BASE + 2);
 		}
 		else {
-			this->set_vitesse_x(1.5f * VITESSE_DE_BASE);
+			this->set_vitesse_x(VITESSE_DE_BASE + 4);
 		}
 	}
 	else {
@@ -57,10 +57,10 @@ void Voitures::choix_vitesse(niveau niveau) {
 			this->set_vitesse_x(VITESSE_DE_BASE);
 		}
 		else if (choix_vitesse < 80) {
-			this->set_vitesse_x(1.25f * VITESSE_DE_BASE);
+			this->set_vitesse_x(VITESSE_DE_BASE + 2);
 		}
 		else {
-			this->set_vitesse_x(1.5f * VITESSE_DE_BASE);
+			this->set_vitesse_x(VITESSE_DE_BASE + 4);
 		}
 	}
 	this->set_vitesse_x(this->get_vitesse_x() - VITESSE_DEFILEMENT); // adapter la vitesse des IA avec le joueur 
