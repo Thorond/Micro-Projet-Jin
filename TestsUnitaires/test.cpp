@@ -105,7 +105,7 @@ TEST(TestAI, TestDeplacementVoie1) {
 	route.get_vehicule(route.get_voie_basse(), 0)->set_x(500);
 	route.get_vehicule(route.get_voie_basse(), 1)->set_x(600);
 	route.get_vehicule(route.get_voie_milieu(), 0)->set_x(550);
-	route.changer_de_voie(basse, milieu, *route.get_vehicule(route.get_voie_milieu(), 0) ) ;
+	route.changer_de_voie(basse, milieu, *route.get_vehicule(route.get_voie_milieu(), 0), false) ;
 	EXPECT_EQ(route.get_voie_milieu().size(), 0);
 	EXPECT_EQ(route.get_voie_basse().size(), 3);
 	EXPECT_EQ(route.get_vehicule(route.get_voie_basse(), 0)->get_x(), 500);
@@ -122,5 +122,5 @@ TEST(TestAI, TestDeplacementVoie2) {
 	route.get_vehicule(route.get_voie_basse(), 0)->set_x(500);
 	route.get_vehicule(route.get_voie_basse(), 1)->set_x(500 + LONGUEUR_VOITURE);
 	route.get_vehicule(route.get_voie_milieu(), 0)->set_x(500 + LONGUEUR_VOITURE/2);
-	EXPECT_EQ(route.changer_de_voie(basse, milieu, *route.get_vehicule(route.get_voie_milieu(), 0)), false);
+	EXPECT_EQ(route.changer_de_voie(basse, milieu, *route.get_vehicule(route.get_voie_milieu(), 0), false), false);
 }

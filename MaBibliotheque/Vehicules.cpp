@@ -61,9 +61,9 @@ bool Vehicules::Update(sf::RenderWindow& window) {
 void Vehicules::draw_circle(double x, double r, sf::RenderWindow& window)
 {
 	int y;
-	if (this->position_y == haute) y = 75;
+	if (this->position_y == haute) y = 85;
 	else if (this->position_y == milieu) y = 50;
-	else y = 25;
+	else y = 15;
 	sf::CircleShape shape(static_cast<float>(r));
 	shape.setFillColor(sf::Color::White);
 	shape.setPosition(static_cast<float>(x - r), static_cast<float>(WINDOW_HEIGHT / 2 - (y + r)));

@@ -5,7 +5,11 @@ Camions::Camions(double x, position_route position, niveau niveau, b2World* worl
 {
 	this->construction_pare_choc(niveau);
 	this->choix_vitesse(niveau);
-	corps.charger(x, 0, this->get_vitesse_x(), true);
+	int y;
+	if (position == haute) y = 85;
+	else if (position == milieu) y = 50;
+	else y = 15;
+	corps.charger(x, y, this->get_vitesse_x(), true);
 }
 
 void Camions::construction_pare_choc(niveau niveau) {

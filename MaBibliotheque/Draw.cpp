@@ -31,9 +31,25 @@ void SFML_output::display(Route& route)
 
 				// acquisition des evenements touche pressee
 				case sf::Event::KeyPressed:
-					if (sf::Keyboard::Z) {
-						if ( route.get_voie_milieu().size() )
-							route.changer_de_voie(haute, milieu, *route.get_vehicule(route.get_voie_milieu(),0));
+					if (event.key.code == sf::Keyboard::Z || event.key.code ==  sf::Keyboard::Up) {
+						if ( route.get_position_voiture_joueur() == milieu )
+							route.changer_de_voie(haute, milieu, 
+								*route.get_vehicule(route.get_voie_milieu(),
+									route.get_index_voiture_joueur()), true);
+						else if (route.get_position_voiture_joueur() == basse)
+							route.changer_de_voie(milieu, basse,
+								*route.get_vehicule(route.get_voie_basse(),
+									route.get_index_voiture_joueur()), true);
+					}
+					else if (event.key.code ==  sf::Keyboard::S || event.key.code ==  sf::Keyboard::Down) {
+						if (route.get_position_voiture_joueur() == milieu)
+							route.changer_de_voie(basse, milieu,
+								*route.get_vehicule(route.get_voie_milieu(),
+									route.get_index_voiture_joueur()), true);
+						else if (route.get_position_voiture_joueur() == haute)
+							route.changer_de_voie(milieu, haute,
+								*route.get_vehicule(route.get_voie_haute(),
+									route.get_index_voiture_joueur()), true);
 					}
 					break;
 

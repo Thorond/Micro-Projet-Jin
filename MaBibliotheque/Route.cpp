@@ -5,7 +5,9 @@ Route::Route()
 {
 	this->world = new b2World(b2Vec2(0, 0));
 	auto voiture_joueur = std::make_unique<Joueur>(WINDOW_WIDTH / 2, milieu, 0, this->niveau_route, this->world);
-	voie_milieu.push_back(std::move(voiture_joueur));
+	this->voie_milieu.push_back(std::move(voiture_joueur));
+	this->index_voiture_joueur = 0;
+	this->position_voiture_joueur = milieu;
 }
 
 niveau Route::get_niveau() { return this->niveau_route; }
@@ -105,8 +107,8 @@ void Route::generation_vehicules(std::vector<std::unique_ptr<Vehicules>>& voie, 
 	
 	
 }
-
-bool Route::changer_de_voie(position_route choix, position_route posActuel, Vehicules& vehic ) {
+// ici camion ou voiture ou joueur ou policier, comment fait on?
+bool Route::changer_de_voie(position_route choix, position_route posActuel, Vehicules& vehic, bool is_joueur  ) {
 	assert((choix == haute && posActuel == milieu) || (choix == milieu && posActuel == basse)
 		|| (choix == milieu && posActuel == haute) || (choix == basse && posActuel == milieu));
 	auto vehi = std::make_unique<Joueur>(vehic.get_x(), vehic.get_position(), vehic.get_vitesse_x(), this->get_niveau(), world ); // que voitures
@@ -151,7 +153,11 @@ bool Route::changer_de_voie(position_route choix, position_route posActuel, Vehi
 		}
 	}
 	
-	vehi.get()->set_position(choix);
+	vehi.get()->set_position(choix); 
+	if (is_joueur) {
+		index_voiture_joueur = positionnement;
+		position_voiture_joueur = choix;
+	}
 	if (positionnement == voie_de_changement->size()) voie_de_changement->push_back(std::move(vehi));
 	else voie_de_changement->insert(voie_de_changement->begin() + positionnement, std::move(vehi));
 	
@@ -226,3 +232,9 @@ void Route::draw(sf::RenderWindow& window) { // à réecrire
 		this->get_vehicule(voie_basse, i)->draw(window);
 	}
 }
+
+
+int Route::get_index_voiture_joueur() { return index_voiture_joueur; }
+void Route::set_index_voiture_joueur(int index) { index_voiture_joueur = index; }
+position_route Route::get_position_voiture_joueur() { return position_voiture_joueur; }
+void Route::set_position_voiture_joueur(position_route pos) { position_voiture_joueur = pos; }
