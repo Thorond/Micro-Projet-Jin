@@ -1,8 +1,5 @@
 #include "stdafx.h"
 #include "monMain.h"
-#include "Route.hpp"
-#include <iostream>
-#include "Draw.hpp"
 
 int monMain()
 {

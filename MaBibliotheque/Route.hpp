@@ -1,5 +1,5 @@
 #pragma once
-#include "Voitures.hpp"
+#include "Joueur.hpp"
 #include "Camions.hpp"
 #include <vector>
 #include <memory>
@@ -28,6 +28,8 @@ public :
 
 	void Update(sf::RenderWindow& window);
 	void draw(sf::RenderWindow& window);
+
+
 
 private :
 	niveau niveau_route;

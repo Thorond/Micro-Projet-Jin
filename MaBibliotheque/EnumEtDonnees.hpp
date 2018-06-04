@@ -28,6 +28,8 @@ static const unsigned int VITESSE_DEFILEMENT(40);
 static const unsigned int VITESSE_MAX(50);
 static const unsigned int VITESSE_MIN(30);
 
+static const unsigned int LONGUEUR_VOITURE(4);
+static const unsigned int LARGEUR_VOITURE(2);
 
 static const unsigned int WINDOW_WIDTH(1000);
 static const unsigned int WINDOW_HEIGHT(700);

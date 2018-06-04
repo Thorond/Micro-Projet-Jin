@@ -12,10 +12,10 @@ void Entitee::charger(double x, double y, double vitesse, bool isCamion) {
 
 	this->shape = new b2PolygonShape();
 	if (!isCamion) {
-		this->shape->SetAsBox(4 * 0.5f - b2_polygonRadius, 2 * 0.5f - b2_polygonRadius);
+		this->shape->SetAsBox(LONGUEUR_VOITURE * 0.5f - b2_polygonRadius, LARGEUR_VOITURE * 0.5f - b2_polygonRadius);
 	}
 	else {
-		this->shape->SetAsBox(8 * 0.5f - b2_polygonRadius, 2 * 0.5f - b2_polygonRadius);
+		this->shape->SetAsBox(LONGUEUR_VOITURE * 2 * 0.5f - b2_polygonRadius, LARGEUR_VOITURE * 0.5f - b2_polygonRadius);
 	}
 
 	this->fixture_def = new b2FixtureDef();

@@ -28,6 +28,16 @@ void SFML_output::display(Route& route)
 					window.close() ;
 				break;
 
+
+				// acquisition des evenements touche pressee
+				case sf::Event::KeyPressed:
+					if (sf::Keyboard::Z) {
+						if ( route.get_voie_milieu().size() )
+							route.changer_de_voie(haute, milieu, *route.get_vehicule(route.get_voie_milieu(),0));
+					}
+					break;
+
+
 				default:
 				break;
 			}

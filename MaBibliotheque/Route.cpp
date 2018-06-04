@@ -4,6 +4,8 @@ Route::Route()
 	: niveau_route(un)
 {
 	this->world = new b2World(b2Vec2(0, 0));
+	auto voiture_joueur = std::make_unique<Joueur>(WINDOW_WIDTH / 2, milieu, 0, this->niveau_route, this->world);
+	voie_milieu.push_back(std::move(voiture_joueur));
 }
 
 niveau Route::get_niveau() { return this->niveau_route; }
@@ -107,7 +109,7 @@ void Route::generation_vehicules(std::vector<std::unique_ptr<Vehicules>>& voie, 
 bool Route::changer_de_voie(position_route choix, position_route posActuel, Vehicules& vehic ) {
 	assert((choix == haute && posActuel == milieu) || (choix == milieu && posActuel == basse)
 		|| (choix == milieu && posActuel == haute) || (choix == basse && posActuel == milieu));
-	auto vehi = std::make_unique<Voitures>(vehic.get_x(), vehic.get_position(), this->get_niveau(), world ); // que voitures
+	auto vehi = std::make_unique<Joueur>(vehic.get_x(), vehic.get_position(), vehic.get_vitesse_x(), this->get_niveau(), world ); // que voitures
 	std::vector<std::unique_ptr<Vehicules>>* voie_de_changement;
 	std::vector<std::unique_ptr<Vehicules>>* voie_actuel;
 	if (choix == haute && posActuel == milieu) {
@@ -127,22 +129,31 @@ bool Route::changer_de_voie(position_route choix, position_route posActuel, Vehi
 		voie_actuel = &get_voie_milieu();
 	}
 	int positionnement = 0;
+	for (size_t i = 0; i < voie_de_changement->size(); i++) {
+		if (get_vehicule(*voie_de_changement, i)->get_x() < vehi.get()->get_x())
+			positionnement++;
+		else if (get_vehicule(*voie_de_changement, i)->get_x() > vehi.get()->get_x()) {
+			break;
+		}
+		else return false; 
+	}
+	/*if (positionnement >= 1) {
+		if ( get_vehicule(*voie_de_changement, positionnement - 1)->get_x() > vehi.get()->get_x() - LONGUEUR_VOITURE) return false;
+	}
+	else if (positionnement >= 2) {
+		if ( get_vehicule(*voie_de_changement, positionnement)->get_x() < vehi.get()->get_x() + LONGUEUR_VOITURE) return false;
+	}*/
+	
 	for (size_t i = 0; i < voie_actuel->size(); i++) {
 		if (get_vehicule(*voie_actuel, i)->get_x() == vehi.get()->get_x()) {
 			voie_actuel->erase(voie_actuel->begin() + i);
 			break;
 		}
 	}
-	for (size_t i = 0; i < voie_de_changement->size(); i++) {
-		if (get_vehicule(*voie_de_changement, i)->get_x() < vehi.get()->get_x())
-			positionnement++;
-		else if (get_vehicule(*voie_de_changement, i)->get_x() > vehi.get()->get_x()) {
-			voie_de_changement->insert(voie_de_changement->begin() + i, std::move(vehi));
-			break;
-		}
-		else return false;
-	}
+	
+	vehi.get()->set_position(choix);
 	if (positionnement == voie_de_changement->size()) voie_de_changement->push_back(std::move(vehi));
+	else voie_de_changement->insert(voie_de_changement->begin() + positionnement, std::move(vehi));
 	
 	return true;
 }
@@ -179,7 +190,7 @@ void Route::consequence_collision(Vehicules& v1, Vehicules& v2) {
 
 
 
-void Route::Update(sf::RenderWindow& window) {
+void Route::Update(sf::RenderWindow& window) { // a réecrire
 	this->world->Step(1.0f / 60.0f, 6, 2);
 	for (size_t i = 0; i < voie_haute.size(); i++) { // est ce que l'on supprime réelement l'objet?
 		if (this->get_vehicule(voie_haute, i)->get_x() < - 100) voie_haute.erase(voie_haute.begin() + i);
@@ -204,7 +215,7 @@ void Route::Update(sf::RenderWindow& window) {
 	}
 }
 
-void Route::draw(sf::RenderWindow& window) {
+void Route::draw(sf::RenderWindow& window) { // à réecrire
 	for (size_t i = 0; i < voie_haute.size(); i++) {
 		this->get_vehicule(voie_haute, i)->draw(window);
 	}

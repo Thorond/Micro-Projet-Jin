@@ -23,7 +23,7 @@ public:
 
 	virtual void construction_pare_choc(niveau niveau) = 0;
 	virtual void choix_vitesse(niveau niveau) = 0;
-	void adapter_sa_vitesse(Vehicules& vehiDevant);
+	virtual void adapter_sa_vitesse(Vehicules& vehiDevant);
 
 	Entitee corps;
 	bool Update(sf::RenderWindow& window);

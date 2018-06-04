@@ -1,5 +1,6 @@
 #pragma once
 #include <Box2D\Box2D.h>
+#include "EnumEtDonnees.hpp"
 
 class Entitee
 {
