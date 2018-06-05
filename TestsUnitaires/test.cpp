@@ -4,7 +4,7 @@
 
 TEST(TestGenerationVoiture, TestStatique) {
 	Route route = Route();
-	route.generation_vehicules(route.get_voie_basse(), basse);
+	route.generation_vehicules( basse);
 	route.get_vehicule(route.get_voie_basse(), 0)->set_vitesse_x(80);
 	route.get_vehicule(route.get_voie_basse(), 0)->set_x(550);
 	EXPECT_EQ(route.get_vehicule(route.get_voie_basse(), 0)->get_vitesse_x(), 80);
@@ -13,10 +13,10 @@ TEST(TestGenerationVoiture, TestStatique) {
 
 TEST(TestConsColli, TestStatique1) {
 	Route route = Route();
-	route.generation_vehicules(route.get_voie_basse(), basse);
+	route.generation_vehicules( basse);
 	route.get_vehicule(route.get_voie_basse(), 0)->set_vitesse_x(80);
 	route.get_vehicule(route.get_voie_basse(), 0)->set_x(450);
-	route.generation_vehicules(route.get_voie_basse(), basse);
+	route.generation_vehicules( basse);
 	route.get_vehicule(route.get_voie_basse(), 0)->set_etat_pc_avant((etat_pare_choc)0);
 	route.get_vehicule(route.get_voie_basse(), 1)->set_etat_pc_arriere((etat_pare_choc)0);
 	route.consequence_collision(*route.get_vehicule(route.get_voie_basse(), 0),
@@ -34,7 +34,7 @@ TEST(TestConsColli, TestStatique1) {
 
 TEST(TestCorp, TestStatique1) {
 	Route route = Route();
-	route.generation_vehicules(route.get_voie_basse(), basse);
+	route.generation_vehicules( basse);
 	Vehicules* temp = route.get_vehicule(route.get_voie_basse(), 0);
 	EXPECT_EQ(temp->get_x(), WINDOW_WIDTH + 100);
 	EXPECT_EQ(temp->corps.body->GetPosition().x, WINDOW_WIDTH + 100);
@@ -44,7 +44,7 @@ TEST(TestCorp, TestDynamique1) {
 	Route route = Route();
 
 	SFML_output out;
-	route.generation_vehicules(route.get_voie_basse(), basse);
+	route.generation_vehicules( basse);
 	Vehicules* temp = route.get_vehicule(route.get_voie_basse(), 0);
 	b2Vec2 vel = temp->corps.body->GetLinearVelocity();
 	for (int32 i = 0; i < 60; ++i)
@@ -60,13 +60,13 @@ TEST(TestAI, TestDynamique1) {
 
 	SFML_output out;
 
-	route.generation_vehicules(route.get_voie_basse(), basse);
+	route.generation_vehicules( basse);
 	Vehicules* vehi1 = route.get_vehicule(route.get_voie_basse(), 0);
 	vehi1->set_vitesse_x(10);
 	vehi1->corps.body->SetLinearVelocity(b2Vec2(vehi1->get_vitesse_x(), 0));
 	vehi1->set_x(400);
 
-	route.generation_vehicules(route.get_voie_basse(), basse);
+	route.generation_vehicules( basse);
 	Vehicules* vehi2 = route.get_vehicule(route.get_voie_basse(), 1);
 	vehi2->set_vitesse_x(-10);
 	vehi2->corps.body->SetLinearVelocity(b2Vec2(vehi2->get_vitesse_x(), 0));
@@ -85,7 +85,7 @@ TEST(TestAI, TestDestruction1) {
 
 	SFML_output out;
 
-	route.generation_vehicules(route.get_voie_basse(), basse);
+	route.generation_vehicules( basse);
 	route.get_vehicule(route.get_voie_basse(), 0)->set_x(0);
 	EXPECT_EQ(route.get_voie_basse().size(), 1);
 	double x = route.get_vehicule(route.get_voie_basse(), 0)->get_x();
@@ -99,14 +99,14 @@ TEST(TestAI, TestDestruction1) {
 TEST(TestAI, TestDeplacementVoie1) {
 	Route route = Route();
 
-	route.generation_vehicules(route.get_voie_basse(), basse);
-	route.generation_vehicules(route.get_voie_basse(), basse);
-	route.generation_vehicules(route.get_voie_milieu(), milieu);
+	route.generation_vehicules( basse);
+	route.generation_vehicules( basse);
+	route.generation_vehicules( milieu);
 	route.get_vehicule(route.get_voie_basse(), 0)->set_x(500);
 	route.get_vehicule(route.get_voie_basse(), 1)->set_x(600);
-	route.get_vehicule(route.get_voie_milieu(), 0)->set_x(550);
-	route.changer_de_voie(basse, milieu, *route.get_vehicule(route.get_voie_milieu(), 0), false) ;
-	EXPECT_EQ(route.get_voie_milieu().size(), 0);
+	route.get_vehicule(route.get_voie_milieu(), 1)->set_x(550);
+	route.changer_de_voie(basse, milieu, *route.get_vehicule(route.get_voie_milieu(), 1), false) ;
+	EXPECT_EQ(route.get_voie_milieu().size(), 1); // le joueur
 	EXPECT_EQ(route.get_voie_basse().size(), 3);
 	EXPECT_EQ(route.get_vehicule(route.get_voie_basse(), 0)->get_x(), 500);
 	EXPECT_EQ(route.get_vehicule(route.get_voie_basse(), 1)->get_x(), 550);
@@ -116,9 +116,9 @@ TEST(TestAI, TestDeplacementVoie1) {
 TEST(TestAI, TestDeplacementVoie2) {
 	Route route = Route();
 
-	route.generation_vehicules(route.get_voie_basse(), basse);
-	route.generation_vehicules(route.get_voie_basse(), basse);
-	route.generation_vehicules(route.get_voie_milieu(), milieu);
+	route.generation_vehicules( basse);
+	route.generation_vehicules( basse);
+	route.generation_vehicules( milieu);
 	route.get_vehicule(route.get_voie_basse(), 0)->set_x(500);
 	route.get_vehicule(route.get_voie_basse(), 1)->set_x(500 + LONGUEUR_VOITURE);
 	route.get_vehicule(route.get_voie_milieu(), 0)->set_x(500 + LONGUEUR_VOITURE/2);

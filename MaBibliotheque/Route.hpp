@@ -21,13 +21,15 @@ public :
 
 	void generation_automatique(sf::Clock& clock , sf::Time& elapsed); // générer pour les trois voies une voiture ou un camion de
 								// façon assez régulière
-	void generation_vehicules(std::vector<std::unique_ptr<Vehicules>>& voie, position_route posi);
+	void generation_vehicules( position_route posi);
 
 	bool changer_de_voie(position_route choix, position_route posActuel, Vehicules& vehic, bool is_joueur);
 	void consequence_collision(Vehicules& v1, Vehicules& v2);
 
 	void Update(sf::RenderWindow& window);
 	void draw(sf::RenderWindow& window);
+
+	b2World* get_world();
 
 	int get_index_voiture_joueur();
 	void set_index_voiture_joueur(int index);

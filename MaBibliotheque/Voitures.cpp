@@ -6,6 +6,20 @@ Voitures::Voitures(double x, position_route position, niveau niveau, b2World* wo
 	this->construction_pare_choc(niveau);
 	this->choix_vitesse(niveau);
 	int y;
+	// temporaire
+	if (position == haute) y = 85;
+	else if (position == milieu) y = 50;
+	else y = 15;
+	corps.charger(x, y, this->get_vitesse_x(), false);
+}
+
+Voitures::Voitures(double x, position_route position, double vitesse, niveau niveau, b2World* world)
+	: Vehicules(x, position, world)
+{
+	this->construction_pare_choc(niveau);
+	this->set_vitesse_x(vitesse);
+	int y;
+	// temporaire
 	if (position == haute) y = 85;
 	else if (position == milieu) y = 50;
 	else y = 15;
