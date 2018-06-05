@@ -6,7 +6,7 @@ Entitee::Entitee(b2World& world) {
 
 void Entitee::charger(double x, double y, double vitesse, bool isCamion) {
 	this->body_def = new b2BodyDef();
-	this->body_def->type = b2_dynamicBody;
+	this->body_def->type = b2_kinematicBody;
 	this->body_def->position.Set(x,y);
 	this->body = this->world->CreateBody(this->body_def);
 

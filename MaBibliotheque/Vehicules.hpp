@@ -11,6 +11,8 @@ public:
 	~Vehicules();
 	double get_x();
 	void set_x( double x);
+	double get_y();
+	void set_y();
 	double get_vitesse_x();
 	void set_vitesse_x( double vitesse );
 	position_route get_position();
@@ -27,11 +29,12 @@ public:
 
 	Entitee corps;
 	bool Update(sf::RenderWindow& window);
-	void draw_circle(double x, double r, sf::RenderWindow& window);
+	void draw_circle(double x,double y , double r, sf::RenderWindow& window);
 	virtual void draw(sf::RenderWindow& window) = 0;
 
 private:
 	double x;
+	double y;
 	double vitesse_x;
 	position_route position_y;
 	etat_pare_choc etat_pc_avant;

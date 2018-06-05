@@ -120,8 +120,6 @@ void Route::generation_vehicules( position_route posi) {
 bool Route::changer_de_voie(position_route choix, position_route posActuel, Vehicules& vehic, bool is_joueur  ) {
 	assert((choix == haute && posActuel == milieu) || (choix == milieu && posActuel == basse)
 		|| (choix == milieu && posActuel == haute) || (choix == basse && posActuel == milieu));
-	auto vehi = std::make_unique<Voitures>(vehic.get_x(), vehic.get_position(), vehic.get_vitesse_x(), this->get_niveau(), world);
-	if ( is_joueur) vehi = std::make_unique<Joueur>(vehic.get_x(), vehic.get_position(), vehic.get_vitesse_x(), this->get_niveau(), world);
 	std::vector<std::unique_ptr<Vehicules>>* voie_de_changement;
 	std::vector<std::unique_ptr<Vehicules>>* voie_actuel;
 	if (choix == haute && posActuel == milieu) {
@@ -142,28 +140,34 @@ bool Route::changer_de_voie(position_route choix, position_route posActuel, Vehi
 	}
 	int positionnement = 0;
 	for (size_t i = 0; i < voie_de_changement->size(); i++) {
-		if (get_vehicule(*voie_de_changement, i)->get_x() < vehi.get()->get_x())
+		if (get_vehicule(*voie_de_changement, i)->get_x() < vehic.get_x())
 			positionnement++;
-		else if (get_vehicule(*voie_de_changement, i)->get_x() > vehi.get()->get_x()) {
+		else if (get_vehicule(*voie_de_changement, i)->get_x() > vehic.get_x()) {
 			break;
 		}
 		else return false; 
 	}
 	if (positionnement >= 1) {
-		if ( get_vehicule(*voie_de_changement, positionnement - 1)->get_x() > vehi.get()->get_x() - LONGUEUR_VOITURE) return false;
+		if ( get_vehicule(*voie_de_changement, positionnement - 1)->get_x() > vehic.get_x() - LONGUEUR_VOITURE) return false;
 	}
-	else if (voie_de_changement->size() > positionnement ) {
-		if ( get_vehicule(*voie_de_changement, positionnement)->get_x() < vehi.get()->get_x() + LONGUEUR_VOITURE) return false;
+	else if (voie_de_changement->size() > (size_t)positionnement ) {
+		if ( get_vehicule(*voie_de_changement, positionnement)->get_x() < vehic.get_x() + LONGUEUR_VOITURE) return false;
 	}
+
+	auto vehi = std::make_unique<Voitures>(vehic.get_x(), vehic.get_position(), vehic.get_vitesse_x(), this->get_niveau(), world);
+	if (is_joueur) vehi = std::make_unique<Joueur>(vehic.get_x(), vehic.get_position(), vehic.get_vitesse_x(), this->get_niveau(), world);
+
 	
 	for (size_t i = 0; i < voie_actuel->size(); i++) {
 		if (get_vehicule(*voie_actuel, i)->get_x() == vehi.get()->get_x()) {
 			voie_actuel->erase(voie_actuel->begin() + i);
+			if (posActuel == position_voiture_joueur && i < index_voiture_joueur ) index_voiture_joueur--;
 			break;
 		}
 	}
 	
-	vehi.get()->set_position(choix); 
+	vehi.get()->set_position(choix);
+	vehi.get()->set_y();
 	if (is_joueur) {
 		index_voiture_joueur = positionnement;
 		position_voiture_joueur = choix;
@@ -209,21 +213,30 @@ void Route::consequence_collision(Vehicules& v1, Vehicules& v2) {
 void Route::Update(sf::RenderWindow& window) {
 	this->world->Step(1.0f / 60.0f, 6, 2);
 	for (size_t i = 0; i < voie_haute.size(); i++) {
-		if (this->get_vehicule(voie_haute, i)->get_x() < - 100) voie_haute.erase(voie_haute.begin() + i);
+		if (this->get_vehicule(voie_haute, i)->get_x() < -100) {
+			voie_haute.erase(voie_haute.begin() + i);
+			if (haute == position_voiture_joueur && i < index_voiture_joueur) index_voiture_joueur--;
+		}
 	}
 	for (size_t i = 0; i < voie_haute.size(); i++) {
 		this->get_vehicule(voie_haute, i)->Update(window);
 		if (i + 1 < voie_haute.size()) this->get_vehicule(voie_haute, i)->adapter_sa_vitesse(*(this->get_vehicule(voie_haute, i + 1)));
 	}
 	for (size_t i = 0; i < voie_milieu.size(); i++) {
-		if (this->get_vehicule(voie_milieu, i)->get_x() < -100) voie_milieu.erase(voie_milieu.begin() + i);
+		if (this->get_vehicule(voie_milieu, i)->get_x() < -100) {
+			voie_milieu.erase(voie_milieu.begin() + i);
+			if (milieu == position_voiture_joueur && i < index_voiture_joueur) index_voiture_joueur--;
+		}
 	}
 	for (size_t i = 0; i < voie_milieu.size(); i++) {
 		this->get_vehicule(voie_milieu, i)->Update(window);
 		if (i + 1 < voie_milieu.size()) this->get_vehicule(voie_milieu, i)->adapter_sa_vitesse(*(this->get_vehicule(voie_milieu, i + 1)));
 	}
 	for (size_t i = 0; i < voie_basse.size(); i++) {
-		if (this->get_vehicule(voie_basse, i)->get_x() < -100) voie_basse.erase(voie_basse.begin() + i);
+		if (this->get_vehicule(voie_basse, i)->get_x() < -100) {
+			voie_basse.erase(voie_basse.begin() + i);
+			if (basse == position_voiture_joueur && i < index_voiture_joueur) index_voiture_joueur--;
+		}
 	}
 	for (size_t i = 0; i < this->voie_basse.size(); i++) {
 		this->get_vehicule(voie_basse, i)->Update(window);

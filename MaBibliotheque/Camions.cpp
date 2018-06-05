@@ -5,11 +5,7 @@ Camions::Camions(double x, position_route position, niveau niveau, b2World* worl
 {
 	this->construction_pare_choc(niveau);
 	this->choix_vitesse(niveau);
-	int y;
-	if (position == haute) y = 85;
-	else if (position == milieu) y = 50;
-	else y = 15;
-	corps.charger(x, y, this->get_vitesse_x(), true);
+	corps.charger(x, this->get_y(), this->get_vitesse_x(), true);
 }
 
 void Camions::construction_pare_choc(niveau niveau) {
@@ -72,9 +68,9 @@ void Camions::choix_vitesse(niveau niveau) {
 
 
 void Camions::draw(sf::RenderWindow& window) {
-	this->draw_circle(this->get_x(), 4, window);
-	this->draw_circle(this->get_x() + 10, 4, window);
-	this->draw_circle(this->get_x() + 20, 4, window);
-	this->draw_circle(this->get_x() + 30, 4, window);
+	this->draw_circle(this->get_x(), this->get_y(), 4, window);
+	this->draw_circle(this->get_x() + 10, this->get_y(), 4, window);
+	this->draw_circle(this->get_x() + 20, this->get_y(), 4, window);
+	this->draw_circle(this->get_x() + 30, this->get_y(), 4, window);
 	
 }

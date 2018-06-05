@@ -1,16 +1,6 @@
-﻿  Camions.cpp
-  Draw.cpp
-  Entitee.cpp
-d:\visual studio\projets\micro-projet-jin\mabibliotheque\entitee.cpp(10): warning C4244: 'argument': conversion from 'double' to 'float32', possible loss of data
-d:\visual studio\projets\micro-projet-jin\mabibliotheque\entitee.cpp(27): warning C4244: 'argument': conversion from 'double' to 'float32', possible loss of data
-  Joueur.cpp
-d:\visual studio\projets\micro-projet-jin\mabibliotheque\joueur.cpp(8): warning C4244: 'argument': conversion from 'double' to 'float32', possible loss of data
-  Route.cpp
-d:\visual studio\projets\micro-projet-jin\mabibliotheque\route.cpp(155): warning C4018: '>': signed/unsigned mismatch
-  Vehicules.cpp
-d:\visual studio\projets\micro-projet-jin\mabibliotheque\vehicules.cpp(50): warning C4244: 'argument': conversion from 'double' to 'float32', possible loss of data
-d:\visual studio\projets\micro-projet-jin\mabibliotheque\vehicules.cpp(58): warning C4244: 'argument': conversion from 'double' to 'float32', possible loss of data
-  Voitures.cpp
-  monMain.cpp
-  Generating Code...
+﻿  Route.cpp
+d:\visual studio\projets\micro-projet-jin\mabibliotheque\route.cpp(164): warning C4018: '<': signed/unsigned mismatch
+d:\visual studio\projets\micro-projet-jin\mabibliotheque\route.cpp(219): warning C4018: '<': signed/unsigned mismatch
+d:\visual studio\projets\micro-projet-jin\mabibliotheque\route.cpp(229): warning C4018: '<': signed/unsigned mismatch
+d:\visual studio\projets\micro-projet-jin\mabibliotheque\route.cpp(239): warning C4018: '<': signed/unsigned mismatch
   MaBibliotheque.vcxproj -> D:\Visual Studio\Projets\Micro-Projet-Jin\Debug\MaBibliotheque.lib

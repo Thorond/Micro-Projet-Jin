@@ -5,12 +5,7 @@ Voitures::Voitures(double x, position_route position, niveau niveau, b2World* wo
 {
 	this->construction_pare_choc(niveau);
 	this->choix_vitesse(niveau);
-	int y;
-	// temporaire
-	if (position == haute) y = 85;
-	else if (position == milieu) y = 50;
-	else y = 15;
-	corps.charger(x, y, this->get_vitesse_x(), false);
+	corps.charger(x, this->get_y(), this->get_vitesse_x(), false);
 }
 
 Voitures::Voitures(double x, position_route position, double vitesse, niveau niveau, b2World* world)
@@ -85,6 +80,6 @@ void Voitures::choix_vitesse(niveau niveau) {
 }
 
 void Voitures::draw(sf::RenderWindow& window) {
-	this->draw_circle(this->get_x(), 4, window);
-	this->draw_circle(this->get_x()+10, 4, window);
+	this->draw_circle(this->get_x(), this->get_y(), 4, window);
+	this->draw_circle(this->get_x()+10, this->get_y(), 4, window);
 }

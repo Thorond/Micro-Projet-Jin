@@ -11,7 +11,7 @@ Vehicules::Vehicules(double x, position_route position, b2World* world)
 	, etat_pc_arriere(indefini)
 	, corps(*world)
 {
-	
+	this->set_y();
 }
 
 Vehicules::~Vehicules() {
@@ -22,6 +22,13 @@ Vehicules::~Vehicules() {
 double Vehicules::get_x() { return x; }
 void Vehicules::set_x(double x) {
 	this->x = x;
+}
+
+double Vehicules::get_y() { return y; }
+void Vehicules::set_y() {
+	if ( this->position_y == haute) this->y = POSITIONNEMENT_VOIE_HAUTE;
+	else if (this->position_y == milieu) this->y = POSITIONNEMENT_VOIE_MILIEU;
+	else this->y = POSITIONNEMENT_VOIE_BASSES;
 }
 
 double Vehicules::get_vitesse_x() { return vitesse_x; }
@@ -59,14 +66,10 @@ bool Vehicules::Update(sf::RenderWindow& window) {
 	return true;
 }
 
-void Vehicules::draw_circle(double x, double r, sf::RenderWindow& window)
+void Vehicules::draw_circle(double x, double y, double r, sf::RenderWindow& window)
 {
-	int y;
-	if (this->position_y == haute) y = 85;
-	else if (this->position_y == milieu) y = 50;
-	else y = 15;
 	sf::CircleShape shape(static_cast<float>(r));
 	shape.setFillColor(sf::Color::White);
-	shape.setPosition(static_cast<float>(x - r), static_cast<float>(WINDOW_HEIGHT / 2 - (y + r)));
+	shape.setPosition(static_cast<float>(x - r), static_cast<float>( (y - r)));
 	window.draw(shape);
 }

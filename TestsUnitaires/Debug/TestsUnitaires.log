@@ -1,1 +1,4 @@
-﻿  TestsUnitaires.vcxproj -> D:\Visual Studio\Projets\Micro-Projet-Jin\Debug\TestsUnitaires.exe
+﻿  test.cpp
+d:\visual studio\projets\micro-projet-jin\testsunitaires\test.cpp(66): warning C4244: 'argument': conversion from 'double' to 'float32', possible loss of data
+d:\visual studio\projets\micro-projet-jin\testsunitaires\test.cpp(72): warning C4244: 'argument': conversion from 'double' to 'float32', possible loss of data
+  TestsUnitaires.vcxproj -> D:\Visual Studio\Projets\Micro-Projet-Jin\Debug\TestsUnitaires.exe
