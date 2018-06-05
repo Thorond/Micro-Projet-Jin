@@ -55,6 +55,7 @@ void Vehicules::adapter_sa_vitesse(Vehicules& vehiDevant) {
 bool Vehicules::Update(sf::RenderWindow& window) {
 	b2Vec2 pos = this->corps.body->GetPosition();
 	this->set_x(pos.x);
+	this->corps.body->SetLinearVelocity(b2Vec2(this->get_vitesse_x(), 0));
 	return true;
 }
 

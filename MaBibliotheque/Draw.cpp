@@ -51,6 +51,18 @@ void SFML_output::display(Route& route)
 								*route.get_vehicule(route.get_voie_haute(),
 									route.get_index_voiture_joueur()), true);
 					}
+					else if (event.key.code == sf::Keyboard::D || event.key.code == sf::Keyboard::Right) {
+						Joueur* voiture_joueur = (Joueur*)route.get_vehicule(route.get_position_voiture_joueur(), route.get_index_voiture_joueur());
+						if (voiture_joueur->get_vitesse_x() < VITESSE_MAX) {
+							voiture_joueur->set_vitesse_x(voiture_joueur->get_vitesse_x() + 1);
+						}
+					}
+					else if (event.key.code == sf::Keyboard::Q || event.key.code == sf::Keyboard::Left) {
+						Joueur* voiture_joueur = (Joueur*)route.get_vehicule(route.get_position_voiture_joueur(), route.get_index_voiture_joueur());
+						if (voiture_joueur->get_vitesse_x() > VITESSE_MIN) {
+							voiture_joueur->set_vitesse_x(voiture_joueur->get_vitesse_x() - 1);
+						}
+					}
 					break;
 
 

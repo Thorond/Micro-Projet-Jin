@@ -28,6 +28,11 @@ std::vector<std::unique_ptr<Vehicules>>& Route::get_voie_basse() {
 Vehicules* Route::get_vehicule(std::vector<std::unique_ptr<Vehicules>>& voie, int rang) {
 	return voie[rang].get();
 }
+Vehicules* Route::get_vehicule(position_route pos, int rang) {
+	if (pos == haute) return voie_haute[rang].get();
+	else if (pos == milieu) return voie_milieu[rang].get();
+	else return voie_basse[rang].get();
+}
 
 void Route::generation_automatique(sf::Clock& clock, sf::Time& elapsed) {
 	const unsigned int FREQ(1800);
@@ -203,7 +208,7 @@ void Route::consequence_collision(Vehicules& v1, Vehicules& v2) {
 
 void Route::Update(sf::RenderWindow& window) {
 	this->world->Step(1.0f / 60.0f, 6, 2);
-	for (size_t i = 0; i < voie_haute.size(); i++) { // est ce que l'on supprime réelement l'objet?
+	for (size_t i = 0; i < voie_haute.size(); i++) {
 		if (this->get_vehicule(voie_haute, i)->get_x() < - 100) voie_haute.erase(voie_haute.begin() + i);
 	}
 	for (size_t i = 0; i < voie_haute.size(); i++) {

@@ -18,7 +18,8 @@ public :
 	std::vector<std::unique_ptr<Vehicules>>& get_voie_basse();
 	
 	Vehicules* get_vehicule(std::vector<std::unique_ptr<Vehicules>>& voie, int rang);
-
+	Vehicules* get_vehicule(position_route pos, int rang);
+	
 	void generation_automatique(sf::Clock& clock , sf::Time& elapsed); // générer pour les trois voies une voiture ou un camion de
 								// façon assez régulière
 	void generation_vehicules( position_route posi);
