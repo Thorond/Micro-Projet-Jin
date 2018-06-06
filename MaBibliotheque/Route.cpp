@@ -260,6 +260,8 @@ void Route::consequence_collision(Vehicules& v1, Vehicules& v2) {
 
 void Route::Update(sf::RenderWindow& window) {
 	this->world->Step(1.0f / 60.0f, 6, 2);
+	gestion_voiture_joueur();
+
 	for (size_t i = 0; i < voie_haute.size(); i++) {
 		if (this->get_vehicule(voie_haute, i)->get_x() < -100) {
 			voie_haute.erase(voie_haute.begin() + i);
@@ -304,3 +306,7 @@ void Route::draw(sf::RenderWindow& window) {
 	}
 }
 
+void Route::gestion_voiture_joueur() {
+	Joueur* voiture_joueur = (Joueur*) this->get_vehicule(this->get_position_voiture_joueur(), this->get_index_voiture_joueur());
+	voiture_joueur->regulation_vitesse_bords();
+}

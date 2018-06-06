@@ -1,13 +1,20 @@
-﻿  Draw.cpp
+﻿  Camions.cpp
+  Draw.cpp
+  Entitee.cpp
+d:\visual studio\projets\micro-projet-jin\mabibliotheque\entitee.cpp(10): warning C4244: 'argument': conversion from 'double' to 'float32', possible loss of data
+d:\visual studio\projets\micro-projet-jin\mabibliotheque\entitee.cpp(28): warning C4244: 'argument': conversion from 'double' to 'float32', possible loss of data
+  Joueur.cpp
+d:\visual studio\projets\micro-projet-jin\mabibliotheque\joueur.cpp(8): warning C4244: 'argument': conversion from 'double' to 'float32', possible loss of data
   Route.cpp
 d:\visual studio\projets\micro-projet-jin\mabibliotheque\route.cpp(181): warning C4018: '<': signed/unsigned mismatch
-d:\visual studio\projets\micro-projet-jin\mabibliotheque\route.cpp(266): warning C4018: '<': signed/unsigned mismatch
-d:\visual studio\projets\micro-projet-jin\mabibliotheque\route.cpp(276): warning C4018: '<': signed/unsigned mismatch
-d:\visual studio\projets\micro-projet-jin\mabibliotheque\route.cpp(286): warning C4018: '<': signed/unsigned mismatch
+d:\visual studio\projets\micro-projet-jin\mabibliotheque\route.cpp(268): warning C4018: '<': signed/unsigned mismatch
+d:\visual studio\projets\micro-projet-jin\mabibliotheque\route.cpp(278): warning C4018: '<': signed/unsigned mismatch
+d:\visual studio\projets\micro-projet-jin\mabibliotheque\route.cpp(288): warning C4018: '<': signed/unsigned mismatch
   Vehicules.cpp
 d:\visual studio\projets\micro-projet-jin\mabibliotheque\vehicules.cpp(57): warning C4244: 'argument': conversion from 'double' to 'float32', possible loss of data
 d:\visual studio\projets\micro-projet-jin\mabibliotheque\vehicules.cpp(65): warning C4244: 'argument': conversion from 'double' to 'float32', possible loss of data
 d:\visual studio\projets\micro-projet-jin\mabibliotheque\vehicules.cpp(83): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
+  Voitures.cpp
   monMain.cpp
   Generating Code...
   MaBibliotheque.vcxproj -> D:\Visual Studio\Projets\Micro-Projet-Jin\Debug\MaBibliotheque.lib

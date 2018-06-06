@@ -11,3 +11,10 @@ Joueur::Joueur(double x, position_route position, double vitesse, niveau niveau,
 void Joueur::adapter_sa_vitesse(Vehicules& vehiDevant) {
 
 }
+
+void Joueur::regulation_vitesse_bords() {
+	if (this->get_vitesse_x() > 0 
+		&& this->get_x() + LONGUEUR_VOITURE > WINDOW_WIDTH) this->set_vitesse_x(VITESSE_DEFILEMENT - VITESSE_DEFILEMENT);
+	else if (this->get_vitesse_x() < 0 
+		&& this->get_x() - LONGUEUR_VOITURE < 0 ) this->set_vitesse_x(VITESSE_DEFILEMENT - VITESSE_DEFILEMENT);
+}

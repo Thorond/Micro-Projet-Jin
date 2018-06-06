@@ -25,8 +25,10 @@ enum niveau {
 
 static const unsigned int VITESSE_DE_BASE(35);
 static const unsigned int VITESSE_DEFILEMENT(45);
-static const unsigned int VITESSE_MAX(55 - VITESSE_DEFILEMENT);
-static const int VITESSE_MIN(35 - VITESSE_DEFILEMENT);
+static const unsigned int VITESSE_MAX(65 );
+static const int VITESSE_MIN(25 );
+static const unsigned int VITESSE_MAX_RELATIVE(65 - VITESSE_DEFILEMENT);
+static const int VITESSE_MIN_RELATIVE(25 - VITESSE_DEFILEMENT);
 
 static const unsigned int LONGUEUR_VOITURE(40);
 static const unsigned int LARGEUR_VOITURE(20);

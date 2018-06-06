@@ -41,6 +41,8 @@ public :
 	void Update(sf::RenderWindow& window);
 	void draw(sf::RenderWindow& window);
 
+	void gestion_voiture_joueur();
+
 
 private :
 	niveau niveau_route;
