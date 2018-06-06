@@ -70,7 +70,7 @@ TEST(TestAI, TestDynamique1) {
 	Vehicules* vehi2 = route.get_vehicule(route.get_voie_basse(), 1);
 	vehi2->set_vitesse_x(-10);
 	vehi2->corps.body->SetLinearVelocity(b2Vec2(vehi2->get_vitesse_x(), 0));
-	vehi2->set_x(500);
+	vehi2->set_x(400 + LONGUEUR_VOITURE);
 
 	EXPECT_NE(vehi1->corps.body->GetLinearVelocity().x, vehi2->corps.body->GetLinearVelocity().x);
 	for (int32 i = 0; i < 60; ++i)

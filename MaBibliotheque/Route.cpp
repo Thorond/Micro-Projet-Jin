@@ -10,10 +10,19 @@ Route::Route()
 	this->position_voiture_joueur = milieu;
 }
 
+/* GETTERS AND SETTERS */
+
 niveau Route::get_niveau() { return this->niveau_route; }
 void Route::set_niveau(niveau nouvNiv) {
 	this->niveau_route = nouvNiv;
 }
+
+b2World* Route::get_world() { return world; }
+
+int Route::get_index_voiture_joueur() { return index_voiture_joueur; }
+void Route::set_index_voiture_joueur(int index) { index_voiture_joueur = index; }
+position_route Route::get_position_voiture_joueur() { return position_voiture_joueur; }
+void Route::set_position_voiture_joueur(position_route pos) { position_voiture_joueur = pos; }
 
 std::vector<std::unique_ptr<Vehicules>>& Route::get_voie_haute() {
 	return this->voie_haute;
@@ -32,6 +41,14 @@ Vehicules* Route::get_vehicule(position_route pos, int rang) {
 	if (pos == haute) return voie_haute[rang].get();
 	else if (pos == milieu) return voie_milieu[rang].get();
 	else return voie_basse[rang].get();
+}
+
+/* FUNCTION MANAGING THE GAME*/
+
+void Route::gestion_global(sf::Clock& clock, sf::Time& elapsed, sf::RenderWindow& window) {
+	this->generation_automatique(clock, elapsed);
+	this->Update(window);
+	this->draw(window);
 }
 
 void Route::generation_automatique(sf::Clock& clock, sf::Time& elapsed) {
@@ -182,6 +199,33 @@ bool Route::changer_de_voie(position_route choix, position_route posActuel, Vehi
 	return true;
 }
 
+bool Route::changer_de_voie_haut_joueur() {
+	bool reussi;
+	if (this->get_position_voiture_joueur() == milieu)
+		reussi = this->changer_de_voie(haute, milieu,
+			*this->get_vehicule(this->get_voie_milieu(),
+				this->get_index_voiture_joueur()), true);
+	else if (this->get_position_voiture_joueur() == basse)
+		reussi = this->changer_de_voie(milieu, basse,
+			*this->get_vehicule(this->get_voie_basse(),
+				this->get_index_voiture_joueur()), true);
+	else return false;
+	return reussi;
+}
+
+bool Route::changer_de_voie_bas_joueur() {
+	bool reussi;
+	if (this->get_position_voiture_joueur() == milieu)
+		reussi = this->changer_de_voie(basse, milieu,
+			*this->get_vehicule(this->get_voie_milieu(),
+				this->get_index_voiture_joueur()), true);
+	else if (this->get_position_voiture_joueur() == haute)
+		reussi = this->changer_de_voie(milieu, haute,
+			*this->get_vehicule(this->get_voie_haute(),
+				this->get_index_voiture_joueur()), true);
+	else return false;
+	return reussi;
+}
 
 void Route::consequence_collision(Vehicules& v1, Vehicules& v2) {
 	int pcv1;
@@ -260,10 +304,3 @@ void Route::draw(sf::RenderWindow& window) {
 	}
 }
 
-
-b2World* Route::get_world() { return world; }
-
-int Route::get_index_voiture_joueur() { return index_voiture_joueur; }
-void Route::set_index_voiture_joueur(int index) { index_voiture_joueur = index; }
-position_route Route::get_position_voiture_joueur() { return position_voiture_joueur; }
-void Route::set_position_voiture_joueur(position_route pos) { position_voiture_joueur = pos; }

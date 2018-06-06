@@ -32,24 +32,10 @@ void SFML_output::display(Route& route)
 				// acquisition des evenements touche pressee
 				case sf::Event::KeyPressed:
 					if (event.key.code == sf::Keyboard::Z || event.key.code ==  sf::Keyboard::Up) {
-						if ( route.get_position_voiture_joueur() == milieu )
-							route.changer_de_voie(haute, milieu, 
-								*route.get_vehicule(route.get_voie_milieu(),
-									route.get_index_voiture_joueur()), true);
-						else if (route.get_position_voiture_joueur() == basse)
-							route.changer_de_voie(milieu, basse,
-								*route.get_vehicule(route.get_voie_basse(),
-									route.get_index_voiture_joueur()), true);
+						route.changer_de_voie_haut_joueur();
 					}
 					else if (event.key.code ==  sf::Keyboard::S || event.key.code ==  sf::Keyboard::Down) {
-						if (route.get_position_voiture_joueur() == milieu)
-							route.changer_de_voie(basse, milieu,
-								*route.get_vehicule(route.get_voie_milieu(),
-									route.get_index_voiture_joueur()), true);
-						else if (route.get_position_voiture_joueur() == haute)
-							route.changer_de_voie(milieu, haute,
-								*route.get_vehicule(route.get_voie_haute(),
-									route.get_index_voiture_joueur()), true);
+						route.changer_de_voie_bas_joueur();
 					}
 					else if (event.key.code == sf::Keyboard::D || event.key.code == sf::Keyboard::Right) {
 						Joueur* voiture_joueur = (Joueur*)route.get_vehicule(route.get_position_voiture_joueur(), route.get_index_voiture_joueur());
@@ -73,9 +59,7 @@ void SFML_output::display(Route& route)
 		}
 		this->clean(); 
 		sf::Time elapsed = clock.getElapsedTime();
-		route.generation_automatique(clock, elapsed);
-		route.Update(window);
-		route.draw(window);
+		route.gestion_global(clock, elapsed, window);
 		window.display();
 	}
 

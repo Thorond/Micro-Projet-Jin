@@ -1,17 +1,13 @@
-﻿  Camions.cpp
-  Draw.cpp
-  Joueur.cpp
-d:\visual studio\projets\micro-projet-jin\mabibliotheque\joueur.cpp(8): warning C4244: 'argument': conversion from 'double' to 'float32', possible loss of data
+﻿  Draw.cpp
   Route.cpp
-d:\visual studio\projets\micro-projet-jin\mabibliotheque\route.cpp(164): warning C4018: '<': signed/unsigned mismatch
-d:\visual studio\projets\micro-projet-jin\mabibliotheque\route.cpp(222): warning C4018: '<': signed/unsigned mismatch
-d:\visual studio\projets\micro-projet-jin\mabibliotheque\route.cpp(232): warning C4018: '<': signed/unsigned mismatch
-d:\visual studio\projets\micro-projet-jin\mabibliotheque\route.cpp(242): warning C4018: '<': signed/unsigned mismatch
+d:\visual studio\projets\micro-projet-jin\mabibliotheque\route.cpp(181): warning C4018: '<': signed/unsigned mismatch
+d:\visual studio\projets\micro-projet-jin\mabibliotheque\route.cpp(266): warning C4018: '<': signed/unsigned mismatch
+d:\visual studio\projets\micro-projet-jin\mabibliotheque\route.cpp(276): warning C4018: '<': signed/unsigned mismatch
+d:\visual studio\projets\micro-projet-jin\mabibliotheque\route.cpp(286): warning C4018: '<': signed/unsigned mismatch
   Vehicules.cpp
 d:\visual studio\projets\micro-projet-jin\mabibliotheque\vehicules.cpp(57): warning C4244: 'argument': conversion from 'double' to 'float32', possible loss of data
 d:\visual studio\projets\micro-projet-jin\mabibliotheque\vehicules.cpp(65): warning C4244: 'argument': conversion from 'double' to 'float32', possible loss of data
 d:\visual studio\projets\micro-projet-jin\mabibliotheque\vehicules.cpp(83): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
-  Voitures.cpp
   monMain.cpp
   Generating Code...
   MaBibliotheque.vcxproj -> D:\Visual Studio\Projets\Micro-Projet-Jin\Debug\MaBibliotheque.lib

@@ -13,12 +13,7 @@ Voitures::Voitures(double x, position_route position, double vitesse, niveau niv
 {
 	this->construction_pare_choc(niveau);
 	this->set_vitesse_x(vitesse);
-	int y;
-	// temporaire
-	if (position == haute) y = 85;
-	else if (position == milieu) y = 50;
-	else y = 15;
-	corps.charger(x, y, this->get_vitesse_x(), false);
+	corps.charger(x, this->get_y(), this->get_vitesse_x(), false);
 }
 
 void Voitures::construction_pare_choc(niveau niveau) {

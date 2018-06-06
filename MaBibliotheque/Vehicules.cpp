@@ -52,13 +52,13 @@ void Vehicules::set_etat_pc_arriere(etat_pare_choc etat) {
 }
 
 void Vehicules::adapter_sa_vitesse(Vehicules& vehiDevant) {
-	if (vehiDevant.get_x() - this->get_x() < 1000 && vehiDevant.get_vitesse_x() < this->get_vitesse_x() ) {
+	if (this->get_x() + LONGUEUR_VOITURE * 2 > vehiDevant.get_x()  && vehiDevant.get_vitesse_x() < this->get_vitesse_x() ) {
 		this->set_vitesse_x(vehiDevant.get_vitesse_x() );
 		this->corps.body->SetLinearVelocity(b2Vec2(vehiDevant.get_vitesse_x(), 0));
 	}
 }
 
-
+/* fonction qui permet de synchroniser les valeurs par defaut du constructeur et celle du body de box2d*/
 bool Vehicules::Update(sf::RenderWindow& window) {
 	b2Vec2 pos = this->corps.body->GetPosition();
 	this->set_x(pos.x);
