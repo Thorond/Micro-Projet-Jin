@@ -1,6 +1,6 @@
 ﻿  Route.cpp
 d:\visual studio\projets\micro-projet-jin\mabibliotheque\route.cpp(164): warning C4018: '<': signed/unsigned mismatch
-d:\visual studio\projets\micro-projet-jin\mabibliotheque\route.cpp(219): warning C4018: '<': signed/unsigned mismatch
-d:\visual studio\projets\micro-projet-jin\mabibliotheque\route.cpp(229): warning C4018: '<': signed/unsigned mismatch
-d:\visual studio\projets\micro-projet-jin\mabibliotheque\route.cpp(239): warning C4018: '<': signed/unsigned mismatch
+d:\visual studio\projets\micro-projet-jin\mabibliotheque\route.cpp(222): warning C4018: '<': signed/unsigned mismatch
+d:\visual studio\projets\micro-projet-jin\mabibliotheque\route.cpp(232): warning C4018: '<': signed/unsigned mismatch
+d:\visual studio\projets\micro-projet-jin\mabibliotheque\route.cpp(242): warning C4018: '<': signed/unsigned mismatch
   MaBibliotheque.vcxproj -> D:\Visual Studio\Projets\Micro-Projet-Jin\Debug\MaBibliotheque.lib

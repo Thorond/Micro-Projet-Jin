@@ -96,7 +96,10 @@ TEST(TestAI, TestDestruction1) {
 	EXPECT_EQ(route.get_voie_basse().size() , 0);
 }
 
-TEST(TestAI, TestDeplacementVoie1) {
+/* Ce test permet de vérifier qu'une voiture qui est appelé par la méthode changer_de_voie
+	décrémente bien le vercteur dans lequel elle se trouve et se positionne correctement dans
+	le vecteur de la direction ou aller*/
+TEST(TestAI, TestDeplacementVoie1) { 
 	Route route = Route();
 
 	route.generation_vehicules( basse);
@@ -113,7 +116,24 @@ TEST(TestAI, TestDeplacementVoie1) {
 	EXPECT_EQ(route.get_vehicule(route.get_voie_basse(), 2)->get_x(), 600);
 }
 
+/* Ce test permet de vérifier que la position de la voiture du joueur est bien décrémenter/incrementer quand 
+	une voiture se déplace d'une voie à une autre */
 TEST(TestAI, TestDeplacementVoie2) {
+	Route route = Route();
+
+	route.generation_vehicules(basse);
+	route.get_vehicule(route.get_voie_basse(), 0)->set_x(300);
+	route.changer_de_voie(milieu, basse, *route.get_vehicule(route.get_voie_basse(), 0), false);
+	EXPECT_EQ(route.get_voie_milieu().size(), 2); 
+	EXPECT_EQ(route.get_voie_basse().size(), 0);
+	EXPECT_EQ(route.get_index_voiture_joueur(), 1);
+	route.changer_de_voie(basse, milieu, *route.get_vehicule(route.get_voie_milieu(), 0), false);
+	EXPECT_EQ(route.get_voie_milieu().size(), 1);
+	EXPECT_EQ(route.get_voie_basse().size(), 1);
+	EXPECT_EQ(route.get_index_voiture_joueur(), 0);
+}
+
+TEST(TestAI, TestDeplacementVoie3) {
 	Route route = Route();
 
 	route.generation_vehicules( basse);

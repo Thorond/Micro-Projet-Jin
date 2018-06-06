@@ -172,8 +172,12 @@ bool Route::changer_de_voie(position_route choix, position_route posActuel, Vehi
 		index_voiture_joueur = positionnement;
 		position_voiture_joueur = choix;
 	}
+	else {
+		if (choix == position_voiture_joueur && positionnement <= index_voiture_joueur) index_voiture_joueur++;
+	}
 	if (positionnement == voie_de_changement->size()) voie_de_changement->push_back(std::move(vehi));
 	else voie_de_changement->insert(voie_de_changement->begin() + positionnement, std::move(vehi));
+	
 	
 	return true;
 }
