@@ -10,12 +10,13 @@ void Entitee::charger(double x, double y, double vitesse, bool isCamion) {
 	this->body_def->position.Set(x,y);
 	this->body = this->world->CreateBody(this->body_def);
 
+	// On utilise pas ceci mais on doit quand même le créé 
 	this->shape = new b2PolygonShape();
 	if (!isCamion) {
-		this->shape->SetAsBox(LONGUEUR_VOITURE * 0.5f - b2_polygonRadius, LARGEUR_VOITURE * 0.5f - b2_polygonRadius);
+		this->shape->SetAsBox(1, 1);
 	}
 	else {
-		this->shape->SetAsBox(LONGUEUR_VOITURE * 2 * 0.5f - b2_polygonRadius, LARGEUR_VOITURE * 0.5f - b2_polygonRadius);
+		this->shape->SetAsBox(1, 1);
 	}
 
 	this->fixture_def = new b2FixtureDef();

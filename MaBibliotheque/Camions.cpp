@@ -68,9 +68,38 @@ void Camions::choix_vitesse(niveau niveau) {
 
 
 void Camions::draw(sf::RenderWindow& window) {
-	this->draw_circle(this->get_x(), this->get_y(), 4, window);
-	this->draw_circle(this->get_x() + 10, this->get_y(), 4, window);
-	this->draw_circle(this->get_x() + 20, this->get_y(), 4, window);
-	this->draw_circle(this->get_x() + 30, this->get_y(), 4, window);
-	
+	draw_corps(window);
+	draw_pare_choc(window);
+}
+
+void Camions::draw_corps(sf::RenderWindow& window) {
+	this->draw_circle(this->get_x() - LONGUEUR_VOITURE / 2 - 2 * RAYON_ROUE, this->get_y(), RAYON_ROUE, window);
+	this->draw_circle(this->get_x() - LONGUEUR_VOITURE / 2 + 2 * RAYON_ROUE, this->get_y(), RAYON_ROUE, window);
+	this->draw_circle(this->get_x() + LONGUEUR_VOITURE / 2 + 2 * RAYON_ROUE, this->get_y(), RAYON_ROUE, window);
+	this->draw_circle(this->get_x() + LONGUEUR_VOITURE / 2 - 2 * RAYON_ROUE, this->get_y(), RAYON_ROUE, window);
+	this->draw_rectangle(this->get_x() - LONGUEUR_VOITURE, this->get_y() - LARGEUR_VOITURE - RAYON_ROUE,
+		LONGUEUR_VOITURE * 2, LARGEUR_VOITURE, window);
+	this->draw_rectangle(this->get_x() + LONGUEUR_VOITURE / 2, this->get_y() - LARGEUR_VOITURE - RAYON_ROUE,
+		LONGUEUR_VOITURE / 2, LARGEUR_VOITURE, window);
+}
+void Camions::draw_pare_choc(sf::RenderWindow& window) {
+
+	if (get_etat_pc_arriere() == 2) {
+		draw_rectangle(this->get_x() - LONGUEUR_VOITURE - 7, this->get_y() - 2 * RAYON_ROUE,
+			3, RAYON_ROUE * 2, window);
+		draw_rectangle(this->get_x() + LONGUEUR_VOITURE + 5, this->get_y() - 2 * RAYON_ROUE,
+			3, RAYON_ROUE * 2, window);
+	}
+	else if (get_etat_pc_arriere() == 3) {
+		draw_rectangle(this->get_x() - LONGUEUR_VOITURE - 9, this->get_y() - 2 * RAYON_ROUE,
+			5, RAYON_ROUE * 2, window);
+		draw_rectangle(this->get_x() + LONGUEUR_VOITURE + 5, this->get_y() - 2 * RAYON_ROUE,
+			5, RAYON_ROUE * 2, window);
+	}
+	else if (get_etat_pc_arriere() == 4) {
+		draw_rectangle(this->get_x() - LONGUEUR_VOITURE - 9, this->get_y() - 4 * RAYON_ROUE,
+			5, RAYON_ROUE * 4, window);
+		draw_rectangle(this->get_x() + LONGUEUR_VOITURE + 5, this->get_y() - 4 * RAYON_ROUE,
+			5, RAYON_ROUE * 4, window);
+	}
 }

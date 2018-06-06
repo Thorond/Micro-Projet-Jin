@@ -71,7 +71,7 @@ void SFML_output::display(Route& route)
 			}
 			
 		}
-		window.clear(); 
+		this->clean(); 
 		sf::Time elapsed = clock.getElapsedTime();
 		route.generation_automatique(clock, elapsed);
 		route.Update(window);
@@ -86,7 +86,7 @@ void SFML_output::clean()
 	window.clear();
 	sf::RectangleShape shape(sf::Vector2f(static_cast<float>(WINDOW_WIDTH), static_cast<float>(WINDOW_HEIGHT)));
 	shape.setPosition(sf::Vector2f(0, 0));
-	shape.setFillColor(sf::Color::Black);
+	shape.setFillColor(sf::Color::White);
 	window.draw(shape);
 }
 

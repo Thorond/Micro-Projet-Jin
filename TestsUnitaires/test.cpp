@@ -133,6 +133,8 @@ TEST(TestAI, TestDeplacementVoie2) {
 	EXPECT_EQ(route.get_index_voiture_joueur(), 0);
 }
 
+/* Ce test permet de vérifier qu'une voiture ne peux pas aller sur un voie si une autre voiture est
+	déjà présente au même niveau qu'elle */
 TEST(TestAI, TestDeplacementVoie3) {
 	Route route = Route();
 

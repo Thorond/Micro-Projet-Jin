@@ -10,5 +10,7 @@ public :
 	void construction_pare_choc(niveau niveau) override;
 	void choix_vitesse(niveau niveau) override;
 	void draw(sf::RenderWindow& window) override;
+	void draw_corps(sf::RenderWindow& window) override;
+	void draw_pare_choc(sf::RenderWindow& window) override;
 
 };

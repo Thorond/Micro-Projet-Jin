@@ -24,12 +24,13 @@ enum niveau {
 };
 
 static const unsigned int VITESSE_DE_BASE(35);
-static const unsigned int VITESSE_DEFILEMENT(40);
-static const unsigned int VITESSE_MAX(50 - VITESSE_DEFILEMENT);
-static const int VITESSE_MIN(30 - VITESSE_DEFILEMENT);
+static const unsigned int VITESSE_DEFILEMENT(45);
+static const unsigned int VITESSE_MAX(55 - VITESSE_DEFILEMENT);
+static const int VITESSE_MIN(35 - VITESSE_DEFILEMENT);
 
-static const unsigned int LONGUEUR_VOITURE(4);
-static const unsigned int LARGEUR_VOITURE(2);
+static const unsigned int LONGUEUR_VOITURE(40);
+static const unsigned int LARGEUR_VOITURE(20);
+static const unsigned int RAYON_ROUE(5);
 
 static const unsigned int WINDOW_WIDTH(1000);
 static const unsigned int WINDOW_HEIGHT(700);

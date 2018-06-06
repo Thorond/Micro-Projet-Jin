@@ -70,6 +70,19 @@ void Vehicules::draw_circle(double x, double y, double r, sf::RenderWindow& wind
 {
 	sf::CircleShape shape(static_cast<float>(r));
 	shape.setFillColor(sf::Color::White);
+	shape.setOutlineThickness(3);
+	shape.setOutlineColor(sf::Color::Black);
 	shape.setPosition(static_cast<float>(x - r), static_cast<float>( (y - r)));
+	window.draw(shape);
+}
+
+void Vehicules::draw_rectangle(double x, double y, double dx, double dy, sf::RenderWindow& window)
+{
+	sf::RectangleShape shape;
+	shape.setFillColor(sf::Color::White);
+	shape.setSize(sf::Vector2f(dx, dy));
+	shape.setOutlineColor(sf::Color::Black);
+	shape.setOutlineThickness(3);
+	shape.setPosition(static_cast<float>(x), static_cast<float>(y ));
 	window.draw(shape);
 }
