@@ -1,6 +1,13 @@
 #pragma once
 #include <iostream>
 
+enum etat_du_jeu {
+	en_jeu,
+	pause,
+	gameover,
+	menu_demarrer
+};
+
 enum position_route {
 	haute,
 	milieu,
@@ -9,10 +16,11 @@ enum position_route {
 
 
 typedef enum  {
-	détruit = 1,
-	abime = 2,
-	bon = 3,
-	excellent = 4,
+	detruit = 0,
+	abime = 1,
+	bon = 2,
+	excellent = 3,
+	indestructible = 4,
 	indefini = 5
 }etat_pare_choc ;
 

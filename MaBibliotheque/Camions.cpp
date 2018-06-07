@@ -11,10 +11,14 @@ Camions::Camions(double x, position_route position, niveau niveau, b2World* worl
 
 void Camions::construction_pare_choc(niveau niveau) {
 	if (niveau == un) {
+		this->set_etat_pc_avant(abime);
+		this->set_etat_pc_arriere(abime);
+	}
+	else if (niveau == deux) {
 		this->set_etat_pc_avant(bon);
 		this->set_etat_pc_arriere(bon);
 	}
-	else if (niveau == deux || niveau == trois ) {
+	else {
 		this->set_etat_pc_avant(excellent);
 		this->set_etat_pc_arriere(excellent);
 	}
@@ -92,10 +96,6 @@ void Camions::draw_pare_choc(sf::RenderWindow& window) {
 		draw_rectangle(this->get_x() - LONGUEUR_VOITURE - 9, this->get_y() - 2 * RAYON_ROUE,
 			5, RAYON_ROUE * 2, window);
 	}
-	else if (get_etat_pc_arriere() == 4) {
-		draw_rectangle(this->get_x() - LONGUEUR_VOITURE - 9, this->get_y() - 4 * RAYON_ROUE,
-			5, RAYON_ROUE * 4, window);
-	}
 
 	if (get_etat_pc_avant() == 1) {
 		draw_rectangle(this->get_x() + LONGUEUR_VOITURE + 5, this->get_y() - 2 * RAYON_ROUE,
@@ -108,9 +108,5 @@ void Camions::draw_pare_choc(sf::RenderWindow& window) {
 	else if (get_etat_pc_avant() == 3) {
 		draw_rectangle(this->get_x() + LONGUEUR_VOITURE + 5, this->get_y() - 2 * RAYON_ROUE,
 			5, RAYON_ROUE * 2, window);
-	}
-	else if (get_etat_pc_avant() == 4) {
-		draw_rectangle(this->get_x() + LONGUEUR_VOITURE + 5, this->get_y() - 4 * RAYON_ROUE,
-			5, RAYON_ROUE * 4, window);
 	}
 }

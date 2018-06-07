@@ -11,6 +11,8 @@ class Route
 {
 public :
 	Route();
+	etat_du_jeu get_etat();
+	void set_etat(etat_du_jeu nouvEtat);
 	niveau get_niveau();
 	void set_niveau(niveau nouvNiv);
 
@@ -45,6 +47,7 @@ public :
 
 
 private :
+	etat_du_jeu etat_en_cours;
 	niveau niveau_route;
 	std::vector<std::unique_ptr<Vehicules>> voie_haute;
 	std::vector<std::unique_ptr<Vehicules>> voie_milieu;
@@ -54,4 +57,5 @@ private :
 
 	int unsigned index_voiture_joueur;
 	position_route position_voiture_joueur;
+
 };

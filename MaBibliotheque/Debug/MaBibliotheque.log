@@ -1,13 +1,5 @@
-﻿  Draw.cpp
-  Joueur.cpp
-d:\visual studio\projets\micro-projet-jin\mabibliotheque\joueur.cpp(8): warning C4244: 'argument': conversion from 'double' to 'float32', possible loss of data
-d:\visual studio\projets\micro-projet-jin\mabibliotheque\joueur.cpp(35): warning C4018: '<': signed/unsigned mismatch
-d:\visual studio\projets\micro-projet-jin\mabibliotheque\joueur.cpp(38): warning C4244: 'argument': conversion from 'double' to 'float32', possible loss of data
-d:\visual studio\projets\micro-projet-jin\mabibliotheque\joueur.cpp(48): warning C4244: 'argument': conversion from 'double' to 'float32', possible loss of data
-d:\visual studio\projets\micro-projet-jin\mabibliotheque\joueur.cpp(43): warning C4390: ';': empty controlled statement found; is this the intent?
-d:\visual studio\projets\micro-projet-jin\mabibliotheque\joueur.cpp(53): warning C4390: ';': empty controlled statement found; is this the intent?
+﻿  Camions.cpp
   Route.cpp
   Voitures.cpp
-  monMain.cpp
   Generating Code...
   MaBibliotheque.vcxproj -> D:\Visual Studio\Projets\Micro-Projet-Jin\Debug\MaBibliotheque.lib

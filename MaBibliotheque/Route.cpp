@@ -2,6 +2,7 @@
 
 Route::Route()
 	: niveau_route(un)
+	, etat_en_cours(en_jeu)
 {
 	this->world = new b2World(b2Vec2(0, 0));
 	auto voiture_joueur = std::make_unique<Joueur>(WINDOW_WIDTH / 2, milieu, 0, this->niveau_route, this->world);
@@ -11,6 +12,9 @@ Route::Route()
 }
 
 /* GETTERS AND SETTERS */
+
+etat_du_jeu Route::get_etat() { return etat_en_cours; }
+void Route::set_etat(etat_du_jeu nouvEtat) { etat_en_cours = nouvEtat;  }
 
 niveau Route::get_niveau() { return this->niveau_route; }
 void Route::set_niveau(niveau nouvNiv) {
@@ -171,10 +175,10 @@ bool Route::changer_de_voie(position_route choix, position_route posActuel, Vehi
 		else return false; 
 	}
 	if (positionnement >= 1) {
-		if ( get_vehicule(*voie_de_changement, positionnement - 1)->get_x() > vehic.get_x() - LONGUEUR_VOITURE) return false;
+		if ( get_vehicule(*voie_de_changement, positionnement - 1)->get_x() > vehic.get_x() - 1.5* LONGUEUR_VOITURE) return false;
 	}
 	else if (voie_de_changement->size() > (size_t)positionnement ) {
-		if ( get_vehicule(*voie_de_changement, positionnement)->get_x() < vehic.get_x() + LONGUEUR_VOITURE) return false;
+		if ( get_vehicule(*voie_de_changement, positionnement)->get_x() < vehic.get_x() + 1.5* LONGUEUR_VOITURE) return false;
 	}
 
 	auto vehi = std::make_unique<Voitures>(vehic.get_x(), vehic.get_position(), vehic.get_vitesse_x(), this->get_niveau(), world);
@@ -288,6 +292,10 @@ void Route::gestion_voiture_joueur() {
 	Joueur* voiture_joueur = (Joueur*) this->get_vehicule(this->get_position_voiture_joueur(), this->get_index_voiture_joueur());
 	voiture_joueur->regulation_vitesse_bords();
 	this->set_index_voiture_joueur(
-		voiture_joueur->gestion_collision(this->get_voie_voiture(get_position_voiture_joueur()), 
-		get_index_voiture_joueur()));
+		voiture_joueur->gestion_collision(this->get_voie_voiture(get_position_voiture_joueur()),
+			get_index_voiture_joueur()));
+
+	if (voiture_joueur->get_etat_pc_avant() < 0 || voiture_joueur->get_etat_pc_arriere() < 0) {
+		this->etat_en_cours = gameover;
+	}
 }

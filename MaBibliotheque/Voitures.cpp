@@ -19,16 +19,16 @@ Voitures::Voitures(double x, position_route position, double vitesse, niveau niv
 
 void Voitures::construction_pare_choc(niveau niveau) {
 	if (niveau == un) {
+		this->set_etat_pc_avant(detruit);
+		this->set_etat_pc_arriere(detruit);
+	}
+	else if (niveau == deux) {
 		this->set_etat_pc_avant(abime);
 		this->set_etat_pc_arriere(abime);
 	}
-	else if (niveau == deux) {
+	else {
 		this->set_etat_pc_avant(bon);
 		this->set_etat_pc_arriere(bon);
-	}
-	else {
-		this->set_etat_pc_avant(excellent);
-		this->set_etat_pc_arriere(excellent);
 	}
 }
 
@@ -97,10 +97,6 @@ void Voitures::draw_pare_choc(sf::RenderWindow& window) {
 		draw_rectangle(this->get_x() - LONGUEUR_VOITURE / 2 - 7, this->get_y() - 2 * RAYON_ROUE,
 			3, RAYON_ROUE * 2, window);
 	}
-	else if (get_etat_pc_arriere() == 3) {
-		draw_rectangle(this->get_x() - LONGUEUR_VOITURE / 2 - 9, this->get_y() - 2 * RAYON_ROUE,
-			5, RAYON_ROUE * 2, window);
-	}
 	if (get_etat_pc_avant() == 1) {
 		draw_rectangle(this->get_x() + LONGUEUR_VOITURE / 2 + 5, this->get_y() - 2 * RAYON_ROUE,
 			1, RAYON_ROUE * 2, window);
@@ -109,20 +105,17 @@ void Voitures::draw_pare_choc(sf::RenderWindow& window) {
 		draw_rectangle(this->get_x() + LONGUEUR_VOITURE / 2 + 5, this->get_y() - 2 * RAYON_ROUE,
 			3, RAYON_ROUE * 2, window);
 	}
-	else if (get_etat_pc_avant() == 3) {
-		draw_rectangle(this->get_x() + LONGUEUR_VOITURE / 2 + 5, this->get_y() - 2 * RAYON_ROUE,
-			5, RAYON_ROUE * 2, window);
-	}
 }
 
 
-int Voitures::consequence_collision(std::vector<std::unique_ptr<Vehicules>>& voie_joueur, int index_voiture, Vehicules& v2) {
+int unsigned Voitures::consequence_collision(std::vector<std::unique_ptr<Vehicules>>& voie_joueur, int unsigned index_voiture, Vehicules& v2) {
 	int pcv1;
 	int pcv2;
 	if (this->get_x() > v2.get_x()) {
 		pcv1 = this->get_etat_pc_arriere();
 		pcv2 = v2.get_etat_pc_avant();
-		this->set_etat_pc_arriere((etat_pare_choc)(pcv1 - pcv2));
+		if (!pcv2) pcv2++;
+		this->set_etat_pc_arriere((etat_pare_choc)(pcv1 - pcv2 ));
 		v2.set_etat_pc_avant((etat_pare_choc)(pcv2 - pcv1));
 		if (this->get_etat_pc_arriere() <= 0) {
 			// Faire disparaitre le vehicule
@@ -136,8 +129,9 @@ int Voitures::consequence_collision(std::vector<std::unique_ptr<Vehicules>>& voi
 	else {
 		pcv1 = this->get_etat_pc_avant();
 		pcv2 = v2.get_etat_pc_arriere();
-		v2.set_etat_pc_arriere((etat_pare_choc)(pcv2 - pcv1));
-		this->set_etat_pc_avant((etat_pare_choc)(pcv1 - pcv2));
+		if (!pcv2) pcv2++;
+		v2.set_etat_pc_arriere((etat_pare_choc)(pcv2 - pcv1 ));
+		this->set_etat_pc_avant((etat_pare_choc)(pcv1 - pcv2 ));
 		if (v2.get_etat_pc_arriere() <= 0) {
 			// Faire disparaitre le vehicule
 			voie_joueur.erase(voie_joueur.begin() + index_voiture + 1);

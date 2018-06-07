@@ -5,7 +5,9 @@ Joueur::Joueur(double x, position_route position, double vitesse, niveau niveau,
 	: Voitures(x, position, niveau, world)
 {
 	this->set_vitesse_x(vitesse);
-	this->corps.body->SetLinearVelocity(b2Vec2(get_vitesse_x(), 0));
+	this->corps.body->SetLinearVelocity(b2Vec2((float32)get_vitesse_x(), 0));
+	this->set_etat_pc_arriere(abime);
+	this->set_etat_pc_avant(abime);
 }
 
 void Joueur::adapter_sa_vitesse(Vehicules& vehiDevant) {
@@ -31,26 +33,24 @@ void Joueur::regulation_vitesse_bords() {
 
 // adapter la distance de collision, adapter le fait que le vehicule s'en prends plusieurs dans la tete 
 // adapter le fait que le joueur ne perd aps son pare choc
-int Joueur::gestion_collision(std::vector<std::unique_ptr<Vehicules>>& voie_joueur, int index_voiture ) {
+int unsigned Joueur::gestion_collision(std::vector<std::unique_ptr<Vehicules>>& voie_joueur, int unsigned index_voiture ) {
 	if (index_voiture + 1 < voie_joueur.size()) {
 		Vehicules* vehicule_face = voie_joueur[index_voiture + 1].get();
 		if (vehicule_face->get_x() - 1.5 * vehicule_face->get_longueur() < this->get_x()) {
-			this->corps.body->SetTransform(b2Vec2(vehicule_face->get_x() - 2 * vehicule_face->get_longueur(),0),0);
+			this->corps.body->SetTransform(b2Vec2((float32)(vehicule_face->get_x() - 2 * vehicule_face->get_longueur()),0),0);
 			this->set_vitesse_x(vehicule_face->get_vitesse_x());
 			index_voiture = this->consequence_collision(voie_joueur, index_voiture, *vehicule_face);
 		}
 	}
-	if (this->get_etat_pc_avant() <= 0); // GAMEOVER 
 
 	if (index_voiture >= 1 ) {
 		Vehicules* vehicule_arrière = voie_joueur[index_voiture -1].get();
-		if (vehicule_arrière->get_x() + 2 * vehicule_arrière->get_longueur() > this->get_x()) {
-			this->corps.body->SetTransform(b2Vec2(vehicule_arrière->get_x() + 3 * vehicule_arrière->get_longueur(), 0), 0);
+		if (vehicule_arrière->get_x() + 1.5 * vehicule_arrière->get_longueur() > this->get_x()) {
+			this->corps.body->SetTransform(b2Vec2((float32)(vehicule_arrière->get_x() + 2 * vehicule_arrière->get_longueur()), 0), 0);
 			this->set_vitesse_x(vehicule_arrière->get_vitesse_x());
 			index_voiture = this->consequence_collision(voie_joueur, index_voiture, *vehicule_arrière);
 		}
 	}
-	if (this->get_etat_pc_arriere() <= 0); // GAMEOVER 
 
 	return index_voiture;
 }

@@ -88,4 +88,6 @@ void Vehicules::draw_rectangle(double x, double y, double dx, double dy, sf::Ren
 	shape.setOutlineThickness(3);
 	shape.setPosition(static_cast<float>(x), static_cast<float>(y ));
 	window.draw(shape);
+
+
 }

@@ -13,6 +13,6 @@ public :
 	void draw_corps(sf::RenderWindow& window) override;
 	void draw_pare_choc(sf::RenderWindow& window) override;
 
-	int consequence_collision(std::vector<std::unique_ptr<Vehicules>>& voie_joueur, int index_voiture, Vehicules& v2);
+	int unsigned consequence_collision(std::vector<std::unique_ptr<Vehicules>>& voie_joueur, int unsigned index_voiture, Vehicules& v2);
 
 };
