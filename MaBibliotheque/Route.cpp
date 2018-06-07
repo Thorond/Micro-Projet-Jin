@@ -24,6 +24,12 @@ void Route::set_index_voiture_joueur(int index) { index_voiture_joueur = index; 
 position_route Route::get_position_voiture_joueur() { return position_voiture_joueur; }
 void Route::set_position_voiture_joueur(position_route pos) { position_voiture_joueur = pos; }
 
+std::vector<std::unique_ptr<Vehicules>>& Route::get_voie_voiture(position_route pos) {
+	if (pos == haute) return this->get_voie_haute();
+	else if (pos == milieu) return this->get_voie_milieu();
+	else return this->get_voie_basse();
+}
+
 std::vector<std::unique_ptr<Vehicules>>& Route::get_voie_haute() {
 	return this->voie_haute;
 }
@@ -155,7 +161,7 @@ bool Route::changer_de_voie(position_route choix, position_route posActuel, Vehi
 		voie_de_changement = &get_voie_basse();
 		voie_actuel = &get_voie_milieu();
 	}
-	int positionnement = 0;
+	size_t positionnement = 0;
 	for (size_t i = 0; i < voie_de_changement->size(); i++) {
 		if (get_vehicule(*voie_de_changement, i)->get_x() < vehic.get_x())
 			positionnement++;
@@ -173,7 +179,8 @@ bool Route::changer_de_voie(position_route choix, position_route posActuel, Vehi
 
 	auto vehi = std::make_unique<Voitures>(vehic.get_x(), vehic.get_position(), vehic.get_vitesse_x(), this->get_niveau(), world);
 	if (is_joueur) vehi = std::make_unique<Joueur>(vehic.get_x(), vehic.get_position(), vehic.get_vitesse_x(), this->get_niveau(), world);
-
+	vehi.get()->set_etat_pc_arriere(vehic.get_etat_pc_arriere());
+	vehi.get()->set_etat_pc_avant(vehic.get_etat_pc_avant());
 	
 	for (size_t i = 0; i < voie_actuel->size(); i++) {
 		if (get_vehicule(*voie_actuel, i)->get_x() == vehi.get()->get_x()) {
@@ -225,35 +232,6 @@ bool Route::changer_de_voie_bas_joueur() {
 				this->get_index_voiture_joueur()), true);
 	else return false;
 	return reussi;
-}
-
-void Route::consequence_collision(Vehicules& v1, Vehicules& v2) {
-	int pcv1;
-	int pcv2;
-	if (v1.get_x() > v2.get_x()) {
-		pcv1 = v1.get_etat_pc_arriere();
-		pcv2 = v2.get_etat_pc_avant();
-		v1.set_etat_pc_arriere((etat_pare_choc)(pcv1 - pcv2));
-		v2.set_etat_pc_avant((etat_pare_choc)(pcv2 - pcv1));
-		if (v1.get_etat_pc_arriere() <= 0) {
-			// Faire disparaitre le vehicule
-		}
-		if (v2.get_etat_pc_avant() <= 0) {
-			// Faire disparaitre le vehicule
-		}
-	}
-	else {
-		pcv1 = v1.get_etat_pc_avant();
-		pcv2 = v2.get_etat_pc_arriere();
-		v2.set_etat_pc_arriere((etat_pare_choc)(pcv2 - pcv1));
-		v1.set_etat_pc_avant((etat_pare_choc)(pcv1 - pcv2));
-		if (v2.get_etat_pc_arriere() <= 0) {
-			// Faire disparaitre le vehicule
-		}
-		if (v1.get_etat_pc_avant() <= 0) {
-			// Faire disparaitre le vehicule
-		}
-	}
 }
 
 
@@ -309,4 +287,7 @@ void Route::draw(sf::RenderWindow& window) {
 void Route::gestion_voiture_joueur() {
 	Joueur* voiture_joueur = (Joueur*) this->get_vehicule(this->get_position_voiture_joueur(), this->get_index_voiture_joueur());
 	voiture_joueur->regulation_vitesse_bords();
+	this->set_index_voiture_joueur(
+		voiture_joueur->gestion_collision(this->get_voie_voiture(get_position_voiture_joueur()), 
+		get_index_voiture_joueur()));
 }

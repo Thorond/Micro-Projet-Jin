@@ -1,4 +1,5 @@
 #pragma once
+#include <iostream>
 
 enum position_route {
 	haute,
@@ -8,11 +9,10 @@ enum position_route {
 
 
 typedef enum  {
-	détruit = 0,
-	abime = 1,
-	bon = 2,
-	excellent = 3,
-	indestructible = 4,
+	détruit = 1,
+	abime = 2,
+	bon = 3,
+	excellent = 4,
 	indefini = 5
 }etat_pare_choc ;
 

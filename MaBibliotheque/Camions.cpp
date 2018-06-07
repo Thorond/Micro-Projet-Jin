@@ -5,6 +5,7 @@ Camions::Camions(double x, position_route position, niveau niveau, b2World* worl
 {
 	this->construction_pare_choc(niveau);
 	this->choix_vitesse(niveau);
+	this->set_longueur(LONGUEUR_VOITURE * 2);
 	corps.charger(x, this->get_y(), this->get_vitesse_x(), true);
 }
 
@@ -13,13 +14,9 @@ void Camions::construction_pare_choc(niveau niveau) {
 		this->set_etat_pc_avant(bon);
 		this->set_etat_pc_arriere(bon);
 	}
-	else if (niveau == deux) {
+	else if (niveau == deux || niveau == trois ) {
 		this->set_etat_pc_avant(excellent);
 		this->set_etat_pc_arriere(excellent);
-	}
-	else {
-		this->set_etat_pc_avant(indestructible);
-		this->set_etat_pc_arriere(indestructible);
 	}
 }
 
@@ -83,22 +80,36 @@ void Camions::draw_corps(sf::RenderWindow& window) {
 		LONGUEUR_VOITURE / 2, LARGEUR_VOITURE, window);
 }
 void Camions::draw_pare_choc(sf::RenderWindow& window) {
-
-	if (get_etat_pc_arriere() == 2) {
+	if (get_etat_pc_arriere() == 1) {
 		draw_rectangle(this->get_x() - LONGUEUR_VOITURE - 7, this->get_y() - 2 * RAYON_ROUE,
-			3, RAYON_ROUE * 2, window);
-		draw_rectangle(this->get_x() + LONGUEUR_VOITURE + 5, this->get_y() - 2 * RAYON_ROUE,
+			1, RAYON_ROUE * 2, window);
+	}
+	else if (get_etat_pc_arriere() == 2) {
+		draw_rectangle(this->get_x() - LONGUEUR_VOITURE - 7, this->get_y() - 2 * RAYON_ROUE,
 			3, RAYON_ROUE * 2, window);
 	}
 	else if (get_etat_pc_arriere() == 3) {
 		draw_rectangle(this->get_x() - LONGUEUR_VOITURE - 9, this->get_y() - 2 * RAYON_ROUE,
 			5, RAYON_ROUE * 2, window);
-		draw_rectangle(this->get_x() + LONGUEUR_VOITURE + 5, this->get_y() - 2 * RAYON_ROUE,
-			5, RAYON_ROUE * 2, window);
 	}
 	else if (get_etat_pc_arriere() == 4) {
 		draw_rectangle(this->get_x() - LONGUEUR_VOITURE - 9, this->get_y() - 4 * RAYON_ROUE,
 			5, RAYON_ROUE * 4, window);
+	}
+
+	if (get_etat_pc_avant() == 1) {
+		draw_rectangle(this->get_x() + LONGUEUR_VOITURE + 5, this->get_y() - 2 * RAYON_ROUE,
+			1, RAYON_ROUE * 2, window);
+	}
+	else if (get_etat_pc_avant() == 2) {
+		draw_rectangle(this->get_x() + LONGUEUR_VOITURE + 5, this->get_y() - 2 * RAYON_ROUE,
+			3, RAYON_ROUE * 2, window);
+	}
+	else if (get_etat_pc_avant() == 3) {
+		draw_rectangle(this->get_x() + LONGUEUR_VOITURE + 5, this->get_y() - 2 * RAYON_ROUE,
+			5, RAYON_ROUE * 2, window);
+	}
+	else if (get_etat_pc_avant() == 4) {
 		draw_rectangle(this->get_x() + LONGUEUR_VOITURE + 5, this->get_y() - 4 * RAYON_ROUE,
 			5, RAYON_ROUE * 4, window);
 	}

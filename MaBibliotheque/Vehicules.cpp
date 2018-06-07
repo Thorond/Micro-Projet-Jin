@@ -36,6 +36,9 @@ void Vehicules::set_vitesse_x(double vitesse) {
 	this->vitesse_x = vitesse;
 }
 
+void Vehicules::set_longueur(int longueur) { this->longueur = longueur; }
+double Vehicules::get_longueur() { return longueur;  }
+
 position_route Vehicules::get_position() { return position_y; }
 void Vehicules::set_position(position_route position) {
 	this->position_y = position;
@@ -54,7 +57,7 @@ void Vehicules::set_etat_pc_arriere(etat_pare_choc etat) {
 void Vehicules::adapter_sa_vitesse(Vehicules& vehiDevant) {
 	if (this->get_x() + LONGUEUR_VOITURE * 2 > vehiDevant.get_x()  && vehiDevant.get_vitesse_x() < this->get_vitesse_x() ) {
 		this->set_vitesse_x(vehiDevant.get_vitesse_x() );
-		this->corps.body->SetLinearVelocity(b2Vec2(vehiDevant.get_vitesse_x(), 0));
+		this->corps.body->SetLinearVelocity(b2Vec2((float32)vehiDevant.get_vitesse_x(), 0));
 	}
 }
 
@@ -62,7 +65,7 @@ void Vehicules::adapter_sa_vitesse(Vehicules& vehiDevant) {
 bool Vehicules::Update(sf::RenderWindow& window) {
 	b2Vec2 pos = this->corps.body->GetPosition();
 	this->set_x(pos.x);
-	this->corps.body->SetLinearVelocity(b2Vec2(this->get_vitesse_x(), 0));
+	this->corps.body->SetLinearVelocity(b2Vec2((float32)this->get_vitesse_x(), 0));
 	return true;
 }
 
@@ -80,7 +83,7 @@ void Vehicules::draw_rectangle(double x, double y, double dx, double dy, sf::Ren
 {
 	sf::RectangleShape shape;
 	shape.setFillColor(sf::Color::White);
-	shape.setSize(sf::Vector2f(dx, dy));
+	shape.setSize(sf::Vector2f((float)dx, (float)dy));
 	shape.setOutlineColor(sf::Color::Black);
 	shape.setOutlineThickness(3);
 	shape.setPosition(static_cast<float>(x), static_cast<float>(y ));

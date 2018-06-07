@@ -15,6 +15,8 @@ public:
 	void set_y();
 	double get_vitesse_x();
 	void set_vitesse_x( double vitesse );
+	void set_longueur( int longueur);
+	double get_longueur();
 	position_route get_position();
 	void set_position( position_route position);
 	etat_pare_choc get_etat_pc_avant();
@@ -39,6 +41,7 @@ private:
 	double x;
 	double y;
 	double vitesse_x;
+	int longueur;
 	position_route position_y;
 	etat_pare_choc etat_pc_avant;
 	etat_pare_choc etat_pc_arriere;
