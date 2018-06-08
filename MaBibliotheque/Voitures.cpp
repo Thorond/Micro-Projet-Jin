@@ -114,29 +114,31 @@ int unsigned Voitures::consequence_collision(std::vector<std::unique_ptr<Vehicul
 	if (this->get_x() > v2.get_x()) {
 		pcv1 = this->get_etat_pc_arriere();
 		pcv2 = v2.get_etat_pc_avant();
+		if (!pcv1) pcv1++;
 		if (!pcv2) pcv2++;
-		this->set_etat_pc_arriere((etat_pare_choc)(pcv1 - pcv2 ));
-		v2.set_etat_pc_avant((etat_pare_choc)(pcv2 - pcv1));
-		if (this->get_etat_pc_arriere() <= 0) {
+		this->set_etat_pc_arriere((etat_pare_choc)(this->get_etat_pc_arriere() - pcv2 ));
+		v2.set_etat_pc_avant((etat_pare_choc)(v2.get_etat_pc_avant() - pcv1));
+		if (this->get_etat_pc_arriere() < 0) {
 			// Faire disparaitre le vehicule
 		}
-		if (v2.get_etat_pc_avant() <= 0) {
+		if (v2.get_etat_pc_avant()< 0) {
 			// Faire disparaitre le vehicule
 			voie_joueur.erase(voie_joueur.begin() + index_voiture - 1);
-			index_voiture--;
+			index_voiture--; // si joueur
 		}
 	}
 	else {
 		pcv1 = this->get_etat_pc_avant();
 		pcv2 = v2.get_etat_pc_arriere();
+		if (!pcv1) pcv1++;
 		if (!pcv2) pcv2++;
-		v2.set_etat_pc_arriere((etat_pare_choc)(pcv2 - pcv1 ));
-		this->set_etat_pc_avant((etat_pare_choc)(pcv1 - pcv2 ));
-		if (v2.get_etat_pc_arriere() <= 0) {
+		v2.set_etat_pc_arriere((etat_pare_choc)(v2.get_etat_pc_arriere() - pcv1 ));
+		this->set_etat_pc_avant((etat_pare_choc)(this->get_etat_pc_avant() - pcv2 ));
+		if (v2.get_etat_pc_arriere() < 0 ) {
 			// Faire disparaitre le vehicule
 			voie_joueur.erase(voie_joueur.begin() + index_voiture + 1);
 		}
-		if (this->get_etat_pc_avant() <= 0) {
+		if (this->get_etat_pc_avant() < 0) {
 			// Faire disparaitre le vehicule
 		}
 	}

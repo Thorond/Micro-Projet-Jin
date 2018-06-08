@@ -14,22 +14,52 @@ TEST(TestGenerationVoiture, TestStatique) {
 TEST(TestConsColli, TestStatique1) {
 	Route route = Route();
 	route.generation_vehicules( basse);
-	route.get_vehicule(route.get_voie_basse(), 0)->set_vitesse_x(80);
-	route.get_vehicule(route.get_voie_basse(), 0)->set_x(450);
-	route.generation_vehicules( basse);
-	route.get_vehicule(route.get_voie_basse(), 0)->set_etat_pc_avant((etat_pare_choc)0);
-	route.get_vehicule(route.get_voie_basse(), 1)->set_etat_pc_arriere((etat_pare_choc)0);
-	route.consequence_collision(*route.get_vehicule(route.get_voie_basse(), 0),
-		*route.get_vehicule(route.get_voie_basse(), 1));
-	EXPECT_EQ(route.get_vehicule(route.get_voie_basse(), 0)->get_etat_pc_avant(), 0);
-	EXPECT_EQ(route.get_vehicule(route.get_voie_basse(), 1)->get_etat_pc_arriere(), 0);
+	route.generation_vehicules(basse);
+	Voitures* v1 = (Voitures*)route.get_vehicule(route.get_voie_basse(), 0);
+	Voitures* v2 = (Voitures*)route.get_vehicule(route.get_voie_basse(), 1);
+	v1->set_vitesse_x(80);
+	v1->set_x(450);
+	v1->set_etat_pc_avant((etat_pare_choc)0);
+	v2->set_etat_pc_arriere((etat_pare_choc)0);
+	v1->consequence_collision(route.get_voie_basse(), 0,*v2);
+	EXPECT_EQ(v1->get_etat_pc_avant(), -1);
+	EXPECT_EQ(route.get_voie_basse().size(), 1);
 
-	route.get_vehicule(route.get_voie_basse(), 0)->set_etat_pc_avant((etat_pare_choc)3);
-	route.get_vehicule(route.get_voie_basse(), 1)->set_etat_pc_arriere((etat_pare_choc)1);
-	route.consequence_collision(*route.get_vehicule(route.get_voie_basse(), 0),
-		*route.get_vehicule(route.get_voie_basse(), 1));
-	EXPECT_EQ(route.get_vehicule(route.get_voie_basse(), 0)->get_etat_pc_avant(), 2);
-	EXPECT_LE(route.get_vehicule(route.get_voie_basse(), 1)->get_etat_pc_arriere(), 0);
+	route.generation_vehicules(basse);
+	v2 = (Voitures*)route.get_vehicule(route.get_voie_basse(), 1);
+	v1->set_etat_pc_avant((etat_pare_choc)3);
+	v2->set_etat_pc_arriere((etat_pare_choc)1);
+	v1->consequence_collision(route.get_voie_basse(), 0, *v2);
+	EXPECT_EQ(v1->get_etat_pc_avant(), 2);
+	EXPECT_EQ(route.get_voie_basse().size(), 1);
+}
+TEST(TestConsColli, TestStatique2) {
+	Route route = Route();
+	route.generation_vehicules(basse);
+	route.generation_vehicules(basse);
+	Voitures* v1 = (Voitures*)route.get_vehicule(route.get_voie_basse(), 0);
+	Voitures* v2 = (Voitures*)route.get_vehicule(route.get_voie_basse(), 1);
+	v1->set_vitesse_x(80);
+	v1->set_x(450);
+	v1->set_etat_pc_avant((etat_pare_choc)3);
+	v2->set_etat_pc_arriere((etat_pare_choc)1);
+	v1->consequence_collision(route.get_voie_basse(), 0, *v2);
+	EXPECT_EQ(v1->get_etat_pc_avant(), 2);
+	EXPECT_EQ(route.get_voie_basse().size(), 1);
+}
+TEST(TestConsColli, TestStatique3) {
+	Route route = Route();
+	route.generation_vehicules(basse);
+	route.generation_vehicules(basse);
+	Voitures* v1 = (Voitures*)route.get_vehicule(route.get_voie_basse(), 0);
+	Voitures* v2 = (Voitures*)route.get_vehicule(route.get_voie_basse(), 1);
+	v1->set_vitesse_x(80);
+	v1->set_x(450);
+	v1->set_etat_pc_avant((etat_pare_choc)1);
+	v2->set_etat_pc_arriere((etat_pare_choc)3);
+	v1->consequence_collision(route.get_voie_basse(), 0, *v2);
+	EXPECT_EQ(v1->get_etat_pc_avant(), -2);
+	EXPECT_EQ(v2->get_etat_pc_arriere(), 2);
 }
 
 TEST(TestCorp, TestStatique1) {
@@ -105,15 +135,16 @@ TEST(TestAI, TestDeplacementVoie1) {
 	route.generation_vehicules( basse);
 	route.generation_vehicules( basse);
 	route.generation_vehicules( milieu);
-	route.get_vehicule(route.get_voie_basse(), 0)->set_x(500);
-	route.get_vehicule(route.get_voie_basse(), 1)->set_x(600);
-	route.get_vehicule(route.get_voie_milieu(), 1)->set_x(550);
-	route.changer_de_voie(basse, milieu, *route.get_vehicule(route.get_voie_milieu(), 1), false) ;
+	route.get_vehicule(route.get_voie_basse(), 0)->set_x(400);
+	route.get_vehicule(route.get_voie_basse(), 1)->set_x(800);
+	route.get_vehicule(route.get_voie_milieu(), 1)->set_x(600);
+	bool success = route.changer_de_voie(basse, milieu, *route.get_vehicule(route.get_voie_milieu(), 1), false) ;
+	EXPECT_EQ(success, true); 
 	EXPECT_EQ(route.get_voie_milieu().size(), 1); // le joueur
 	EXPECT_EQ(route.get_voie_basse().size(), 3);
-	EXPECT_EQ(route.get_vehicule(route.get_voie_basse(), 0)->get_x(), 500);
-	EXPECT_EQ(route.get_vehicule(route.get_voie_basse(), 1)->get_x(), 550);
-	EXPECT_EQ(route.get_vehicule(route.get_voie_basse(), 2)->get_x(), 600);
+	EXPECT_EQ(route.get_vehicule(route.get_voie_basse(), 0)->get_x(), 400);
+	EXPECT_EQ(route.get_vehicule(route.get_voie_basse(), 1)->get_x(), 600);
+	EXPECT_EQ(route.get_vehicule(route.get_voie_basse(), 2)->get_x(), 800);
 }
 
 /* Ce test permet de vérifier que la position de la voiture du joueur est bien décrémenter/incrementer quand 
