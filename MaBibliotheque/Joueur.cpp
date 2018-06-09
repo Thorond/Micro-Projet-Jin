@@ -31,8 +31,6 @@ void Joueur::regulation_vitesse_bords() {
 }
 
 
-// adapter la distance de collision, adapter le fait que le vehicule s'en prends plusieurs dans la tete 
-// adapter le fait que le joueur ne perd aps son pare choc
 int unsigned Joueur::gestion_collision(std::vector<std::unique_ptr<Vehicules>>& voie_joueur, int unsigned index_voiture ) {
 	if (index_voiture + 1 < voie_joueur.size()) {
 		Vehicules* vehicule_face = voie_joueur[index_voiture + 1].get();

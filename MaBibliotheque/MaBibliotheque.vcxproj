@@ -155,6 +155,7 @@
     <ClInclude Include="Draw.hpp" />
     <ClInclude Include="Entitee.hpp" />
     <ClInclude Include="EnumEtDonnees.hpp" />
+    <ClInclude Include="EventHandler.hpp" />
     <ClInclude Include="Joueur.hpp" />
     <ClInclude Include="monMain.h" />
     <ClInclude Include="Policier.hpp" />
@@ -168,6 +169,7 @@
     <ClCompile Include="Camions.cpp" />
     <ClCompile Include="Draw.cpp" />
     <ClCompile Include="Entitee.cpp" />
+    <ClCompile Include="EventHandler.cpp" />
     <ClCompile Include="Joueur.cpp" />
     <ClCompile Include="monMain.cpp" />
     <ClCompile Include="Policier.cpp" />

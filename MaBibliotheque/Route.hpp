@@ -6,7 +6,7 @@
 #include <random>
 #include <iostream>
 
-
+void prout();
 class Route 
 {
 public :

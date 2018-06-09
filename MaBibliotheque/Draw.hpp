@@ -1,7 +1,6 @@
 #pragma once
-#include <SFML/Graphics.hpp>
 #include "EnumEtDonnees.hpp"
-#include "Route.hpp"
+#include "EventHandler.hpp"
 
 class SFML_output
 {
