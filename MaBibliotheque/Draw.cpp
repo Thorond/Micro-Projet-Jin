@@ -56,26 +56,9 @@ void SFML_output::display(Route& route)
 			sf::Time elapsed = clock.getElapsedTime();
 			route.gestion_global(clock, elapsed, window);
 		}
-		else if (route.get_etat() == gameover) { // temporaire
-
-			sf::Text text;
-			text.setFont(font);
-			text.setString("GameOver");
-			text.setFillColor(sf::Color::Black);
-			text.setCharacterSize(50);
-			text.setStyle(sf::Text::Bold | sf::Text::Underlined);
-			text.setPosition(WINDOW_WIDTH * 3/8 , WINDOW_HEIGHT / 3);
-
-
-			sf::Text text2;
-			text2.setFont(font);
-			text2.setString("Appuyez sur 'entrée' pour continuer");
-			text2.setFillColor(sf::Color::Black); 
-			text2.setCharacterSize(24);
-			text2.setPosition(WINDOW_WIDTH *5/16 , WINDOW_HEIGHT * 5/8);
-
-			window.draw(text);
-			window.draw(text2);
+		else if (route.get_etat() == gameover) { 
+			this->affichage_text(font, "GameOver", 50, true, true, WINDOW_WIDTH * 3 / 8, WINDOW_HEIGHT / 3);
+			this->affichage_text(font, "Appuyez sur 'entrée' pour continuer", 24, false, false, WINDOW_WIDTH * 5 / 16, WINDOW_HEIGHT * 5 / 8);
 		}
 		window.display();
 	}
@@ -94,4 +77,18 @@ void SFML_output::clean()
 
 sf::RenderWindow& SFML_output::get_window() {
 	return window;
+}
+
+void SFML_output::affichage_text(sf::Font& font, sf::String string, int size_char, bool bold, bool underlined, double pos_x, double pos_y) {
+
+
+	sf::Text text;
+	text.setFont(font);
+	text.setString(string);
+	text.setFillColor(sf::Color::Black);
+	text.setCharacterSize(size_char);
+	if (bold) text.setStyle(sf::Text::Bold);
+	if ( underlined ) text.setStyle(sf::Text::Underlined);
+	text.setPosition(pos_x, pos_y);
+	window.draw(text);
 }

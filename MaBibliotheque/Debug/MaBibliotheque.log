@@ -1,4 +1,5 @@
 ﻿  Draw.cpp
+d:\visual studio\projets\micro-projet-jin\mabibliotheque\draw.cpp(92): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
   EventHandler.cpp
   monMain.cpp
   Generating Code...
