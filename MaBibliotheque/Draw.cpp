@@ -17,7 +17,11 @@ void SFML_output::display(Route& route)
 	sf::Clock clock;
 
 	sf::Font font;
-	if (!font.loadFromFile("fonts/Alfredo_.ttf"))
+	//if (!font.loadFromFile("fonts/Alfredo_.ttf"))
+	//{
+	//	// error...
+	//}
+	if (!font.loadFromFile("fonts/arial.ttf"))
 	{
 		// error...
 	}
@@ -41,6 +45,9 @@ void SFML_output::display(Route& route)
 					case en_jeu:
 						event_en_jeu(route, event);
 						break;
+					case pause:
+						event_pause(route, event);
+						break;
 					case gameover :
 						event_game_over(route, event);
 						break;
@@ -60,6 +67,13 @@ void SFML_output::display(Route& route)
 				sf::Time elapsed = clock.getElapsedTime();
 				route.gestion_global(clock, elapsed, window);
 				this->affichage_donnees_joueur_en_jeu(route, font);
+				this->affichage_pause(route, font, false);
+				break;
+			}
+			case pause:
+			{
+				this->affichage_donnees_joueur_en_jeu(route, font);
+				this->affichage_pause(route, font, true);
 				break;
 			}
 			case gameover :
@@ -97,6 +111,17 @@ void SFML_output::affichage_text(sf::Font& font, sf::String string, int size_cha
 	if ( underlined ) text.setStyle(sf::Text::Underlined);
 	text.setPosition(pos_x, pos_y);
 	window.draw(text);
+}
+
+void SFML_output::affichage_pause(Route& route, sf::Font& font, bool pause) {
+	if (!pause) {
+		std::string pause = " Pause : 'P' ";
+		this->affichage_text(font, pause, 26, false, false, WINDOW_WIDTH * 5 / 6, WINDOW_HEIGHT * 1 / 16);
+	}
+	else {
+		std::string pause = " PAUSE (P)";
+		this->affichage_text(font, pause, 26, false, false, WINDOW_WIDTH * 7/16 , WINDOW_HEIGHT /2);
+	}
 }
 
 void SFML_output::affichage_game_over(Route& route, sf::Font& font) {

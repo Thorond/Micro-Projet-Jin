@@ -22,6 +22,16 @@ void event_en_jeu(Route& route, sf::Event& event) {
 			voiture_joueur->set_vitesse_x(voiture_joueur->get_vitesse_x() - 2);
 		}
 	}
+
+	else if (event.key.code == sf::Keyboard::P) {
+		route.set_etat(pause);
+	}
+}
+
+void event_pause(Route& route, sf::Event& event) {
+	if (event.key.code == sf::Keyboard::P) {
+		route.set_etat(en_jeu);
+	}
 }
 
 void event_game_over(Route& route, sf::Event& event) {

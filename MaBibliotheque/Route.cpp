@@ -60,9 +60,25 @@ Vehicules* Route::get_vehicule(position_route pos, int rang) {
 /* FUNCTION MANAGING THE GAME*/
 
 void Route::gestion_global(sf::Clock& clock, sf::Time& elapsed, sf::RenderWindow& window) {
-	this->generation_automatique(clock, elapsed);
-	this->Update(window);
-	this->draw(window);
+	
+	switch (etat_en_cours)
+	{
+	case en_jeu:
+	{
+		this->generation_automatique(clock, elapsed);
+		this->Update(window);
+		this->draw(window);
+		break;
+	}
+	case pause :
+		this->draw(window);
+		break;
+	case gameover :
+		//destroy everithing
+		break;
+	default:
+		break;
+	}
 }
 
 void Route::generation_automatique(sf::Clock& clock, sf::Time& elapsed) {
