@@ -17,7 +17,7 @@ void SFML_output::display(Route& route)
 	sf::Clock clock;
 
 	sf::Font font;
-	if (!font.loadFromFile("fonts/arial.ttf"))
+	if (!font.loadFromFile("fonts/Alfredo_.ttf"))
 	{
 		// error...
 	}
@@ -37,11 +37,13 @@ void SFML_output::display(Route& route)
 
 				// acquisition des evenements touche pressee
 				case sf::Event::KeyPressed:
-					if (route.get_etat() == en_jeu) {
+					switch (route.get_etat()) {
+					case en_jeu:
 						event_en_jeu(route, event);
-					}
-					else if (route.get_etat() == gameover) {
+						break;
+					case gameover :
 						event_game_over(route, event);
+						break;
 					}
 					break;
 
@@ -52,13 +54,19 @@ void SFML_output::display(Route& route)
 			
 		}
 		this->clean();
-		if (route.get_etat() == en_jeu) {
-			sf::Time elapsed = clock.getElapsedTime();
-			route.gestion_global(clock, elapsed, window);
-		}
-		else if (route.get_etat() == gameover) { 
-			this->affichage_text(font, "GameOver", 50, true, true, WINDOW_WIDTH * 3 / 8, WINDOW_HEIGHT / 3);
-			this->affichage_text(font, "Appuyez sur 'entrée' pour continuer", 24, false, false, WINDOW_WIDTH * 5 / 16, WINDOW_HEIGHT * 5 / 8);
+		switch (route.get_etat()) {
+			case en_jeu:
+			{
+				sf::Time elapsed = clock.getElapsedTime();
+				route.gestion_global(clock, elapsed, window);
+				this->affichage_donnees_joueur_en_jeu(route, font);
+				break;
+			}
+			case gameover :
+			
+				this->affichage_game_over(route, font);
+				break;
+			
 		}
 		window.display();
 	}
@@ -80,8 +88,6 @@ sf::RenderWindow& SFML_output::get_window() {
 }
 
 void SFML_output::affichage_text(sf::Font& font, sf::String string, int size_char, bool bold, bool underlined, double pos_x, double pos_y) {
-
-
 	sf::Text text;
 	text.setFont(font);
 	text.setString(string);
@@ -91,4 +97,20 @@ void SFML_output::affichage_text(sf::Font& font, sf::String string, int size_cha
 	if ( underlined ) text.setStyle(sf::Text::Underlined);
 	text.setPosition(pos_x, pos_y);
 	window.draw(text);
+}
+
+void SFML_output::affichage_game_over(Route& route, sf::Font& font) {
+	this->affichage_text(font, "GameOver", 60, true, true, WINDOW_WIDTH * 3 / 8, WINDOW_HEIGHT / 3);
+	this->affichage_text(font, "Appuyez sur 'entrée' pour continuer", 40, false, false, WINDOW_WIDTH * 1 / 4, WINDOW_HEIGHT * 5 / 8);
+}
+
+void SFML_output::affichage_donnees_joueur_en_jeu(Route& route, sf::Font& font) {
+	Joueur* voiture_joueur = (Joueur*)route.get_vehicule(route.get_position_voiture_joueur(), route.get_index_voiture_joueur());
+	std::string vitesse = " Vitesse : " + std::to_string((int)(voiture_joueur->get_vitesse_x() + VITESSE_DEFILEMENT));
+	this->affichage_text(font, vitesse , 40, false, false, WINDOW_WIDTH * 3/4, WINDOW_HEIGHT * 7 / 8);
+	std::string etat_pc_avant = " Pare-choc avant : " + std::to_string(voiture_joueur->get_etat_pc_avant());
+	this->affichage_text(font, etat_pc_avant, 40, false, false, 50, WINDOW_HEIGHT * 6 / 8);
+	std::string etat_pc_arriere = " Pare-choc arrière : " + std::to_string(voiture_joueur->get_etat_pc_arriere());
+	this->affichage_text(font, etat_pc_arriere, 40, false, false, 50, WINDOW_HEIGHT * 7 / 8);
+
 }

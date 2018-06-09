@@ -1,5 +1,5 @@
 #pragma once
-#include <iostream>
+#include <iostream>   
 
 enum etat_du_jeu {
 	en_jeu,
