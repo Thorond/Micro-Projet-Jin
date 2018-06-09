@@ -36,7 +36,7 @@ void Joueur::regulation_vitesse_bords() {
 int unsigned Joueur::gestion_collision(std::vector<std::unique_ptr<Vehicules>>& voie_joueur, int unsigned index_voiture ) {
 	if (index_voiture + 1 < voie_joueur.size()) {
 		Vehicules* vehicule_face = voie_joueur[index_voiture + 1].get();
-		if (vehicule_face->get_x() - 1.5 * vehicule_face->get_longueur() < this->get_x()) {
+		if (vehicule_face->get_x() - 1.7 * vehicule_face->get_longueur() < this->get_x()) {
 			this->corps.body->SetTransform(b2Vec2((float32)(vehicule_face->get_x() - 2 * vehicule_face->get_longueur()),0),0);
 			this->set_vitesse_x(vehicule_face->get_vitesse_x());
 			index_voiture = this->consequence_collision(voie_joueur, index_voiture, *vehicule_face);
@@ -45,7 +45,7 @@ int unsigned Joueur::gestion_collision(std::vector<std::unique_ptr<Vehicules>>& 
 
 	if (index_voiture >= 1 ) {
 		Vehicules* vehicule_arrière = voie_joueur[index_voiture -1].get();
-		if (vehicule_arrière->get_x() + 1.5 * vehicule_arrière->get_longueur() > this->get_x()) {
+		if (vehicule_arrière->get_x() + 1.4 * vehicule_arrière->get_longueur() > this->get_x()) {
 			this->corps.body->SetTransform(b2Vec2((float32)(vehicule_arrière->get_x() + 2 * vehicule_arrière->get_longueur()), 0), 0);
 			this->set_vitesse_x(vehicule_arrière->get_vitesse_x());
 			index_voiture = this->consequence_collision(voie_joueur, index_voiture, *vehicule_arrière);

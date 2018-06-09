@@ -175,10 +175,10 @@ bool Route::changer_de_voie(position_route choix, position_route posActuel, Vehi
 		else return false; 
 	}
 	if (positionnement >= 1) {
-		if ( get_vehicule(*voie_de_changement, positionnement - 1)->get_x() > vehic.get_x() - 1.5* LONGUEUR_VOITURE) return false;
+		if ( get_vehicule(*voie_de_changement, positionnement - 1)->get_x() > vehic.get_x() - 1.4* get_vehicule(*voie_de_changement, positionnement - 1)->get_longueur() ) return false;
 	}
 	else if (voie_de_changement->size() > (size_t)positionnement ) {
-		if ( get_vehicule(*voie_de_changement, positionnement)->get_x() < vehic.get_x() + 1.5* LONGUEUR_VOITURE) return false;
+		if ( get_vehicule(*voie_de_changement, positionnement)->get_x() < vehic.get_x() + 1.7*  get_vehicule(*voie_de_changement, positionnement )->get_longueur()) return false;
 	}
 
 	auto vehi = std::make_unique<Voitures>(vehic.get_x(), vehic.get_position(), vehic.get_vitesse_x(), this->get_niveau(), world);
