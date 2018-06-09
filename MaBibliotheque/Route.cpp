@@ -3,6 +3,7 @@
 Route::Route()
 	: niveau_route(un)
 	, etat_en_cours(en_jeu)
+	, distance_parcouru(0)
 {
 	this->world = new b2World(b2Vec2(0, 0));
 	auto voiture_joueur = std::make_unique<Joueur>(WINDOW_WIDTH / 2, milieu, 0, this->niveau_route, this->world);
@@ -15,6 +16,9 @@ Route::Route()
 
 etat_du_jeu Route::get_etat() { return etat_en_cours; }
 void Route::set_etat(etat_du_jeu nouvEtat) { etat_en_cours = nouvEtat;  }
+
+int Route::get_distance_parcouru() { return distance_parcouru; }
+void Route::set_distance_parcouru(int dist) { distance_parcouru = dist; }
 
 niveau Route::get_niveau() { return this->niveau_route; }
 void Route::set_niveau(niveau nouvNiv) {
@@ -243,6 +247,7 @@ bool Route::changer_de_voie_bas_joueur() {
 void Route::Update(sf::RenderWindow& window) {
 	this->world->Step(1.0f / 60.0f, 6, 2);
 	gestion_voiture_joueur();
+	distance_parcouru++;
 
 	for (size_t i = 0; i < voie_haute.size(); i++) {
 		if (this->get_vehicule(voie_haute, i)->get_x() < -100) {
@@ -274,6 +279,7 @@ void Route::Update(sf::RenderWindow& window) {
 		this->get_vehicule(voie_basse, i)->Update(window);
 		if (i + 1 < voie_basse.size()) this->get_vehicule(voie_basse, i)->adapter_sa_vitesse(*(this->get_vehicule(voie_basse, i + 1)));
 	}
+
 }
 
 void Route::draw(sf::RenderWindow& window) { 

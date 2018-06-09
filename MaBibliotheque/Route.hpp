@@ -6,14 +6,15 @@
 #include <random>
 #include <iostream>
 
-void prout();
 class Route 
 {
 public :
 	Route();
 	etat_du_jeu get_etat();
 	void set_etat(etat_du_jeu nouvEtat);
-	niveau get_niveau();
+	int get_distance_parcouru();
+	void set_distance_parcouru(int dist);
+	niveau get_niveau(); 
 	void set_niveau(niveau nouvNiv);
 
 	b2World* get_world();
@@ -48,6 +49,7 @@ public :
 
 private :
 	etat_du_jeu etat_en_cours;
+	int distance_parcouru;
 	niveau niveau_route;
 	std::vector<std::unique_ptr<Vehicules>> voie_haute;
 	std::vector<std::unique_ptr<Vehicules>> voie_milieu;

@@ -87,7 +87,7 @@ sf::RenderWindow& SFML_output::get_window() {
 	return window;
 }
 
-void SFML_output::affichage_text(sf::Font& font, sf::String string, int size_char, bool bold, bool underlined, double pos_x, double pos_y) {
+void SFML_output::affichage_text(sf::Font& font, sf::String string, int size_char, bool bold, bool underlined, float pos_x, float pos_y) {
 	sf::Text text;
 	text.setFont(font);
 	text.setString(string);
@@ -112,5 +112,7 @@ void SFML_output::affichage_donnees_joueur_en_jeu(Route& route, sf::Font& font) 
 	this->affichage_text(font, etat_pc_avant, 40, false, false, 50, WINDOW_HEIGHT * 6 / 8);
 	std::string etat_pc_arriere = " Pare-choc arrière : " + std::to_string(voiture_joueur->get_etat_pc_arriere());
 	this->affichage_text(font, etat_pc_arriere, 40, false, false, 50, WINDOW_HEIGHT * 7 / 8);
+	std::string distance_parcouru = " Distance parcouru : " + std::to_string(route.get_distance_parcouru()/10) + " mètres.";
+	this->affichage_text(font, distance_parcouru, 40, true, false, 50, WINDOW_HEIGHT * 1 / 8);
 
 }
