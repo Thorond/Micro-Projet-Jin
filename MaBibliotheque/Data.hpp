@@ -1,5 +1,6 @@
 #pragma once
 #include <sqlite3.h>
+#include "Route.hpp"
 
 class SQLite {
 public:
@@ -9,7 +10,9 @@ public:
 	int get_rc();
 	void create_table();
 	void insert_op();
-	void select_op();
+	void select_op(Route& route);
+	void update_op(int niveau);
+	void delete_op();
 private:
 	sqlite3 * db;
 	char *zErrMsg = 0;

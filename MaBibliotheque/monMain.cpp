@@ -12,11 +12,9 @@ int monMain()
 	else {
 		fprintf(stderr, "Opened database successfully\n");
 	}
-	//sqlite.create_table();
-	//sqlite.insert_op();
-	sqlite.select_op();
-
 	Route route = Route();
+	sqlite.select_op(route);
+
 	SFML_output out;
 	out.display(route);
 

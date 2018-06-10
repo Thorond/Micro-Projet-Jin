@@ -1,6 +1,7 @@
 #include "pch.h"
 #include "../MaBibliotheque/Route.hpp"
 #include "../MaBibliotheque/Draw.hpp"
+#include "../MaBibliotheque/Data.cpp"
 
 TEST(TestGenerationVoiture, TestStatique) {
 	Route route = Route();
@@ -176,4 +177,26 @@ TEST(TestAI, TestDeplacementVoie3) {
 	route.get_vehicule(route.get_voie_basse(), 1)->set_x(500 + LONGUEUR_VOITURE);
 	route.get_vehicule(route.get_voie_milieu(), 0)->set_x(500 + LONGUEUR_VOITURE/2);
 	EXPECT_EQ(route.changer_de_voie(basse, milieu, *route.get_vehicule(route.get_voie_milieu(), 0), false), false);
+}
+
+TEST(TestDB, TestFetchAndChange1) {
+	SQLite sqlite = SQLite();
+	if (sqlite.get_rc()) {
+		fprintf(stderr, "Can't open database: %s\n", sqlite3_errmsg(sqlite.get_db()));
+		sqlite3_close(sqlite.get_db());
+	}
+	else {
+		fprintf(stderr, "Opened database successfully\n");
+	}
+	Route route = Route();
+	sqlite.update_op(1);
+	EXPECT_EQ(NIVEAU_DATA, 1);
+	sqlite.select_op(route);
+	EXPECT_EQ(route.get_niveau(), 1);
+	sqlite.update_op(3);
+	sqlite.select_op(route);
+	EXPECT_EQ(route.get_niveau(), 3);
+	sqlite.update_op(1); // pour remettre la valeur à 1 dans le fichier
+
+	sqlite3_close(sqlite.get_db());
 }
