@@ -33,6 +33,7 @@ public :
 	Vehicules* get_vehicule(position_route pos, int rang);
 	
 	void gestion_global(sf::Clock& clock, sf::Time& elapsed, sf::RenderWindow& window);
+	void reinit_global();
 	void generation_automatique(sf::Clock& clock , sf::Time& elapsed); // générer pour les trois voies une voiture ou un camion de
 								// façon assez régulière
 	void generation_vehicules( position_route posi);
@@ -40,11 +41,15 @@ public :
 	bool changer_de_voie(position_route choix, position_route posActuel, Vehicules& vehic, bool is_joueur);
 	bool changer_de_voie_haut_joueur();
 	bool changer_de_voie_bas_joueur();
+	void nettoyage_voies();
 
 	void Update(sf::RenderWindow& window);
 	void draw(sf::RenderWindow& window);
 
 	void gestion_voiture_joueur();
+	void reinit_donnees_joueur();
+
+
 
 
 private :

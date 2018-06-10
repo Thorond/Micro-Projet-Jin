@@ -51,6 +51,9 @@ void SFML_output::display(Route& route)
 					case gameover :
 						event_game_over(route, event);
 						break;
+					case menu_demarrer :
+						event_menu_demarrer(route, event);
+						break;
 					}
 					break;
 
@@ -77,10 +80,11 @@ void SFML_output::display(Route& route)
 				break;
 			}
 			case gameover :
-			
 				this->affichage_game_over(route, font);
 				break;
-			
+			case menu_demarrer :
+				this->affichage_menu_demarrer(route, font);
+				break;
 		}
 		window.display();
 	}
@@ -139,5 +143,11 @@ void SFML_output::affichage_donnees_joueur_en_jeu(Route& route, sf::Font& font) 
 	this->affichage_text(font, etat_pc_arriere, 40, false, false, 50, WINDOW_HEIGHT * 7 / 8);
 	std::string distance_parcouru = " Distance parcouru : " + std::to_string(route.get_distance_parcouru()/10) + " mètres.";
 	this->affichage_text(font, distance_parcouru, 40, true, false, 50, WINDOW_HEIGHT * 1 / 8);
+
+}
+
+void SFML_output::affichage_menu_demarrer(Route& route, sf::Font& font) {
+	this->affichage_text(font, " Bienvenue", 60, true, true, WINDOW_WIDTH * 3 / 8, WINDOW_HEIGHT / 3);
+	this->affichage_text(font, "Appuyez sur 'entrée' pour entrer en jeu", 40, false, false, WINDOW_WIDTH * 1 / 4, WINDOW_HEIGHT * 5 / 8);
 
 }

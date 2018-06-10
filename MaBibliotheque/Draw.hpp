@@ -12,6 +12,7 @@ public:
 	void affichage_pause(Route& route, sf::Font& font, bool pause);
 	void affichage_game_over(Route& route, sf::Font& font);
 	void affichage_donnees_joueur_en_jeu(Route& route, sf::Font& font);
+	void affichage_menu_demarrer(Route& route, sf::Font& font);
 
 	sf::RenderWindow& get_window();
 

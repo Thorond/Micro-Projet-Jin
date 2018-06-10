@@ -2,7 +2,7 @@
 
 Route::Route()
 	: niveau_route(un)
-	, etat_en_cours(en_jeu)
+	, etat_en_cours(menu_demarrer)
 	, distance_parcouru(0)
 {
 	this->world = new b2World(b2Vec2(0, 0));
@@ -79,6 +79,11 @@ void Route::gestion_global(sf::Clock& clock, sf::Time& elapsed, sf::RenderWindow
 	default:
 		break;
 	}
+}
+
+void Route::reinit_global(){
+	this->nettoyage_voies();
+	this->reinit_donnees_joueur();
 }
 
 void Route::generation_automatique(sf::Clock& clock, sf::Time& elapsed) {
@@ -258,6 +263,11 @@ bool Route::changer_de_voie_bas_joueur() {
 	return reussi;
 }
 
+void Route::nettoyage_voies() {
+	voie_haute.clear();
+	voie_milieu.clear();
+	voie_basse.clear();
+}
 
 
 void Route::Update(sf::RenderWindow& window) {
@@ -319,5 +329,15 @@ void Route::gestion_voiture_joueur() {
 
 	if (voiture_joueur->get_etat_pc_avant() < 0 || voiture_joueur->get_etat_pc_arriere() < 0) {
 		this->etat_en_cours = gameover;
+		this->reinit_global();
 	}
+}
+
+
+void Route::reinit_donnees_joueur() {
+	auto voiture_joueur = std::make_unique<Joueur>(WINDOW_WIDTH / 2, milieu, 0, this->niveau_route, this->world);
+	this->voie_milieu.push_back(std::move(voiture_joueur));
+	this->position_voiture_joueur = milieu;
+	this->index_voiture_joueur = 0;
+	this->distance_parcouru = 0; 
 }

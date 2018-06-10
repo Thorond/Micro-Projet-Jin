@@ -36,9 +36,13 @@ void event_pause(Route& route, sf::Event& event) {
 
 void event_game_over(Route& route, sf::Event& event) {
 	if (event.key.code == sf::Keyboard::Return) {
+		route.set_etat(menu_demarrer);
+	}
+}
+
+
+void event_menu_demarrer(Route& route, sf::Event& event) {
+	if (event.key.code == sf::Keyboard::Return) {
 		route.set_etat(en_jeu);
-		Joueur* voiture_joueur = (Joueur*)route.get_vehicule(route.get_position_voiture_joueur(), route.get_index_voiture_joueur());
-		voiture_joueur->set_etat_pc_arriere(abime);
-		voiture_joueur->set_etat_pc_avant(abime);
 	}
 }
