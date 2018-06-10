@@ -12,8 +12,6 @@ d:\visual studio\projets\micro-projet-jin\mabibliotheque\debug\policier.sbr
 d:\visual studio\projets\micro-projet-jin\mabibliotheque\debug\route.sbr
 d:\visual studio\projets\micro-projet-jin\mabibliotheque\debug\vehicules.sbr
 d:\visual studio\projets\micro-projet-jin\mabibliotheque\debug\voitures.sbr
-d:\visual studio\projets\micro-projet-jin\mabibliotheque\debug\voleur.sbr
-d:\visual studio\projets\micro-projet-jin\mabibliotheque\debug\voleur.obj
 d:\visual studio\projets\micro-projet-jin\mabibliotheque\debug\voitures.obj
 d:\visual studio\projets\micro-projet-jin\mabibliotheque\debug\vehicules.obj
 d:\visual studio\projets\micro-projet-jin\mabibliotheque\debug\route.obj
@@ -23,6 +21,10 @@ d:\visual studio\projets\micro-projet-jin\mabibliotheque\debug\joueur.obj
 d:\visual studio\projets\micro-projet-jin\mabibliotheque\debug\entitee.obj
 d:\visual studio\projets\micro-projet-jin\mabibliotheque\debug\draw.obj
 d:\visual studio\projets\micro-projet-jin\mabibliotheque\debug\camions.obj
+d:\visual studio\projets\micro-projet-jin\mabibliotheque\debug\eventhandler.sbr
+d:\visual studio\projets\micro-projet-jin\mabibliotheque\debug\eventhandler.obj
+d:\visual studio\projets\micro-projet-jin\mabibliotheque\debug\data.sbr
+d:\visual studio\projets\micro-projet-jin\mabibliotheque\debug\data.obj
 d:\visual studio\projets\micro-projet-jin\debug\mabibliotheque.lib
 d:\visual studio\projets\micro-projet-jin\mabibliotheque\debug\vcpkg.applocal.log
 d:\visual studio\projets\micro-projet-jin\debug\mabibliotheque.pdb

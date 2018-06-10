@@ -152,6 +152,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClInclude Include="Camions.hpp" />
+    <ClInclude Include="Data.hpp" />
     <ClInclude Include="Draw.hpp" />
     <ClInclude Include="Entitee.hpp" />
     <ClInclude Include="EnumEtDonnees.hpp" />
@@ -167,6 +168,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Camions.cpp" />
+    <ClCompile Include="Data.cpp" />
     <ClCompile Include="Draw.cpp" />
     <ClCompile Include="Entitee.cpp" />
     <ClCompile Include="EventHandler.cpp" />
