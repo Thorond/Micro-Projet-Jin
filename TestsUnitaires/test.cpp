@@ -80,7 +80,7 @@ TEST(TestCorp, TestDynamique1) {
 	b2Vec2 vel = temp->corps.body->GetLinearVelocity();
 	for (int32 i = 0; i < 60; ++i)
 	{
-		route.Update(out.get_window());
+		route.Update();
 	}
 	EXPECT_NE(vel.x, 0);
 	EXPECT_NE(temp->corps.body->GetPosition().x, 500);
@@ -106,7 +106,7 @@ TEST(TestAI, TestDynamique1) {
 	EXPECT_NE(vehi1->corps.body->GetLinearVelocity().x, vehi2->corps.body->GetLinearVelocity().x);
 	for (int32 i = 0; i < 60; ++i)
 	{
-		route.Update(out.get_window());
+		route.Update();
 	}
 	EXPECT_EQ(vehi1->corps.body->GetLinearVelocity().x, vehi2->corps.body->GetLinearVelocity().x);
 }
@@ -122,7 +122,7 @@ TEST(TestAI, TestDestruction1) {
 	double x = route.get_vehicule(route.get_voie_basse(), 0)->get_x();
 	while (x > - 100 ) {
 		x = route.get_vehicule(route.get_voie_basse(), 0)->get_x();
-		route.Update(out.get_window());
+		route.Update();
 	}
 	EXPECT_EQ(route.get_voie_basse().size() , 0);
 }

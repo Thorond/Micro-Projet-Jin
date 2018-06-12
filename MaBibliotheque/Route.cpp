@@ -67,6 +67,7 @@ void Route::gestion_global(sf::Clock& clock, sf::Time& elapsed, sf::RenderWindow
 	{
 		this->generation_automatique(clock, elapsed);
 		this->Update();
+		this->passage_de_niveau();
 		break;
 	}
 	case pause :
@@ -266,6 +267,29 @@ void Route::nettoyage_voies() {
 	voie_haute.clear();
 	voie_milieu.clear();
 	voie_basse.clear();
+}
+
+void Route::passage_de_niveau() {
+	if (niveau_route == un) {
+		if (this->distance_parcouru > 5000) {
+			this->etat_en_cours = menu_demarrer;
+			this->niveau_route = deux;
+			this->reinit_global();
+		}
+	} else if (niveau_route == deux) {
+		if (this->distance_parcouru > 7500) {
+			this->etat_en_cours = menu_demarrer;
+			this->niveau_route = trois;
+			this->reinit_global();
+		}
+	}
+	else if (niveau_route == trois) {
+		if (this->distance_parcouru > 10000) {
+			this->etat_en_cours = menu_demarrer;
+			// jeu fini
+			this->reinit_global();
+		}
+	}
 }
 
 

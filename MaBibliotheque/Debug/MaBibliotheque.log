@@ -1,16 +1,1 @@
-﻿  Camions.cpp
-d:\visual studio\projets\micro-projet-jin\mabibliotheque\camions.cpp(8): warning C4244: 'argument': conversion from 'double' to 'int', possible loss of data
-  Data.cpp
-d:\visual studio\projets\micro-projet-jin\mabibliotheque\data.cpp(19): warning C4018: '<': signed/unsigned mismatch
-  Draw.cpp
-  Entitee.cpp
-d:\visual studio\projets\micro-projet-jin\mabibliotheque\entitee.cpp(10): warning C4244: 'argument': conversion from 'double' to 'float32', possible loss of data
-d:\visual studio\projets\micro-projet-jin\mabibliotheque\entitee.cpp(28): warning C4244: 'argument': conversion from 'double' to 'float32', possible loss of data
-  EventHandler.cpp
-  Joueur.cpp
-  Route.cpp
-  Vehicules.cpp
-  Voitures.cpp
-  monMain.cpp
-  Generating Code...
-  MaBibliotheque.vcxproj -> D:\Visual Studio\Projets\Micro-Projet-Jin\Debug\MaBibliotheque.lib
+﻿  MaBibliotheque.vcxproj -> D:\Visual Studio\Projets\Micro-Projet-Jin\Debug\MaBibliotheque.lib

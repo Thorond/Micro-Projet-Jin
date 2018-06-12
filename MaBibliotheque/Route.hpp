@@ -42,13 +42,13 @@ public :
 	bool changer_de_voie_haut_joueur();
 	bool changer_de_voie_bas_joueur();
 	void nettoyage_voies();
+	void passage_de_niveau();
 
 	void Update();
 	void draw(sf::RenderWindow& window);
 
 	void gestion_voiture_joueur();
 	void reinit_donnees_joueur();
-
 
 
 

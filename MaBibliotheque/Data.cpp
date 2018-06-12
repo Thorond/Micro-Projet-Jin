@@ -17,7 +17,6 @@ static int NIVEAU_DATA;
 static int callback(void *data, int argc, char **argv, char **azColName) {
 	fprintf(stderr, "%s: ", (const char*)data);
 	for (unsigned i = 0; i<argc; i++) {
-		std::cout << azColName[i] << " = " << argv[i] << std::endl;
 		NIVEAU_DATA = atoi(argv[0]);
 	}
 	return 0;
@@ -67,7 +66,7 @@ void SQLite::select_op(Route& route) {
 
 	/* Execute SQL statement */
 	rc = sqlite3_exec(db, sql, callback, (void*)warn, &zErrMsg);
-	if (NIVEAU_DATA ) route.set_niveau((niveau)NIVEAU_DATA);
+	if ( NIVEAU_DATA != NULL ) route.set_niveau((niveau)NIVEAU_DATA);
 
 	if (rc != SQLITE_OK) {
 		fprintf(stderr, "SQL error: %s\n", zErrMsg);

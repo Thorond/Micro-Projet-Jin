@@ -2,5 +2,6 @@
 d:\visual studio\projets\micro-projet-jin\mabibliotheque\data.cpp(19): warning C4018: '<': signed/unsigned mismatch
 d:\visual studio\projets\micro-projet-jin\testsunitaires\test.cpp(97): warning C4244: 'argument': conversion from 'double' to 'float32', possible loss of data
 d:\visual studio\projets\micro-projet-jin\testsunitaires\test.cpp(103): warning C4244: 'argument': conversion from 'double' to 'float32', possible loss of data
+MaBibliotheque.lib(Vehicules.obj) : warning LNK4075: ignoring '/EDITANDCONTINUE' due to '/SAFESEH' specification
   TestsUnitaires.vcxproj -> D:\Visual Studio\Projets\Micro-Projet-Jin\Debug\TestsUnitaires.exe
 BSCMAKE : warning BK4503: minor error in .SBR file 'Debug\pch.sbr' ignored

@@ -148,6 +148,8 @@ void SFML_output::affichage_donnees_joueur_en_jeu(Route& route, sf::Font& font) 
 	Joueur* voiture_joueur = (Joueur*)route.get_vehicule(route.get_position_voiture_joueur(), route.get_index_voiture_joueur());
 	std::string vitesse = " Vitesse : " + std::to_string((int)(voiture_joueur->get_vitesse_x() + VITESSE_DEFILEMENT));
 	this->affichage_text(font, vitesse , 40, false, false, WINDOW_WIDTH * 3/4, WINDOW_HEIGHT * 7 / 8);
+	std::string niveau = " Niveau : " + std::to_string(route.get_niveau() + 1);
+	this->affichage_text(font, niveau, 40, false, false, WINDOW_WIDTH * 3 / 4, WINDOW_HEIGHT * 6 / 8);
 	std::string etat_pc_avant = " Pare-choc avant : " + std::to_string(voiture_joueur->get_etat_pc_avant());
 	this->affichage_text(font, etat_pc_avant, 40, false, false, 50, WINDOW_HEIGHT * 6 / 8);
 	std::string etat_pc_arriere = " Pare-choc arrière : " + std::to_string(voiture_joueur->get_etat_pc_arriere());
