@@ -30,7 +30,8 @@ void Joueur::regulation_vitesse_bords() {
 		&& this->get_x() - LONGUEUR_VOITURE < 0 ) this->set_vitesse_x(VITESSE_DEFILEMENT - VITESSE_DEFILEMENT);
 }
 
-
+/* Fonction permettant de gerer lorsque le vehicule du joueur est trop proche d'un autre vehicule ainsi que
+les consequences associees.*/
 int unsigned Joueur::gestion_collision(std::vector<std::unique_ptr<Vehicules>>& voie_joueur, int unsigned index_voiture ) {
 	if (index_voiture + 1 < voie_joueur.size()) {
 		Vehicules* vehicule_face = voie_joueur[index_voiture + 1].get();

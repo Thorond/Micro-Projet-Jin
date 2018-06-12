@@ -9,6 +9,7 @@ class Vehicules
 public:
 	Vehicules(double x, position_route position, b2World* world);
 	~Vehicules();
+	/* GETTERS AND SETTERS*/
 	double get_x();
 	void set_x( double x);
 	double get_y();
@@ -26,12 +27,13 @@ public:
 
 
 	virtual void construction_pare_choc(niveau niveau) = 0;
-	virtual void choix_vitesse(niveau niveau) = 0;
-	virtual void adapter_sa_vitesse(Vehicules& vehiDevant);
+	virtual void choix_vitesse(niveau niveau) = 0; /* Choix de la vitesse du vehicule en fonction du niveau actuel*/
+	virtual void adapter_sa_vitesse(Vehicules& vehiDevant); /* Permet d'adapter la vitesse d'un vehicule si celui devant
+															va plus lentement que lui */
 
 	Entitee corps;
-	bool Update();
-	void draw_circle(double x,double y , double r, sf::RenderWindow& window);
+	bool Update(); /* Synchronise les donnes porpres de la classe avec celles du corps de box2d*/
+	void draw_circle(double x,double y , double r, sf::RenderWindow& window); 
 	void draw_rectangle(double x, double y, double dx, double dy, sf::RenderWindow& window);
 	virtual void draw(sf::RenderWindow& window) = 0;
 	virtual void draw_corps(sf::RenderWindow& window) = 0;

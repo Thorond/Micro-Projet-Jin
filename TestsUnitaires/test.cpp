@@ -3,6 +3,7 @@
 #include "../MaBibliotheque/Draw.hpp"
 #include "../MaBibliotheque/Data.cpp"
 
+/* Test verifiant que la generation de vehicule se fait correctement*/
 TEST(TestGenerationVoiture, TestStatique) {
 	Route route = Route();
 	route.generation_vehicules( basse);
@@ -12,6 +13,7 @@ TEST(TestGenerationVoiture, TestStatique) {
 	EXPECT_EQ(route.get_vehicule(route.get_voie_basse(), 0)->get_x(), 550);
 }
 
+/* Tests verifiant que la fonction de colision et de consequence associe fonctionne correctement*/
 TEST(TestConsColli, TestStatique1) {
 	Route route = Route();
 	route.generation_vehicules( basse);
@@ -63,6 +65,7 @@ TEST(TestConsColli, TestStatique3) {
 	EXPECT_EQ(v2->get_etat_pc_arriere(), 2);
 }
 
+/* Test verifiant que box2d est correctement implente*/
 TEST(TestCorp, TestStatique1) {
 	Route route = Route();
 	route.generation_vehicules( basse);
@@ -71,6 +74,7 @@ TEST(TestCorp, TestStatique1) {
 	EXPECT_EQ(temp->corps.body->GetPosition().x, WINDOW_WIDTH + 100);
 }
 
+/* Test verifiant que box2d est correctement implente et que le moteur tourne*/
 TEST(TestCorp, TestDynamique1) {
 	Route route = Route();
 
@@ -86,6 +90,7 @@ TEST(TestCorp, TestDynamique1) {
 	EXPECT_NE(temp->corps.body->GetPosition().x, 500);
 }
 
+/* Test verifiant que les véhicules adaptent bien leur vitesse en fonction du vehicule en face */
 TEST(TestAI, TestDynamique1) {
 	Route route = Route();
 
@@ -111,6 +116,7 @@ TEST(TestAI, TestDynamique1) {
 	EXPECT_EQ(vehi1->corps.body->GetLinearVelocity().x, vehi2->corps.body->GetLinearVelocity().x);
 }
 
+/* Test permettant de verifier que les vehicules se détruisent bien en sortant de l'écran du joueur */
 TEST(TestAI, TestDestruction1) {
 	Route route = Route();
 
@@ -179,6 +185,7 @@ TEST(TestAI, TestDeplacementVoie3) {
 	EXPECT_EQ(route.changer_de_voie(basse, milieu, *route.get_vehicule(route.get_voie_milieu(), 0), false), false);
 }
 
+/*Test permettant de vérifier le bon fonctionnement du select et de l'update de la DB*/
 TEST(TestDB, TestFetchAndChange1) {
 	SQLite sqlite = SQLite();
 	if (sqlite.get_rc()) {

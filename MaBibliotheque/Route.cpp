@@ -59,26 +59,13 @@ Vehicules* Route::get_vehicule(position_route pos, int rang) {
 
 /* FUNCTION MANAGING THE GAME*/
 
-void Route::gestion_global(sf::Clock& clock, sf::Time& elapsed, sf::RenderWindow& window) {
+void Route::gestion_global(sf::Clock& clock, sf::Time& elapsed) {
 	
-	switch (etat_en_cours)
-	{
-	case en_jeu:
-	{
-		this->generation_automatique(clock, elapsed);
-		this->Update();
-		this->passage_de_niveau();
-		break;
-	}
-	case pause :
-		this->draw(window);
-		break;
-	case gameover :
-		//destroy everithing
-		break;
-	default:
-		break;
-	}
+	
+	this->generation_automatique(clock, elapsed);
+	this->Update();
+	this->passage_de_niveau();
+	
 }
 
 void Route::reinit_global(){
@@ -292,7 +279,9 @@ void Route::passage_de_niveau() {
 	}
 }
 
-
+/* Fonction primordiale permettant de mettre à jour la position des vehicules ainsi que de celui du joueur,
+grace a box2D, de supprimer les vehicules en dehors des limites et d'appeler les fonctions principales
+des vehicules tels que 'adapter_sa_vitesse'.*/
 void Route::Update() {
 	this->world->Step(1.0f / 60.0f, 6, 2);
 	gestion_voiture_joueur();
@@ -343,12 +332,14 @@ void Route::draw(sf::RenderWindow& window) {
 	}
 }
 
+/* Fonction gerant la voiture du joueur et donc ce dernier meme quant au jeu, lancant le gameover si celui ci
+n'a plus de 'vie', etc. */
 void Route::gestion_voiture_joueur() {
 	Joueur* voiture_joueur = (Joueur*) this->get_vehicule(this->get_position_voiture_joueur(), this->get_index_voiture_joueur());
 	voiture_joueur->regulation_vitesse_bords();
 	this->set_index_voiture_joueur(
 		voiture_joueur->gestion_collision(this->get_voie_voiture(get_position_voiture_joueur()),
-			get_index_voiture_joueur()));
+			get_index_voiture_joueur())); 
 
 	if (voiture_joueur->get_etat_pc_avant() < 0 || voiture_joueur->get_etat_pc_arriere() < 0) {
 		this->etat_en_cours = gameover;
@@ -356,7 +347,7 @@ void Route::gestion_voiture_joueur() {
 	}
 }
 
-
+/* Reinitialisation des donnees du joueur lors d'un lancement de jeu/gameover. */
 void Route::reinit_donnees_joueur() {
 	auto voiture_joueur = std::make_unique<Joueur>(WINDOW_WIDTH / 2, milieu, 0, this->niveau_route, this->world);
 	this->voie_milieu.push_back(std::move(voiture_joueur));

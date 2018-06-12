@@ -18,6 +18,7 @@ Vehicules::~Vehicules() {
 
 }
 
+/* GETTERS AND SETTERS*/
 
 double Vehicules::get_x() { return x; }
 void Vehicules::set_x(double x) {
@@ -61,7 +62,7 @@ void Vehicules::adapter_sa_vitesse(Vehicules& vehiDevant) {
 	}
 }
 
-/* fonction qui permet de synchroniser les valeurs par defaut du constructeur et celle du body de box2d*/
+/* Synchronise les donnes porpres de la classe avec celles du corps de box2d*/
 bool Vehicules::Update() {
 	b2Vec2 pos = this->corps.body->GetPosition();
 	this->set_x(pos.x);

@@ -8,7 +8,7 @@ public:
 	sqlite3 * get_db();
 	char * get_err_mse();
 	int get_rc();
-	void create_table();
+	void create_table(); 
 	void insert_op();
 	void select_op(Route& route);
 	void update_op(int niveau);

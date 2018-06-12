@@ -18,14 +18,8 @@ void SFML_output::display(Route& route)
 	sf::Clock clockBoucle;
 
 	sf::Font font;
-	//if (!font.loadFromFile("fonts/Alfredo_.ttf"))
-	//{
-	//	// error...
-	//}
-	if (!font.loadFromFile("fonts/arial.ttf"))
-	{
-		// error...
-	}
+	if (!font.loadFromFile("fonts/arial.ttf")) { /*error*/ }/*fonts/Alfredo_.ttf*/
+
 
 	double lag = 0.0;
 	
@@ -75,8 +69,8 @@ void SFML_output::display(Route& route)
 			{
 				while (lag >= MS_PER_UPDATE)
 				{
-					sf::Time elapsed = clock.getElapsedTime();
-					route.gestion_global(clock, elapsed, window);
+					sf::Time elapsed = clock.getElapsedTime(); /* temps passé pour la generation de vehicules*/
+					route.gestion_global(clock, elapsed);
 					lag -= MS_PER_UPDATE;
 				}
 				route.draw(window);
@@ -88,6 +82,7 @@ void SFML_output::display(Route& route)
 			{
 				this->affichage_donnees_joueur_en_jeu(route, font);
 				this->affichage_pause(route, font, true);
+				route.draw(window);
 				break;
 			}
 			case gameover :
@@ -102,6 +97,7 @@ void SFML_output::display(Route& route)
 
 }
 
+/* Fonction permettant de nettoyer la fenetre */
 void SFML_output::clean()
 {
 	window.clear();
@@ -116,6 +112,7 @@ sf::RenderWindow& SFML_output::get_window() {
 	return window;
 }
 
+/* Fonction generatrice pour l'affichage de texte*/
 void SFML_output::affichage_text(sf::Font& font, sf::String string, int size_char, bool bold, bool underlined, float pos_x, float pos_y) {
 	sf::Text text;
 	text.setFont(font);

@@ -39,12 +39,13 @@ static const unsigned int VITESSE_MAX_RELATIVE(65 - VITESSE_DEFILEMENT);
 static const int VITESSE_MIN_RELATIVE(25 - VITESSE_DEFILEMENT);
 
 static const unsigned int LONGUEUR_VOITURE(40);
-static const unsigned int LARGEUR_VOITURE(20);
+static const unsigned int LARGEUR_VOITURE(20); // inutilise ici 
 static const unsigned int RAYON_ROUE(5);
 
 static const unsigned int WINDOW_WIDTH(1000);
 static const unsigned int WINDOW_HEIGHT(700);
 
+/* Positionnement sur l'axe des y pour l'affichage des vehicules */
 static const unsigned int POSITIONNEMENT_VOIE_HAUTE(WINDOW_HEIGHT  / 3);
 static const unsigned int POSITIONNEMENT_VOIE_MILIEU(WINDOW_HEIGHT / 2);
 static const unsigned int POSITIONNEMENT_VOIE_BASSES(WINDOW_HEIGHT * 2 / 3);

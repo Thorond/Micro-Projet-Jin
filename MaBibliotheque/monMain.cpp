@@ -23,7 +23,6 @@ int monMain()
 	out.display(route);
 
 	/* Fermeture du jeu et sauvegarde */
-	std::cout << route.get_niveau() << std::endl;
 	sqlite.update_op(route.get_niveau());
 	sqlite3_close(sqlite.get_db());
 

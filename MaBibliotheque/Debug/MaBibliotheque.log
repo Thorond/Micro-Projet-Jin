@@ -1,1 +1,8 @@
-﻿  MaBibliotheque.vcxproj -> D:\Visual Studio\Projets\Micro-Projet-Jin\Debug\MaBibliotheque.lib
+﻿  Data.cpp
+d:\visual studio\projets\micro-projet-jin\mabibliotheque\data.cpp(19): warning C4018: '<': signed/unsigned mismatch
+  Draw.cpp
+  EventHandler.cpp
+  Route.cpp
+  monMain.cpp
+  Generating Code...
+  MaBibliotheque.vcxproj -> D:\Visual Studio\Projets\Micro-Projet-Jin\Debug\MaBibliotheque.lib
