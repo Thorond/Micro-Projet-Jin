@@ -43,7 +43,7 @@ public :
 	bool changer_de_voie_bas_joueur();
 	void nettoyage_voies();
 
-	void Update(sf::RenderWindow& window);
+	void Update();
 	void draw(sf::RenderWindow& window);
 
 	void gestion_voiture_joueur();

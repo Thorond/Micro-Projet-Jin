@@ -30,7 +30,7 @@ public:
 	virtual void adapter_sa_vitesse(Vehicules& vehiDevant);
 
 	Entitee corps;
-	bool Update(sf::RenderWindow& window);
+	bool Update();
 	void draw_circle(double x,double y , double r, sf::RenderWindow& window);
 	void draw_rectangle(double x, double y, double dx, double dy, sf::RenderWindow& window);
 	virtual void draw(sf::RenderWindow& window) = 0;

@@ -15,6 +15,7 @@ void SFML_output::display(Route& route)
 {
 	window.display();
 	sf::Clock clock;
+	sf::Clock clockBoucle;
 
 	sf::Font font;
 	//if (!font.loadFromFile("fonts/Alfredo_.ttf"))
@@ -25,9 +26,14 @@ void SFML_output::display(Route& route)
 	{
 		// error...
 	}
+
+	double lag = 0.0;
 	
 	while (window.isOpen())
 	{
+		double elapsedBoucle = clockBoucle.restart().asMilliseconds();
+		lag += elapsedBoucle;
+
 		sf::Event event;
 		while (window.pollEvent(event))
 		{
@@ -67,8 +73,13 @@ void SFML_output::display(Route& route)
 		switch (route.get_etat()) {
 			case en_jeu:
 			{
-				sf::Time elapsed = clock.getElapsedTime();
-				route.gestion_global(clock, elapsed, window);
+				while (lag >= MS_PER_UPDATE)
+				{
+					sf::Time elapsed = clock.getElapsedTime();
+					route.gestion_global(clock, elapsed, window);
+					lag -= MS_PER_UPDATE;
+				}
+				route.draw(window);
 				this->affichage_donnees_joueur_en_jeu(route, font);
 				this->affichage_pause(route, font, false);
 				break;

@@ -66,8 +66,7 @@ void Route::gestion_global(sf::Clock& clock, sf::Time& elapsed, sf::RenderWindow
 	case en_jeu:
 	{
 		this->generation_automatique(clock, elapsed);
-		this->Update(window);
-		this->draw(window);
+		this->Update();
 		break;
 	}
 	case pause :
@@ -270,7 +269,7 @@ void Route::nettoyage_voies() {
 }
 
 
-void Route::Update(sf::RenderWindow& window) {
+void Route::Update() {
 	this->world->Step(1.0f / 60.0f, 6, 2);
 	gestion_voiture_joueur();
 	distance_parcouru++;
@@ -282,7 +281,7 @@ void Route::Update(sf::RenderWindow& window) {
 		}
 	}
 	for (size_t i = 0; i < voie_haute.size(); i++) {
-		this->get_vehicule(voie_haute, i)->Update(window);
+		this->get_vehicule(voie_haute, i)->Update();
 		if (i + 1 < voie_haute.size()) this->get_vehicule(voie_haute, i)->adapter_sa_vitesse(*(this->get_vehicule(voie_haute, i + 1)));
 	}
 	for (size_t i = 0; i < voie_milieu.size(); i++) {
@@ -292,7 +291,7 @@ void Route::Update(sf::RenderWindow& window) {
 		}
 	}
 	for (size_t i = 0; i < voie_milieu.size(); i++) {
-		this->get_vehicule(voie_milieu, i)->Update(window);
+		this->get_vehicule(voie_milieu, i)->Update();
 		if (i + 1 < voie_milieu.size()) this->get_vehicule(voie_milieu, i)->adapter_sa_vitesse(*(this->get_vehicule(voie_milieu, i + 1)));
 	}
 	for (size_t i = 0; i < voie_basse.size(); i++) {
@@ -302,7 +301,7 @@ void Route::Update(sf::RenderWindow& window) {
 		}
 	}
 	for (size_t i = 0; i < this->voie_basse.size(); i++) {
-		this->get_vehicule(voie_basse, i)->Update(window);
+		this->get_vehicule(voie_basse, i)->Update();
 		if (i + 1 < voie_basse.size()) this->get_vehicule(voie_basse, i)->adapter_sa_vitesse(*(this->get_vehicule(voie_basse, i + 1)));
 	}
 

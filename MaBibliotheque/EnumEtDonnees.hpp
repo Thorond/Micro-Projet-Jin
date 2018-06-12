@@ -48,3 +48,5 @@ static const unsigned int WINDOW_HEIGHT(700);
 static const unsigned int POSITIONNEMENT_VOIE_HAUTE(WINDOW_HEIGHT  / 3);
 static const unsigned int POSITIONNEMENT_VOIE_MILIEU(WINDOW_HEIGHT / 2);
 static const unsigned int POSITIONNEMENT_VOIE_BASSES(WINDOW_HEIGHT * 2 / 3);
+
+static const double MS_PER_UPDATE(1.6);
